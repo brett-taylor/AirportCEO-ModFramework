@@ -11,6 +11,14 @@ namespace ACMLInstaller
             string copyExtension, int PATCH_INTO_INSTRUCTION_NUMBER)
         {
             string newDLLDirectory = Path.Combine(Path.GetDirectoryName(dllDirectory), Path.GetFileNameWithoutExtension(dllDirectory)) + copyExtension;
+            string newACMLDLLDirectory = Path.Combine(Path.GetDirectoryName(dllDirectory), Path.GetFileName(acmlDLL));
+
+            if (File.Exists(newDLLDirectory) == true)
+                File.Delete(newDLLDirectory);
+
+            if (File.Exists(newACMLDLLDirectory) == true)
+                File.Delete(newACMLDLLDirectory);
+
             File.Move(dllDirectory, newDLLDirectory);
             File.Copy(acmlDLL, Path.Combine(Path.GetDirectoryName(dllDirectory), Path.GetFileName(acmlDLL)));
 
