@@ -1,14 +1,21 @@
 ﻿using System;
 using System.IO;
 
-namespace ACML.Installer
+namespace ACMLInstaller
 {
     public class Program
     {
         private static readonly string AIRPORT_CEO_EXECUTABLE_FILE_NAME = "Airport CEO.exe";
         private static readonly string EXAMPLE_DIRECTORY = "C:\\Steam Library\\steamapps\\common\\Airport CEO";
         private static readonly string DLL_DIRECTORY = Path.Combine("Airport CEO_Data", Path.Combine("Managed", "Assembly-CSharp.dll"));
-        
+        private static readonly string ACML_DLL = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "ACML.dll");
+        private static readonly string PATCH_CALL_TYPE = "MainMenuUI";
+        private static readonly string PATCH_CALL_METHOD = "Awake";
+        private static readonly string TARGET_CALL_TYPE = "ACML.AirportCEOModLoader";
+        private static readonly string TARGET_CALL_METHOD = "Entry";
+        private static readonly string ORIGINAL_DLL_EXTESION = "_original.dll";
+        private static readonly int PATCH_INTO_INSTRUCTION_NUMBER = 2;
+
         public static void Main()
         {
             string directory = GetInputDirectory();
@@ -18,8 +25,18 @@ namespace ACML.Installer
                 if (VerifyDLLDirectory(directory) == true)
                 {
                     Console.WriteLine("Found DLL. Attempting to patch");
+                    Console.WriteLine(" ");
                     string dll = Path.Combine(directory, DLL_DIRECTORY);
-                    // Patch
+                    try
+                    {
+                        Patcher.Patch(dll, ACML_DLL, PATCH_CALL_TYPE, PATCH_CALL_METHOD, TARGET_CALL_TYPE, TARGET_CALL_METHOD, ORIGINAL_DLL_EXTESION, PATCH_INTO_INSTRUCTION_NUMBER);
+                        Console.WriteLine("Patch successful.");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Patch failed");
+                        Console.WriteLine(e.ToString());
+                    }
                 }
             }
             Console.ReadKey();
