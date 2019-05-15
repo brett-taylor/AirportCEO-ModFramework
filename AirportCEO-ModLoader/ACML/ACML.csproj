@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>ACML</RootNamespace>
     <AssemblyName>ACML</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,22 +37,28 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp_publicized">
+      <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\publicized_assemblies\Assembly-CSharp_publicized.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AirportCEOModLoader.cs" />
     <Compile Include="ModHelper\ModHelper.cs" />
     <Compile Include="ModLoader\Attributes\ACMLMod.cs" />
     <Compile Include="ModLoader\Attributes\ACMLModEntryPoint.cs" />
+    <Compile Include="ModLoader\Mod.cs" />
     <Compile Include="ModLoader\ModLoader.cs" />
     <Compile Include="ModLoader\Utilities\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

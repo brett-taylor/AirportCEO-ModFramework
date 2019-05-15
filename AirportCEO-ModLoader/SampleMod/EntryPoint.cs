@@ -8,7 +8,7 @@ namespace SampleMod
         [ACMLModEntryPoint]
         public static void Entry()
         {
-            // do stuff to mod.
+            System.Console.WriteLine("[SampleMod] Sample Mod executing.");
         }
     }
 }
