@@ -36,6 +36,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\Harmony\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\DOTween.dll</HintPath>
     </Reference>

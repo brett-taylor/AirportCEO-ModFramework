@@ -9,6 +9,7 @@ namespace ACMLInstaller
         private static readonly string EXAMPLE_DIRECTORY = "C:\\Steam Library\\steamapps\\common\\Airport CEO";
         private static readonly string DLL_DIRECTORY = Path.Combine("Airport CEO_Data", Path.Combine("Managed", "Assembly-CSharp.dll"));
         private static readonly string ACML_DLL = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "ACML.dll");
+        private static readonly string HARMONY_DLL = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "0Harmony.dll");
         private static readonly string PATCH_CALL_TYPE = "MainMenuUI";
         private static readonly string PATCH_CALL_METHOD = "Awake";
         private static readonly string TARGET_CALL_TYPE = "ACML.AirportCEOModLoader";
@@ -29,7 +30,7 @@ namespace ACMLInstaller
                     string dll = Path.Combine(directory, DLL_DIRECTORY);
                     try
                     {
-                        Patcher.Patch(dll, ACML_DLL, PATCH_CALL_TYPE, PATCH_CALL_METHOD, TARGET_CALL_TYPE, TARGET_CALL_METHOD, ORIGINAL_DLL_EXTESION, PATCH_INTO_INSTRUCTION_NUMBER);
+                        Patcher.Patch(dll, ACML_DLL, HARMONY_DLL, PATCH_CALL_TYPE, PATCH_CALL_METHOD, TARGET_CALL_TYPE, TARGET_CALL_METHOD, ORIGINAL_DLL_EXTESION, PATCH_INTO_INSTRUCTION_NUMBER);
                         Console.WriteLine("Patch successful.");
                     }
                     catch (Exception e)

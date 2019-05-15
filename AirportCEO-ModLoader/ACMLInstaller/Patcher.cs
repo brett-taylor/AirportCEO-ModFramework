@@ -7,7 +7,7 @@ namespace ACMLInstaller
 {
     public class Patcher
     {
-        public static void Patch(string dllDirectory, string acmlDLL, string patchCallType, string patchCallMethod, string targetCallType, string targetCallMethod, 
+        public static void Patch(string dllDirectory, string acmlDLL, string harmonyDLL, string patchCallType, string patchCallMethod, string targetCallType, string targetCallMethod, 
             string copyExtension, int PATCH_INTO_INSTRUCTION_NUMBER)
         {
             string newDLLDirectory = Path.Combine(Path.GetDirectoryName(dllDirectory), Path.GetFileNameWithoutExtension(dllDirectory)) + copyExtension;
@@ -21,6 +21,7 @@ namespace ACMLInstaller
 
             File.Move(dllDirectory, newDLLDirectory);
             File.Copy(acmlDLL, Path.Combine(Path.GetDirectoryName(dllDirectory), Path.GetFileName(acmlDLL)));
+            File.Copy(harmonyDLL, Path.Combine(Path.GetDirectoryName(dllDirectory), Path.GetFileName(harmonyDLL)));
 
             AssemblyDefinition patchAssembly = AssemblyDefinition.ReadAssembly(newDLLDirectory);
             MethodDefinition patchMethod = patchAssembly.MainModule.GetType(patchCallType).Methods.First((x) => x.Name == patchCallMethod);
