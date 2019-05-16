@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMLInstaller", "ACMLInstal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod", "SampleMod\SampleMod.csproj", "{10545160-1631-4C7C-BE93-6DA67829C8C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMH", "ACMH\ACMH.csproj", "{C7FD9185-9929-4D03-AA46-FB566CF34CB7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{10545160-1631-4C7C-BE93-6DA67829C8C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10545160-1631-4C7C-BE93-6DA67829C8C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10545160-1631-4C7C-BE93-6DA67829C8C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7FD9185-9929-4D03-AA46-FB566CF34CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7FD9185-9929-4D03-AA46-FB566CF34CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7FD9185-9929-4D03-AA46-FB566CF34CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7FD9185-9929-4D03-AA46-FB566CF34CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

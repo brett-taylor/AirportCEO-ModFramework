@@ -16,15 +16,12 @@ namespace ACMLInstaller
         private static readonly string DLL_DIRECTORY = Path.Combine("Airport CEO_Data", Path.Combine("Managed", "Assembly-CSharp.dll"));
         private static readonly string ACML_DLL = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "ACML.dll");
         private static readonly string HARMONY_DLL = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "0Harmony.dll");
-        private static readonly string PATCH_CALL_TYPE = "MainMenuUI";
+        private static readonly string PATCH_CALL_TYPE = "MainMenuWorldController";
         private static readonly string PATCH_CALL_METHOD = "Awake";
         private static readonly string TARGET_CALL_TYPE = "ACML.AirportCEOModLoader";
         private static readonly string TARGET_CALL_METHOD = "Entry";
         private static readonly string ORIGINAL_DLL_EXTESION = "_original.dll";
         private static readonly int PATCH_INTO_INSTRUCTION_NUMBER = 2;
-        private static readonly string MOD_FOLDER_NAME = "ACMLMods";
-        private static readonly string ACMH_FOLDER_NAME = "ACMH";
-        private static readonly string ACMH_DLL_NAME = "ACMH.dll";
 
         public static void Main()
         {
@@ -39,9 +36,6 @@ namespace ACMLInstaller
                     string dll = Path.Combine(directory, DLL_DIRECTORY);
                     try
                     {
-                        CreateModDirectory(directory);
-                        UpdateACMH(directory);
-                        Console.WriteLine("");
                         Console.WriteLine("Patch Starting.");
                         Patch(dll, ACML_DLL, HARMONY_DLL, PATCH_CALL_TYPE, PATCH_CALL_METHOD, TARGET_CALL_TYPE, TARGET_CALL_METHOD, ORIGINAL_DLL_EXTESION, PATCH_INTO_INSTRUCTION_NUMBER);
                         Console.WriteLine("Patch successful.");
@@ -80,46 +74,6 @@ namespace ACMLInstaller
                 Console.WriteLine($"Did not find the DLL at \"{Path.Combine(directory, DLL_DIRECTORY)}\".");
 
             return result;
-        }
-
-        private static void CreateModDirectory(string executableDirectory)
-        {
-            string modPath = Path.Combine(executableDirectory, MOD_FOLDER_NAME);
-            Console.WriteLine($"Checking mods directory {modPath}");
-            if (Directory.Exists(modPath) == false)
-            {
-                Directory.CreateDirectory(modPath);
-            }
-        }
-
-        private static void UpdateACMH(string executableDirectory)
-        {
-            string modPath = Path.Combine(executableDirectory, MOD_FOLDER_NAME);
-            string acmhPath = Path.Combine(modPath, ACMH_FOLDER_NAME);
-            Console.WriteLine($"Checking ACMH directory {acmhPath}");
-            if (Directory.Exists(acmhPath) == false)
-            {
-                Directory.CreateDirectory(acmhPath);
-            }
-            else
-            {
-                if (File.Exists(Path.Combine(acmhPath, ACMH_DLL_NAME)))
-                {
-                    File.Delete(ACMH_DLL_NAME);
-                }
-            }
-
-            string executableLocation = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string acmhDLLInExecutable = Path.Combine(Path.Combine(executableLocation, ACMH_FOLDER_NAME), ACMH_DLL_NAME);
-            string acmhDLLFinalLocation = Path.Combine(acmhPath, ACMH_DLL_NAME);
-            Console.WriteLine($"1 {executableLocation}");
-            Console.WriteLine($"2 {acmhDLLInExecutable}");
-            Console.WriteLine($"3 {acmhDLLFinalLocation}");
-            if (File.Exists(acmhDLLFinalLocation) == true)
-            {
-                File.Delete(acmhDLLFinalLocation);
-            }
-            File.Copy(acmhDLLInExecutable, acmhDLLFinalLocation);
         }
 
         public static void Patch(string dllDirectory, string acmlDLL, string harmonyDLL, string patchCallType, string patchCallMethod, string targetCallType, string targetCallMethod,

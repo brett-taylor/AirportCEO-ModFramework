@@ -6,7 +6,7 @@ namespace ACML
 {
     public class AirportCEOModLoader
     {
-        public static readonly ModVersion ModLoaderVersion = new ModVersion(1, 0, 0);
+        public static readonly ModVersion ModLoaderVersion = new ModVersion(0, 1, 0);
 
         public static void Entry()
         {

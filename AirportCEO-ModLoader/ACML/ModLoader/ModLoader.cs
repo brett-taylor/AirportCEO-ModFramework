@@ -10,13 +10,13 @@ namespace ACML.ModLoader
 {
     public static class ModLoader
     {
-        public static List<Mod> ModsFound { get; private set; }
-        public static List<Mod> ModsLoaded { get; private set; }
+        public static Dictionary<string, Mod> ModsFound { get; private set; }
+        public static Dictionary<string, Mod> ModsLoaded { get; private set; }
 
         public static void Initialise()
         {
-            ModsFound = new List<Mod>();
-            ModsLoaded = new List<Mod>();
+            ModsFound = new Dictionary<string, Mod>();
+            ModsLoaded = new Dictionary<string, Mod>();
 
             string modPath = GetModPath();
             if (Directory.Exists(modPath) == false)
@@ -32,7 +32,7 @@ namespace ACML.ModLoader
                 AddToFoundModsIfACMLMod(dll.ToString());
             }
 
-            foreach (Mod mod in ModsFound)
+            foreach (Mod mod in ModsFound.Values)
             {
                 mod.CalculateIfShouldLoad();
                 if (mod.ShouldLoad())
@@ -62,7 +62,7 @@ namespace ACML.ModLoader
                 return;
 
             ACMLMod acmlMod = (ACMLMod) entryPointClass.GetCustomAttributes(typeof(ACMLMod), true).FirstOrDefault();
-            ModsFound.Add(new Mod(acmlMod, assembly, entryPointMethod));
+            ModsFound.Add(acmlMod.ID, new Mod(acmlMod, assembly, entryPointMethod));
             Utilities.Logger.Print($"Found Mod: {acmlMod.Name}");
         }
 
@@ -71,11 +71,15 @@ namespace ACML.ModLoader
             Utilities.Logger.Print($"Executing entry point of mod: {mod.ModInfo.Name}");
             try
             {
-                mod.EntryPoint.Invoke(null, null);
+                ModsLoaded.Add(mod.ModInfo.ID, mod);
+                mod.EntryPoint.Invoke(null, new object[] { mod });
                 Utilities.Logger.Print($"Sucessfully executed entry point of mod: {mod.ModInfo.Name}");
             }
             catch (Exception e)
             {
+                if (ModsLoaded.ContainsKey(mod.ModInfo.ID))
+                    ModsLoaded.Remove(mod.ModInfo.ID);
+
                 Utilities.Logger.Print($"Failed to execute entry point of mod: {mod.ModInfo.Name}");
                 Utilities.Logger.Print(e.ToString());
             }

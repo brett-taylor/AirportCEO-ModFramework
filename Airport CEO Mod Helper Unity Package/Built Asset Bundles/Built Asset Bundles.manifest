@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2123827706
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: acmh
+      Dependencies: {}
