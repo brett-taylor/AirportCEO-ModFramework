@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace ACMLInstaller
 {
+    /**
+     * This is just a temp messy installer
+     */
     public class Program
     {
         private static readonly string AIRPORT_CEO_EXECUTABLE_FILE_NAME = "Airport CEO.exe";
@@ -19,8 +22,9 @@ namespace ACMLInstaller
         private static readonly string TARGET_CALL_METHOD = "Entry";
         private static readonly string ORIGINAL_DLL_EXTESION = "_original.dll";
         private static readonly int PATCH_INTO_INSTRUCTION_NUMBER = 2;
+        private static readonly string MOD_FOLDER_NAME = "ACMLMods";
         private static readonly string ACMH_FOLDER_NAME = "ACMH";
-        private static readonly string ACMH_ASSETS_FOLDER_NAME = "ACMHAssets";
+        private static readonly string ACMH_DLL_NAME = "ACMH.dll";
 
         public static void Main()
         {
@@ -35,9 +39,8 @@ namespace ACMLInstaller
                     string dll = Path.Combine(directory, DLL_DIRECTORY);
                     try
                     {
-                        Console.WriteLine("Copying AirportCEO Modding Helper.");
-                        CreateOrUpdateACMHDirectory(directory);
-                        Console.WriteLine("Copied AirportCEO Modding Helper.");
+                        CreateModDirectory(directory);
+                        UpdateACMH(directory);
                         Console.WriteLine("");
                         Console.WriteLine("Patch Starting.");
                         Patch(dll, ACML_DLL, HARMONY_DLL, PATCH_CALL_TYPE, PATCH_CALL_METHOD, TARGET_CALL_TYPE, TARGET_CALL_METHOD, ORIGINAL_DLL_EXTESION, PATCH_INTO_INSTRUCTION_NUMBER);
@@ -79,34 +82,44 @@ namespace ACMLInstaller
             return result;
         }
 
-        private static void CreateOrUpdateACMHDirectory(string executableDirectory)
+        private static void CreateModDirectory(string executableDirectory)
         {
-            string acmhDirectory = Path.Combine(executableDirectory, ACMH_FOLDER_NAME);
-            Console.WriteLine($"Checking to see if directory exists: {acmhDirectory}");
-            if (Directory.Exists(acmhDirectory) == false)
+            string modPath = Path.Combine(executableDirectory, MOD_FOLDER_NAME);
+            Console.WriteLine($"Checking mods directory {modPath}");
+            if (Directory.Exists(modPath) == false)
             {
-                Directory.CreateDirectory(acmhDirectory);
+                Directory.CreateDirectory(modPath);
             }
+        }
 
-            string acmhAssetsDirectory = Path.Combine(acmhDirectory, ACMH_ASSETS_FOLDER_NAME);
-            Console.WriteLine($"Attempting to delete: {acmhAssetsDirectory}");
-            if (Directory.Exists(acmhAssetsDirectory) == true)
+        private static void UpdateACMH(string executableDirectory)
+        {
+            string modPath = Path.Combine(executableDirectory, MOD_FOLDER_NAME);
+            string acmhPath = Path.Combine(modPath, ACMH_FOLDER_NAME);
+            Console.WriteLine($"Checking ACMH directory {acmhPath}");
+            if (Directory.Exists(acmhPath) == false)
             {
-                foreach (string filePath in Directory.GetFiles(acmhAssetsDirectory))
+                Directory.CreateDirectory(acmhPath);
+            }
+            else
+            {
+                if (File.Exists(Path.Combine(acmhPath, ACMH_DLL_NAME)))
                 {
-                    Console.WriteLine($"Attempting to delete file: {filePath}");
-                    File.Delete(filePath);
+                    File.Delete(ACMH_DLL_NAME);
                 }
-                Directory.Delete(acmhAssetsDirectory);
             }
 
-            Console.WriteLine($"Attempting to create directory {acmhAssetsDirectory}");
-            Directory.CreateDirectory(acmhAssetsDirectory);
-            foreach (string filePath in Directory.GetFiles(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), ACMH_ASSETS_FOLDER_NAME)))
+            string executableLocation = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string acmhDLLInExecutable = Path.Combine(Path.Combine(executableLocation, ACMH_FOLDER_NAME), ACMH_DLL_NAME);
+            string acmhDLLFinalLocation = Path.Combine(acmhPath, ACMH_DLL_NAME);
+            Console.WriteLine($"1 {executableLocation}");
+            Console.WriteLine($"2 {acmhDLLInExecutable}");
+            Console.WriteLine($"3 {acmhDLLFinalLocation}");
+            if (File.Exists(acmhDLLFinalLocation) == true)
             {
-                Console.WriteLine($"Attempting to copy file {filePath}");
-                File.Copy(filePath, Path.Combine(acmhAssetsDirectory, Path.GetFileName(filePath)));
+                File.Delete(acmhDLLFinalLocation);
             }
+            File.Copy(acmhDLLInExecutable, acmhDLLFinalLocation);
         }
 
         public static void Patch(string dllDirectory, string acmlDLL, string harmonyDLL, string patchCallType, string patchCallMethod, string targetCallType, string targetCallMethod,
