@@ -52,11 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AirportCEOModLoader.cs" />
-    <Compile Include="ModHelper\ModHelper.cs" />
     <Compile Include="ModLoader\Attributes\ACMLMod.cs" />
     <Compile Include="ModLoader\Attributes\ACMLModEntryPoint.cs" />
     <Compile Include="ModLoader\Mod.cs" />
     <Compile Include="ModLoader\ModLoader.cs" />
+    <Compile Include="ModLoader\ModVersion.cs" />
     <Compile Include="ModLoader\Utilities\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
