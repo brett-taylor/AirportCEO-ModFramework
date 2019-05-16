@@ -18,6 +18,11 @@ namespace ACML.ModLoader
             Patch = patch;
         }
 
+        public override string ToString()
+        {
+            return $"{Major}.{Minor}.{Patch}";
+        }
+
         public static ModVersion Parse(string version)
         {
             if (ModVersionRegEx.IsMatch(version))
@@ -32,9 +37,57 @@ namespace ACML.ModLoader
             return Default;
         }
 
-        public override string ToString()
+        public override bool Equals(object obj)
         {
-            return $"{Major}.{Minor}.{Patch}";
+            var version = obj as ModVersion;
+            return version != null && Major == version.Major && Minor == version.Minor && Patch == version.Patch;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -639545495;
+            hashCode = hashCode * -1521134295 + Major.GetHashCode();
+            hashCode = hashCode * -1521134295 + Minor.GetHashCode();
+            hashCode = hashCode * -1521134295 + Patch.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(ModVersion mv1, ModVersion mv2)
+        {
+            return (mv1.Major == mv2.Major) || (mv1.Minor == mv2.Minor) || (mv1.Patch == mv2.Patch);
+        }
+
+        public static bool operator !=(ModVersion mv1, ModVersion mv2)
+        {
+            return (mv1.Major != mv2.Major) || (mv1.Minor != mv2.Minor) || (mv1.Patch != mv2.Patch);
+        }
+
+        public static bool operator >=(ModVersion mv1, ModVersion mv2)
+        {
+            return (mv1.Major >= mv2.Major) ||
+                ((mv1.Major == mv2.Major) && (mv1.Minor >= mv2.Minor)) ||
+                ((mv1.Major == mv2.Major) && (mv1.Minor == mv2.Minor) && (mv1.Patch >= mv2.Patch));
+        }
+
+        public static bool operator <=(ModVersion mv1, ModVersion mv2)
+        {
+            return (mv1.Major <= mv2.Major) ||
+                ((mv1.Major == mv2.Major) && (mv1.Minor <= mv2.Minor)) ||
+                ((mv1.Major == mv2.Major) && (mv1.Minor == mv2.Minor) && (mv1.Patch <= mv2.Patch));
+        }
+
+        public static bool operator >(ModVersion mv1, ModVersion mv2)
+        {
+            return (mv1.Major > mv2.Major) ||
+                ((mv1.Major == mv2.Major) && (mv1.Minor > mv2.Minor)) ||
+                ((mv1.Major == mv2.Major) && (mv1.Minor == mv2.Minor) && (mv1.Patch > mv2.Patch));
+        }
+
+        public static bool operator <(ModVersion mv1, ModVersion mv2)
+        {
+            return (mv1.Major < mv2.Major) ||
+                 ((mv1.Major == mv2.Major) && (mv1.Minor < mv2.Minor)) ||
+                 ((mv1.Major == mv2.Major) && (mv1.Minor == mv2.Minor) && (mv1.Patch < mv2.Patch));
         }
     }
 }

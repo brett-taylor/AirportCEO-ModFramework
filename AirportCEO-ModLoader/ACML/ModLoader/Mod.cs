@@ -10,6 +10,7 @@ namespace ACML.ModLoader
         public MethodInfo EntryPoint { get; private set; }
         public ModVersion ModVersion { get; private set; }
         public ModVersion RequiredACMLVersion { get; private set; }
+        public ModLoadFailure ModLoadFailure { get; private set; } = ModLoadFailure.UNKNOWN;
 
         public Mod(ACMLMod modInfo, Assembly assembly, MethodInfo entryPoint)
         {
@@ -18,6 +19,22 @@ namespace ACML.ModLoader
             EntryPoint = entryPoint;
             ModVersion = ModVersion.Parse(modInfo.ModVersion);
             RequiredACMLVersion = ModVersion.Parse(modInfo.RequiredACMLVersion);
+        }
+
+        public void CalculateIfShouldLoad()
+        {
+            if (RequiredACMLVersion > AirportCEOModLoader.ModLoaderVersion)
+            {
+                ModLoadFailure = ModLoadFailure.REQUIRES_NEWER_VERSION_OF_ACML;
+                return;
+            }
+
+            ModLoadFailure = ModLoadFailure.SUCCESS;
+        }
+
+        public bool ShouldLoad()
+        {
+            return ModLoadFailure == ModLoadFailure.SUCCESS;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace SampleMod
         public static void Entry()
         {
             System.Console.WriteLine("[SampleMod] Sample Mod executing.");
-            var harmony = HarmonyInstance.Create("com.github.harmony.rimworld.mod.example");
+            var harmony = HarmonyInstance.Create("Hanks.Tom.SampleMod");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }

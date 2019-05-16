@@ -27,11 +27,19 @@ namespace ACML.ModLoader
 
             Utilities.Logger.Print($"Located ModPath: {GetModPath()}");
             FileInfo[] allDlls = new DirectoryInfo(modPath).GetFiles("*.dll", SearchOption.AllDirectories);
-            foreach(FileInfo dll in allDlls)
+            foreach (FileInfo dll in allDlls)
+            {
                 AddToFoundModsIfACMLMod(dll.ToString());
+            }
 
             foreach (Mod mod in ModsFound)
-                LoadMod(mod);
+            {
+                mod.CalculateIfShouldLoad();
+                if (mod.ShouldLoad())
+                    LoadMod(mod);
+                else
+                    Utilities.Logger.Print($"{mod.ModInfo.Name} did not load because {mod.ModLoadFailure}");
+            }
         }
 
         public static string GetModPath()
