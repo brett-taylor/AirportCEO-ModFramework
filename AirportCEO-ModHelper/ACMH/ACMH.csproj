@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,8 +38,8 @@
     <Reference Include="ACML">
       <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\ACML.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\Assembly-CSharp.dll</HintPath>
+    <Reference Include="Assembly-CSharp_publicized">
+      <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\DOTween.dll</HintPath>
@@ -121,6 +122,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACMH.cs" />
+    <Compile Include="MainMenuShowMods\ModMenuCustomMod.cs" />
+    <Compile Include="MainMenuShowMods\ModMenuPatcher.cs" />
     <Compile Include="MainMenuShowMods\ShowVersionOnMenuPatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Assets.cs" />

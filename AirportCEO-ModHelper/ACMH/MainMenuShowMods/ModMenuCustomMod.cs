@@ -1,0 +1,30 @@
+﻿using ACML.ModLoader;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ACMH.MainMenuShowMods
+{
+    public class ModMenuCustomMod : MonoBehaviour
+    {
+        private Mod mod = null;
+        private Text headerText = null;
+        private Text description = null;
+        private Button buttonPlay = null;
+        private Button buttonUnsubscribe = null;
+
+        public void Awake()
+        {
+            headerText = transform.Find("HeaderText")?.gameObject?.GetComponent<Text>();
+            description = transform.Find("Description")?.gameObject?.GetComponent<Text>();
+            buttonPlay = transform.Find("ButtonPlay")?.gameObject?.gameObject?.GetComponent<Button>();
+            buttonUnsubscribe = transform.Find("ButtonUnsubscribe")?.gameObject?.GetComponent<Button>();
+        }
+
+        public void SetMod(Mod mod)
+        {
+            this.mod = mod;
+            headerText.text = mod.ModInfo.Name + " (ACML Mod)";
+            description.text = "ACML mods do not have descriptions yet.";
+        }
+    }
+}
