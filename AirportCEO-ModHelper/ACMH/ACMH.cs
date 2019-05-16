@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace ACMH
 {
-    [ACMLMod(id: "AirportCEOModHelper", name: "Mod Helper", modVersion: "0.1.0", requiredACMLVersion: "0.1.0")]
+    [ACMLMod(id: "AirportCEOModHelper", name: "ACMH - Mod Helper", modVersion: "0.1.0", requiredACMLVersion: "0.1.0")]
     public class ACMH
     {
         public static HarmonyInstance HarmonyInstance { get; private set; }

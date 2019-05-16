@@ -18,6 +18,8 @@ namespace ACMH.MainMenuShowMods
             description = transform.Find("Description")?.gameObject?.GetComponent<Text>();
             buttonPlay = transform.Find("ButtonPlay")?.gameObject?.gameObject?.GetComponent<Button>();
             buttonUnsubscribe = transform.Find("ButtonUnsubscribe")?.gameObject?.GetComponent<Button>();
+
+            GetComponent<Image>().color = new Color(0.08f, 0.35f, 0.44f);
         }
 
         public void SetMod(Mod mod)
