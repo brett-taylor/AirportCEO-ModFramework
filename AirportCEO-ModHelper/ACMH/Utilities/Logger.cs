@@ -4,7 +4,7 @@ namespace ACMH.Utilities
 {
     public class Logger
     {
-        public static void Print(string message, bool alertInGame = false)
+        internal static void Print(string message, bool alertInGame = false)
         {
             Console.WriteLine($"[AirportCEOModHelper] {message}");
 
@@ -12,7 +12,7 @@ namespace ACMH.Utilities
                 ShowNotification(message);
         }
 
-        public static void Error(string message, bool alertInGame = false)
+        internal static void Error(string message, bool alertInGame = false)
         {
             Print($"[ERROR] {message}", alertInGame);
         }

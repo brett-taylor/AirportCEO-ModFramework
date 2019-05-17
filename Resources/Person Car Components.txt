@@ -1,0 +1,58 @@
+Object: PersonCar(Clone) has UnityEngine.Transform
+Object: PersonCar(Clone) has PersonCarController
+Object: Sprite has UnityEngine.Transform
+Object: Chassie has UnityEngine.Transform
+Object: Chassie has UnityEngine.SpriteRenderer
+Object: Windows has UnityEngine.Transform
+Object: Windows has UnityEngine.SpriteRenderer
+Object: Shadow has UnityEngine.Transform
+Object: Shadow has UnityEngine.SpriteRenderer
+Object: Shadow has ShadowHandler
+Object: Doors has UnityEngine.Transform
+Object: Doors has VehicleDoorManager
+Object: Doors has UnityEngine.Animator
+Object: FrontDoor1 has UnityEngine.Transform
+Object: FrontDoor2 has UnityEngine.Transform
+Object: RearDoor1 has UnityEngine.Transform
+Object: RearDoor2 has UnityEngine.Transform
+Object: CargoPoint has UnityEngine.Transform
+Object: Lights has UnityEngine.Transform
+Object: Lights has VehicleLightManager
+Object: HeadLightRight has UnityEngine.Transform
+Object: HeadLightRight has UnityEngine.Light
+Object: HeadLightLeft has UnityEngine.Transform
+Object: HeadLightLeft has UnityEngine.Light
+Object: RearLightRight has UnityEngine.Transform
+Object: RearLightRight has UnityEngine.Light
+Object: RearLightLeft has UnityEngine.Transform
+Object: RearLightLeft has UnityEngine.Light
+Object: WarningLights has UnityEngine.Transform
+Object: DecorationLights has UnityEngine.Transform
+Object: New Sprite has UnityEngine.Transform
+Object: New Sprite has UnityEngine.SpriteRenderer
+Object: New Sprite (1) has UnityEngine.Transform
+Object: New Sprite (1) has UnityEngine.SpriteRenderer
+Object: New Sprite (2) has UnityEngine.Transform
+Object: New Sprite (2) has UnityEngine.SpriteRenderer
+Object: New Sprite (3) has UnityEngine.Transform
+Object: New Sprite (3) has UnityEngine.SpriteRenderer
+Object: Audio has UnityEngine.Transform
+Object: Audio has VehicleAudioManager
+Object: PersistentEngineAudioSource has UnityEngine.Transform
+Object: PersistentEngineAudioSource has UnityEngine.AudioSource
+Object: Exhaust has UnityEngine.Transform
+Object: Exhaust has UnityEngine.ParticleSystem
+Object: Exhaust has UnityEngine.ParticleSystemRenderer
+Object: Boundary has UnityEngine.Transform
+Object: Boundary has BoundaryHandler
+Object: Border has UnityEngine.Transform
+Object: StartPos has UnityEngine.Transform
+Object: EndPos has UnityEngine.Transform
+Object: PersonGrid has UnityEngine.Transform
+Object: StartPos has UnityEngine.Transform
+Object: EndPos has UnityEngine.Transform
+Object: TrailerHitch has UnityEngine.Transform
+Object: TrailerAttachmentPoint has UnityEngine.Transform
+Object: TrailerRotationPoint has UnityEngine.Transform
+Object: TurnPosition has UnityEngine.Transform
+Object: FrontPosition has UnityEngine.Transform

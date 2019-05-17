@@ -129,5 +129,6 @@
     <Compile Include="Utilities\Assets.cs" />
     <Compile Include="Utilities\Logger.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

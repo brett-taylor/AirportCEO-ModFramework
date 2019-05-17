@@ -1,0 +1,27 @@
+Object:  Small  Toilet 57482 has UnityEngine.Transform
+Object:  Small  Toilet 57482 has InteractionItemModel
+Object: Sprite has UnityEngine.Transform
+Object: Sprite has UnityEngine.Animator
+Object: Sprite has UnityEngine.LODGroup
+Object: Toilet has UnityEngine.Transform
+Object: Toilet has UnityEngine.SpriteRenderer
+Object: Shadow (1) has UnityEngine.Transform
+Object: Shadow (1) has UnityEngine.SpriteRenderer
+Object: Shadow (1) has ShadowHandler
+Object: Wall has UnityEngine.Transform
+Object: Wall has UnityEngine.SpriteRenderer
+Object: Door has UnityEngine.Transform
+Object: Door has UnityEngine.SpriteRenderer
+Object: Overlay has UnityEngine.Transform
+Object: Overlay has OverlayHandler
+Object: InteractionPoints has UnityEngine.Transform
+Object: EntryPoint has UnityEngine.Transform
+Object: InteractionPoint has UnityEngine.Transform
+Object: Boundary has UnityEngine.Transform
+Object: Boundary has BoundaryHandler
+Object: Border has UnityEngine.Transform
+Object: StartPos has UnityEngine.Transform
+Object: EndPos has UnityEngine.Transform
+Object: PersonGrid has UnityEngine.Transform
+Object: StartPos has UnityEngine.Transform
+Object: EndPos has UnityEngine.Transform

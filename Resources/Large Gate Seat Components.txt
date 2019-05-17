@@ -1,0 +1,42 @@
+Object:  Large  Gate Seating 157566 has UnityEngine.Transform
+Object:  Large  Gate Seating 157566 has InteractionItemModel
+Object: Sprite has UnityEngine.Transform
+Object: Sprite has UnityEngine.LODGroup
+Object: SpriteSeat has UnityEngine.Transform
+Object: SpriteSeat has UnityEngine.SpriteRenderer
+Object: Rim has UnityEngine.Transform
+Object: Rim has UnityEngine.SpriteRenderer
+Object: Shadow has UnityEngine.Transform
+Object: Shadow has UnityEngine.SpriteRenderer
+Object: Shadow has ShadowHandler
+Object: Overlay has UnityEngine.Transform
+Object: Overlay has OverlayHandler
+Object: InteractionPoints has UnityEngine.Transform
+Object: SeatingPoint has UnityEngine.Transform
+Object: SeatingPoint (1) has UnityEngine.Transform
+Object: SeatingPoint (2) has UnityEngine.Transform
+Object: SeatingPoint (3) has UnityEngine.Transform
+Object: SeatingPoint (4) has UnityEngine.Transform
+Object: SeatingPoint (5) has UnityEngine.Transform
+Object: SeatingPoint (6) has UnityEngine.Transform
+Object: SeatingPoint (7) has UnityEngine.Transform
+Object: SeatingPoint (8) has UnityEngine.Transform
+Object: SeatingPoint (9) has UnityEngine.Transform
+Object: SeatingPoint (10) has UnityEngine.Transform
+Object: SeatingPoint (11) has UnityEngine.Transform
+Object: SeatingPoint (12) has UnityEngine.Transform
+Object: SeatingPoint (13) has UnityEngine.Transform
+Object: SeatingPoint (14) has UnityEngine.Transform
+Object: SeatingPoint (15) has UnityEngine.Transform
+Object: SeatingPoint (16) has UnityEngine.Transform
+Object: SeatingPoint (17) has UnityEngine.Transform
+Object: SeatingPoint (18) has UnityEngine.Transform
+Object: SeatingPoint (19) has UnityEngine.Transform
+Object: Boundary has UnityEngine.Transform
+Object: Boundary has BoundaryHandler
+Object: Border has UnityEngine.Transform
+Object: StartPos has UnityEngine.Transform
+Object: EndPos has UnityEngine.Transform
+Object: PersonGrid has UnityEngine.Transform
+Object: StartPos has UnityEngine.Transform
+Object: EndPos has UnityEngine.Transform

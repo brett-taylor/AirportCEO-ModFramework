@@ -1,0 +1,88 @@
+Object: AirsideShuttleBus(Clone) has UnityEngine.Transform
+Object: AirsideShuttleBus(Clone) has AirsideShuttleBusController
+Object: Sprite has UnityEngine.Transform
+Object: Chassie has UnityEngine.Transform
+Object: Chassie has UnityEngine.SpriteRenderer
+Object: Windows has UnityEngine.Transform
+Object: Windows has UnityEngine.SpriteRenderer
+Object: DoorStepFront has UnityEngine.Transform
+Object: DoorStepFront has UnityEngine.SpriteRenderer
+Object: DoorStepBack has UnityEngine.Transform
+Object: DoorStepBack has UnityEngine.SpriteRenderer
+Object: Shadow has UnityEngine.Transform
+Object: Shadow has UnityEngine.SpriteRenderer
+Object: Shadow has ShadowHandler
+Object: Doors has UnityEngine.Transform
+Object: Doors has VehicleDoorManager
+Object: Doors has UnityEngine.Animator
+Object: FrontDoor1 has UnityEngine.Transform
+Object: RearDoor1 has UnityEngine.Transform
+Object: DoorSprites has UnityEngine.Transform
+Object: FrontDoorSprites has UnityEngine.Transform
+Object: FrontDoor1 has UnityEngine.Transform
+Object: FrontDoor1 has UnityEngine.SpriteRenderer
+Object: FrontDoor2 has UnityEngine.Transform
+Object: FrontDoor2 has UnityEngine.SpriteRenderer
+Object: BackDoorSprites has UnityEngine.Transform
+Object: BackDoor1 has UnityEngine.Transform
+Object: BackDoor1 has UnityEngine.SpriteRenderer
+Object: BackDoor2 has UnityEngine.Transform
+Object: BackDoor2 has UnityEngine.SpriteRenderer
+Object: Lights has UnityEngine.Transform
+Object: Lights has VehicleLightManager
+Object: HeadLightRight has UnityEngine.Transform
+Object: HeadLightRight has UnityEngine.Light
+Object: HeadLightLeft has UnityEngine.Transform
+Object: HeadLightLeft has UnityEngine.Light
+Object: RearLightRight has UnityEngine.Transform
+Object: RearLightRight has UnityEngine.Light
+Object: RearLightLeft has UnityEngine.Transform
+Object: RearLightLeft has UnityEngine.Light
+Object: WarningLights has UnityEngine.Transform
+Object: DecorationLights has UnityEngine.Transform
+Object: TopLight has UnityEngine.Transform
+Object: TopLight has UnityEngine.SpriteRenderer
+Object: TopLight (3) has UnityEngine.Transform
+Object: TopLight (3) has UnityEngine.SpriteRenderer
+Object: TopLight (5) has UnityEngine.Transform
+Object: TopLight (5) has UnityEngine.SpriteRenderer
+Object: TopLight (7) has UnityEngine.Transform
+Object: TopLight (7) has UnityEngine.SpriteRenderer
+Object: TopLight (1) has UnityEngine.Transform
+Object: TopLight (1) has UnityEngine.SpriteRenderer
+Object: TopLight (2) has UnityEngine.Transform
+Object: TopLight (2) has UnityEngine.SpriteRenderer
+Object: TopLight (4) has UnityEngine.Transform
+Object: TopLight (4) has UnityEngine.SpriteRenderer
+Object: TopLight (6) has UnityEngine.Transform
+Object: TopLight (6) has UnityEngine.SpriteRenderer
+Object: TopLight (8) has UnityEngine.Transform
+Object: TopLight (8) has UnityEngine.SpriteRenderer
+Object: TopLight (9) has UnityEngine.Transform
+Object: TopLight (9) has UnityEngine.SpriteRenderer
+Object: TopLight (10) has UnityEngine.Transform
+Object: TopLight (10) has UnityEngine.SpriteRenderer
+Object: TopLight (11) has UnityEngine.Transform
+Object: TopLight (11) has UnityEngine.SpriteRenderer
+Object: Audio has UnityEngine.Transform
+Object: Audio has VehicleAudioManager
+Object: PersistentEngineAudioSource has UnityEngine.Transform
+Object: PersistentEngineAudioSource has UnityEngine.AudioSource
+Object: BreakAudioSource has UnityEngine.Transform
+Object: BreakAudioSource has UnityEngine.AudioSource
+Object: Exhaust has UnityEngine.Transform
+Object: Exhaust has UnityEngine.ParticleSystem
+Object: Exhaust has UnityEngine.ParticleSystemRenderer
+Object: Boundary has UnityEngine.Transform
+Object: Boundary has BoundaryHandler
+Object: Border has UnityEngine.Transform
+Object: StartPos has UnityEngine.Transform
+Object: EndPos has UnityEngine.Transform
+Object: PersonGrid has UnityEngine.Transform
+Object: StartPos has UnityEngine.Transform
+Object: EndPos has UnityEngine.Transform
+Object: TrailerHitch has UnityEngine.Transform
+Object: TrailerAttachmentPoint has UnityEngine.Transform
+Object: TrailerRotationPoint has UnityEngine.Transform
+Object: TurnPosition has UnityEngine.Transform
+Object: FrontPosition has UnityEngine.Transform

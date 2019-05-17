@@ -36,6 +36,9 @@
     <Reference Include="0Harmony">
       <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\0Harmony.dll</HintPath>
     </Reference>
+    <Reference Include="ACMH">
+      <HintPath>C:\Users\Brett\AppData\Roaming\Apoapsis Studios\Airport CEO\Mods\ACMH\ACMH.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp_publicized">
       <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\publicized_assemblies\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
@@ -63,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="Patchers\ClickVehiclePatcher.cs" />
     <Compile Include="Patchers\GameControllerPatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

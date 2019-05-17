@@ -1,0 +1,158 @@
+
+Object: Aircraft 5243 has UnityEngine.Transform
+Object: Aircraft 5243 has AircraftController
+Object: Aircraft 5243 has AircraftAnimationManager
+Object: Shadow has UnityEngine.Transform
+Object: Shadow has UnityEngine.SpriteRenderer
+Object: Shadow has ShadowHandler
+Object: Sprite has UnityEngine.Transform
+Object: RightWing has UnityEngine.Transform
+Object: RightWing has UnityEngine.SpriteRenderer
+Object: LeftWing has UnityEngine.Transform
+Object: LeftWing has UnityEngine.SpriteRenderer
+Object: EmergencyExist has UnityEngine.Transform
+Object: EmergencyExist has UnityEngine.SpriteRenderer
+Object: EmergencyExist (1) has UnityEngine.Transform
+Object: EmergencyExist (1) has UnityEngine.SpriteRenderer
+Object: LeftTail has UnityEngine.Transform
+Object: LeftTail has UnityEngine.SpriteRenderer
+Object: RightTail has UnityEngine.Transform
+Object: RightTail has UnityEngine.SpriteRenderer
+Object: NightWindows has UnityEngine.Transform
+Object: NightWindows (1) has UnityEngine.Transform
+Object: NightWindows (1) has UnityEngine.SpriteRenderer
+Object: NightWindows (2) has UnityEngine.Transform
+Object: NightWindows (2) has UnityEngine.SpriteRenderer
+Object: NightWindows (3) has UnityEngine.Transform
+Object: NightWindows (3) has UnityEngine.SpriteRenderer
+Object: Livery has UnityEngine.Transform
+Object: A320_HAVANA_LIV(Clone) has UnityEngine.Transform
+Object: A320_HAVANA_LIV(Clone) has Livery
+Object: Fuselag2 has UnityEngine.Transform
+Object: Fuselag2 has UnityEngine.SpriteRenderer
+Object: Engine1 has UnityEngine.Transform
+Object: Engine1 has UnityEngine.SpriteRenderer
+Object: Engine2 has UnityEngine.Transform
+Object: Engine2 has UnityEngine.SpriteRenderer
+Object: Doors has UnityEngine.Transform
+Object: Doors has AircraftDoorManager
+Object: RightFrontDoor has UnityEngine.Transform
+Object: RightRearDoor has UnityEngine.Transform
+Object: LeftFrontDoor has UnityEngine.Transform
+Object: LeftRearDoor has UnityEngine.Transform
+Object: FrontCargoDoor has UnityEngine.Transform
+Object: RearCargoDoor has UnityEngine.Transform
+Object: Flaps has UnityEngine.Transform
+Object: Flaps has UnityEngine.Animator
+Object: RightFlap has UnityEngine.Transform
+Object: RightFlap has UnityEngine.SpriteRenderer
+Object: LeftFlap has UnityEngine.Transform
+Object: LeftFlap has UnityEngine.SpriteRenderer
+Object: Lights has UnityEngine.Transform
+Object: Lights has AircraftLightManager
+Object: BeconLight has UnityEngine.Transform
+Object: BeconLight has UnityEngine.SpriteRenderer
+Object: StrobeLightLeft has UnityEngine.Transform
+Object: StrobeLightLeft has UnityEngine.SpriteRenderer
+Object: StrobeLightRight has UnityEngine.Transform
+Object: StrobeLightRight has UnityEngine.SpriteRenderer
+Object: StrobeLightBack has UnityEngine.Transform
+Object: StrobeLightBack has UnityEngine.SpriteRenderer
+Object: PortLight has UnityEngine.Transform
+Object: PortLight has UnityEngine.SpriteRenderer
+Object: StarbordLight has UnityEngine.Transform
+Object: StarbordLight has UnityEngine.SpriteRenderer
+Object: TaxiLight has UnityEngine.Transform
+Object: TaxiLight has UnityEngine.Light
+Object: LandingLight has UnityEngine.Transform
+Object: LandingLight has UnityEngine.Light
+Object: LandingLight (1) has UnityEngine.Transform
+Object: LandingLight (1) has UnityEngine.Light
+Object: Effects has UnityEngine.Transform
+Object: Effects has AircraftEffectsManager
+Object: LeftTouchDownFX has UnityEngine.Transform
+Object: LeftTouchDownFX has UnityEngine.ParticleSystem
+Object: LeftTouchDownFX has UnityEngine.ParticleSystemRenderer
+Object: RightTouchDownFX has UnityEngine.Transform
+Object: RightTouchDownFX has UnityEngine.ParticleSystem
+Object: RightTouchDownFX has UnityEngine.ParticleSystemRenderer
+Object: RightEngineExhaust has UnityEngine.Transform
+Object: RightEngineExhaust has UnityEngine.ParticleSystem
+Object: RightEngineExhaust has UnityEngine.ParticleSystemRenderer
+Object: LeftEngineExhaust has UnityEngine.Transform
+Object: LeftEngineExhaust has UnityEngine.ParticleSystem
+Object: LeftEngineExhaust has UnityEngine.ParticleSystemRenderer
+Object: Audio has UnityEngine.Transform
+Object: Audio has AircraftAudioManager
+Object: LeftEngine has UnityEngine.Transform
+Object: LeftEngine has UnityEngine.AudioSource
+Object: RightEngine has UnityEngine.Transform
+Object: RightEngine has UnityEngine.AudioSource
+Object: Shutdown has UnityEngine.Transform
+Object: Shutdown has UnityEngine.AudioSource
+Object: StartUp has UnityEngine.Transform
+Object: StartUp has UnityEngine.AudioSource
+Object: TouchDown has UnityEngine.Transform
+Object: TouchDown has UnityEngine.AudioSource
+Object: ReverserEngine has UnityEngine.Transform
+Object: ReverserEngine has UnityEngine.AudioSource
+Object: TakeoffSFXObject(Clone) has UnityEngine.Transform
+Object: TakeoffSFXObject(Clone) has UnityEngine.AudioSource
+Object: TakeoffSFXObject(Clone) has TimedDestroy
+Object: TakeoffSFXObject(Clone) has TakeoffAmbience
+Object: EngineSound(Clone) has UnityEngine.Transform
+Object: EngineSound(Clone) has UnityEngine.AudioSource
+Object: EngineSound(Clone) has UnityEngine.Transform
+Object: EngineSound(Clone) has UnityEngine.AudioSource
+Object: EngineSound(Clone) has UnityEngine.Transform
+Object: EngineSound(Clone) has UnityEngine.AudioSource
+Object: EngineSound(Clone) has UnityEngine.Transform
+Object: EngineSound(Clone) has UnityEngine.AudioSource
+Object: APUSound(Clone) has UnityEngine.Transform
+Object: APUSound(Clone) has UnityEngine.AudioSource
+Object: ServicePoints has UnityEngine.Transform
+Object: Employee has UnityEngine.Transform
+Object: Engine1.1 has UnityEngine.Transform
+Object: Engine1.2 has UnityEngine.Transform
+Object: Engine2.1 has UnityEngine.Transform
+Object: Engine2.2 has UnityEngine.Transform
+Object: WheelCarrige has UnityEngine.Transform
+Object: Wing1.1 has UnityEngine.Transform
+Object: Wing1.2 has UnityEngine.Transform
+Object: Wing2.1 has UnityEngine.Transform
+Object: Wing2.2 has UnityEngine.Transform
+Object: Front1 has UnityEngine.Transform
+Object: Front2 has UnityEngine.Transform
+Object: Back1 has UnityEngine.Transform
+Object: Back2 has UnityEngine.Transform
+Object: Back3 has UnityEngine.Transform
+Object: Vehicle has UnityEngine.Transform
+Object: FuelTruck has UnityEngine.Transform
+Object: ServiceTruck has UnityEngine.Transform
+Object: CateringTruck has UnityEngine.Transform
+Object: BeltLoaderTruck has UnityEngine.Transform
+Object: StairTruck has UnityEngine.Transform
+Object: Cargo has UnityEngine.Transform
+Object: CargoPoint has UnityEngine.Transform
+Object: CargoPoint (1) has UnityEngine.Transform
+Object: ToggleableSprites has UnityEngine.Transform
+Object: Cone has UnityEngine.Transform
+Object: Cone has UnityEngine.SpriteRenderer
+Object: Cone (1) has UnityEngine.Transform
+Object: Cone (1) has UnityEngine.SpriteRenderer
+Object: APU has UnityEngine.Transform
+Object: APU has UnityEngine.SpriteRenderer
+Object: APU has UnityEngine.AudioSource
+Object: APU Shadow has UnityEngine.Transform
+Object: APU Shadow has UnityEngine.SpriteRenderer
+Object: APU Shadow has ShadowHandler
+Object: GPU has UnityEngine.Transform
+Object: GPU has UnityEngine.SpriteRenderer
+Object: GPU has UnityEngine.AudioSource
+Object: GPUWire has UnityEngine.Transform
+Object: GPUWire has UnityEngine.SpriteRenderer
+Object: GPU Shadow has UnityEngine.Transform
+Object: GPU Shadow has UnityEngine.SpriteRenderer
+Object: GPU Shadow has ShadowHandler
+Object: TurnPosition has UnityEngine.Transform
+
