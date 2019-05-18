@@ -11,8 +11,8 @@ namespace SampleMod
         [ACMLModEntryPoint]
         public static void Entry(Mod mod)
         {
-            System.Console.WriteLine("[SampleMod] Sample Mod executing.");
-            var harmony = HarmonyInstance.Create("Hanks.Tom.SampleMod");
+            System.Console.WriteLine($"[{mod.ModInfo.ID}] {mod.ModInfo.Name} executing.");
+            var harmony = HarmonyInstance.Create(mod.ModInfo.ID);
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }

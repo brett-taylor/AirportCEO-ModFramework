@@ -16,7 +16,7 @@ namespace ACMH
         {
             Mod = mod;
             Utilities.Assets.Initialise();
-            HarmonyInstance = HarmonyInstance.Create("AirportCEOModHelper");
+            HarmonyInstance = HarmonyInstance.Create(Mod.ModInfo.ID);
             HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
         }
     }
