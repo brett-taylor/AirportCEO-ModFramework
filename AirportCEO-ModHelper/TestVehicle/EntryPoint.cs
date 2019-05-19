@@ -2,6 +2,7 @@
 using ACML.ModLoader;
 using Harmony;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -123,6 +124,24 @@ namespace TestVehicle
                 NotificationController.Instance.AttemptSendNotification("A new product has arrived!", CameraController.Instance.GetWorldCenter(), 
                     Enums.NotificationType.Other, Enums.MessageSeverity.Unspecified, text + "NewProduct", text, Enums.InteractableObjectType.Vehicle, true);
 
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(VehicleDoorManager))]
+    [HarmonyPatch("Awake")]
+    public class VehicleDoorManagerAwakePatcher
+    {
+        [HarmonyPrefix]
+        public static bool Prefix(VehicleDoorManager __instance)
+        {
+            if (__instance.frontDoorPoints == null|| __instance.rearDoorPoints == null)
+            {
+                __instance.animator = __instance.GetComponent<Animator>();
+                __instance.allAccessPoints = new List<Transform>();
                 return false;
             }
 

@@ -36,8 +36,9 @@
     <Reference Include="0Harmony">
       <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="ACMH">
-      <HintPath>C:\Users\Brett\AppData\Roaming\Apoapsis Studios\Airport CEO\Mods\ACMH\ACMH.dll</HintPath>
+    <Reference Include="ACML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\ACML.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp_publicized">
       <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\publicized_assemblies\Assembly-CSharp_publicized.dll</HintPath>
@@ -59,21 +60,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Patchers\GameControllerPatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ACML\ACML.csproj">
-      <Project>{57F82021-F8EA-4A34-B819-DA0772799EB3}</Project>
-      <Name>ACML</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
