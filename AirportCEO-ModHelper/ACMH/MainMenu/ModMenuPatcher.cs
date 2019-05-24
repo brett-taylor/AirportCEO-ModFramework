@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ACMH.MainMenuShowMods
+namespace ACMH.MainMenu
 {
     [HarmonyPatch(typeof(NativeModsPanel))]
     [HarmonyPatch("UpdateModLists")]

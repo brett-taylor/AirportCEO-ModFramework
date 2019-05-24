@@ -10,7 +10,7 @@ namespace ACML.ModLoader
         public MethodInfo EntryPoint { get; private set; }
         public ModVersion ModVersion { get; private set; }
         public ModVersion RequiredACMLVersion { get; private set; }
-        public ModLoadFailure ModLoadFailure { get; private set; } = ModLoadFailure.UNKNOWN;
+        public ModLoadFailure ModLoadFailure { get; private set; }
 
         public Mod(ACMLMod modInfo, Assembly assembly, MethodInfo entryPoint)
         {
@@ -19,6 +19,7 @@ namespace ACML.ModLoader
             EntryPoint = entryPoint;
             ModVersion = ModVersion.Parse(modInfo.ModVersion);
             RequiredACMLVersion = ModVersion.Parse(modInfo.RequiredACMLVersion);
+            ModLoadFailure = ModLoadFailure.UNKNOWN;
         }
 
         public void CalculateIfShouldLoad()

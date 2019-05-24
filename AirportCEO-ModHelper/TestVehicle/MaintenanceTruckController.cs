@@ -7,15 +7,10 @@ namespace TestVehicle
 {
     public class MaintenanceTruckController : ServiceVehicleController
     {
-        public VehicleModel VehicleModelBlah { get { return GetModel<ServiceCarModel>(); } }
-
         public override void Initialize()
         {
-            if (model == null)
-                model = new ServiceCarModel();
-
+            model = new ServiceCarModel();
             colorableParts = new SpriteRenderer[0];
-
             doorManager = gameObject.AddComponent<VehicleDoorManager>();
             doorManager.frontDoorPoints = new List<Transform>();
             doorManager.rearDoorPoints = new List<Transform>();
@@ -23,9 +18,9 @@ namespace TestVehicle
             doorManager.allAccessPoints = new List<Transform>();
             doorManager.transformsToHide = new List<Transform>();
             cargoDoors = new Transform[0];
-
             resetAction = new Action<Enums.ServiceVehicleActivity, bool, string>(ResetCarModel);
-            VehicleModelBlah.Initialize();
+
+            model.Initialize();
             base.Initialize();
         }
 

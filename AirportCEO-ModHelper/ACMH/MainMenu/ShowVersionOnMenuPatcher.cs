@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ACMH.MainMenuShowMods
+namespace ACMH.MainMenu
 {
     [HarmonyPatch(typeof(MainMenuWorldController))]
     [HarmonyPatch("ShowHideGameMenuPanels")]

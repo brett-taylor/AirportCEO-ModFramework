@@ -1,4 +1,5 @@
 ﻿using ACMH.Utilities.Extensions;
+using ACMH.Utilities.Misc;
 using ACML.ModLoader;
 using Harmony;
 using System;
@@ -112,17 +113,27 @@ namespace TestVehicle
             {
                 string text = "";
 
-                GameObject serviceCar = UnityEngine.Object.Instantiate(TrafficController.Instance.serviceCarPrefab, FolderController.Instance.GetSceneRootTransform());
+                /*GameObject serviceCar = UnityEngine.Object.Instantiate(TrafficController.Instance.serviceCarPrefab, FolderController.Instance.GetSceneRootTransform());
                 ServiceCarController serviceCarController = serviceCar.GetComponent<ServiceCarController>();
-                if (serviceCarController != null)
+
+
+
+                /*if (serviceCarController != null)
                     UnityEngine.Object.Destroy(serviceCarController);
 
                 VehicleController vehicleController = serviceCar.AddComponent<MaintenanceTruckController>();
                 vehicleController.Initialize();
-                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(vehicleController, false);
+                TrafficController.Instance.AddVehicleToSpawnQueue(vehicleController, false);
 
                 NotificationController.Instance.AttemptSendNotification("A new product has arrived!", CameraController.Instance.GetWorldCenter(), 
-                    Enums.NotificationType.Other, Enums.MessageSeverity.Unspecified, text + "NewProduct", text, Enums.InteractableObjectType.Vehicle, true);
+                    Enums.NotificationType.Other, Enums.MessageSeverity.Unspecified, text + "NewProduct", text, Enums.InteractableObjectType.Vehicle, true);*/
+
+                GameObject gameObject8 = Singleton<TrafficController>.Instance.SpawnVehicleGameObject(Enums.VehicleType.ServiceCar, Enums.VehicleSubType.Unspecified);
+                gameObject8.DumpFields();
+                ServiceCarController component7 = gameObject8.GetComponent<ServiceCarController>();
+                component7.Initialize();
+                component7.ServiceVehicleModel.isOwnedByAirport = true;
+                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component7, false);
 
                 return false;
             }
