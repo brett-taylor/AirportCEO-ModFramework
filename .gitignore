@@ -329,7 +329,7 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
-Airport CEO Mod Helper Unity Package/Library/*
-Airport CEO Mod Helper Unity Package/Temp/*
+Unity Projects/*/Library/*
+Unity Projects/*/Temp/*
 AirportCEO-ModHelper/Dependencies/*.dll
 AirportCEO-ModLoader/Dependencies/*.dll

@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+CRC: 2329785927
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 400b29f122f07fee184473ce356d06b2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 07de8bf4249144b20ca0cf7f9bdd9a6c
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Sprites/Service Vehicle Master Sprite Sheet.png
+- Assets/Prefabs/TestCar.prefab
+Dependencies: []

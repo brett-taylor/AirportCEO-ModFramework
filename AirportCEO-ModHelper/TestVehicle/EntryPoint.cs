@@ -1,9 +1,7 @@
-﻿using ACMH.Utilities.Extensions;
-using ACMH.Utilities.Misc;
+﻿using ACMH.Utilities.Misc;
 using ACML.ModLoader;
 using Harmony;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -23,6 +21,7 @@ namespace TestVehicle
             Mod = mod;
             HarmonyInstance = HarmonyInstance.Create(Mod.ModInfo.ID);
             HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
+            Assets.Initialise();
         }
     }
 
@@ -86,7 +85,7 @@ namespace TestVehicle
                     description = "Cool Test Bed that does fuck all",
                     fixedCost = 100f,
                     operatingCost = 5f,
-                    deliveryTime = new TimeSpan(0, 10, 0),
+                    deliveryTime = new TimeSpan(0, 1, 0),
                     isQuantifiable = true,
                     isPhysicalProduct = true,
                     prerequisiteForDisplay = new ProcurementController.Prerequisite[0],
@@ -112,29 +111,75 @@ namespace TestVehicle
             if (productType == EntryPoint.ProductTypeEnum)
             {
                 string text = "";
+                Console.WriteLine($"!!!!!!!IMPORTANT! TestCar Spawned");
 
-                /*GameObject serviceCar = UnityEngine.Object.Instantiate(TrafficController.Instance.serviceCarPrefab, FolderController.Instance.GetSceneRootTransform());
-                ServiceCarController serviceCarController = serviceCar.GetComponent<ServiceCarController>();
+                GameObject testCar = UnityEngine.Object.Instantiate(Assets.TEST_VEHICLE);
+                testCar.transform.SetParent(FolderController.Instance.GetSceneRootTransform(), false);
 
+                //////////////////////////////////////////
+                VehicleDoorManager vdm = testCar.transform.Find("Doors").gameObject.AddComponent<VehicleDoorManager>();
+                vdm.frontDoorPoints = new List<Transform>();
+                vdm.rearDoorPoints = new List<Transform>();
+                vdm.cargoDoorPoints = new List<Transform>();
+                vdm.transformsToHide = new List<Transform>();
+                vdm.frontDoorPoints.Add(testCar.transform.Find("Doors/FrontDoor1"));
+                vdm.frontDoorPoints.Add(testCar.transform.Find("Doors/FrontDoor2"));
+                vdm.rearDoorPoints.Add(testCar.transform.Find("Doors/RearDoor1"));
+                vdm.cargoDoorPoints.Add(testCar.transform.Find("Doors/CargoPoint"));
+                vdm.allAccessPoints = new List<Transform>();
+                vdm.allAccessPoints.AddRange(vdm.frontDoorPoints);
+                vdm.allAccessPoints.AddRange(vdm.rearDoorPoints);
+                //////////////////////////////////////////
 
+                //////////////////////////////////////////
+                VehicleLightManager vlm = testCar.transform.Find("Lights").gameObject.AddComponent<VehicleLightManager>();
+                //////////////////////////////////////////
 
-                /*if (serviceCarController != null)
-                    UnityEngine.Object.Destroy(serviceCarController);
+                //////////////////////////////////////////
+                BoundaryHandler bh = testCar.transform.Find("Boundary").gameObject.AddComponent<BoundaryHandler>();
+                bh.zoneType = (Enums.ZoneType) 4;
+                bh.boundaryType = BoundaryHandler.BoundaryType.PersonGrid;
+                //////////////////////////////////////////
 
-                VehicleController vehicleController = serviceCar.AddComponent<MaintenanceTruckController>();
-                vehicleController.Initialize();
-                TrafficController.Instance.AddVehicleToSpawnQueue(vehicleController, false);
+                //////////////////////////////////////////
+                ShadowHandler shadowHandler = testCar.transform.Find("Sprite/Shadow").gameObject.AddComponent<ShadowHandler>();
+                shadowHandler.shadowDistance = 0.175f;
+                //////////////////////////////////////////
+
+                //////////////////////////////////////////
+                VehicleAudioManager vehicleAudio = testCar.transform.Find("Audio").gameObject.AddComponent<VehicleAudioManager>();
+                //////////////////////////////////////////
+
+                //////////////////////////////////////////
+                ServiceVehicleController scc = testCar.AddComponent<TestTruckController>();
+                scc.colorableParts = new SpriteRenderer[0];
+                scc.cargoDoors = new Transform[0];
+                scc.doorManager = vdm;
+                scc.lightManager = vlm;
+                scc.audioManager = vehicleAudio;
+                scc.exhaust = testCar.GetComponentInChildren<ParticleSystem>();
+                scc.shadows = new ShadowHandler[] { shadowHandler };
+                scc.boundary = bh;
+                scc.currentActionDescriptionListReference = new List<Enums.ServiceVehicleAction>();
+                scc.allSprites = new SpriteRenderer[0];
+                scc.currentShipment = new Shipment(Vector3.zero, Enums.DeliveryContainerType.Unspecified, Enums.DeliveryContentType.Unspecified, 0);
+                scc.thoughtsReferenceList = new List<Thought>();
+                //////////////////////////////////////////
+
+                //////////////////////////////////////////
+                scc.gameObject.SetActive(false);
+                scc.transform.position = Vector3.zero;
+                scc.Initialize();
+                scc.ServiceVehicleModel.isOwnedByAirport = true;
+                TrafficController.Instance.AddVehicleToSpawnQueue(scc, false);
+                vlm.ActivateLights();
+                vlm.ToggleWarningLights(true);
+                testCar.DumpFields();
+                SpawnBeltLoader.TEST = testCar;
+                //////////////////////////////////////////
 
                 NotificationController.Instance.AttemptSendNotification("A new product has arrived!", CameraController.Instance.GetWorldCenter(), 
-                    Enums.NotificationType.Other, Enums.MessageSeverity.Unspecified, text + "NewProduct", text, Enums.InteractableObjectType.Vehicle, true);*/
-
-                GameObject gameObject8 = Singleton<TrafficController>.Instance.SpawnVehicleGameObject(Enums.VehicleType.ServiceCar, Enums.VehicleSubType.Unspecified);
-                gameObject8.DumpFields();
-                ServiceCarController component7 = gameObject8.GetComponent<ServiceCarController>();
-                component7.Initialize();
-                component7.ServiceVehicleModel.isOwnedByAirport = true;
-                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component7, false);
-
+                    Enums.NotificationType.Other, Enums.MessageSeverity.Unspecified, text + "NewProduct", text, Enums.InteractableObjectType.Vehicle, true);
                 return false;
             }
 
@@ -151,12 +196,78 @@ namespace TestVehicle
         {
             if (__instance.frontDoorPoints == null|| __instance.rearDoorPoints == null)
             {
-                __instance.animator = __instance.GetComponent<Animator>();
-                __instance.allAccessPoints = new List<Transform>();
                 return false;
             }
 
             return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(VehicleController))]
+    [HarmonyPatch("Initialize")]
+    public class VehicleControllerInitializePrefixPatcher
+    {
+        [HarmonyPrefix]
+        public static void Prefix(VehicleController __instance)
+        {
+            Console.WriteLine($"HarmonyPrefix VehicleController::Initialize called on {__instance.gameObject.name}");
+        }
+    }
+
+    [HarmonyPatch(typeof(VehicleController))]
+    [HarmonyPatch("Initialize")]
+    public class VehicleControllerInitializePostfixPatcher
+    {
+        [HarmonyPostfix]
+        public static void Postfix(VehicleController __instance)
+        {
+            Console.WriteLine($"HarmonyPostfix VehicleController::Initialize called on {__instance.gameObject.name}");
+        }
+    }
+
+    [HarmonyPatch(typeof(VehicleController))]
+    [HarmonyPatch("GetAllSpritesInObject")]
+    public class VehicleControllerGetAllSpritesInObjectPrefixPatcher
+    {
+        [HarmonyPrefix]
+        public static void Postfix(VehicleController __instance)
+        {
+            Console.WriteLine($"HarmonyPrefix VehicleController::GetAllSpritesInObject called on {__instance.gameObject.name}");
+        }
+    }
+
+    [HarmonyPatch(typeof(PlayerInputController))]
+    [HarmonyPatch("Update")]
+    public static class SpawnBeltLoader
+    {
+        public static GameObject TEST;
+
+        [HarmonyPostfix]
+        public static void Postfix()
+        {
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
+            {
+                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.PushbackTruck, Enums.VehicleSubType.Unspecified);
+                PushbackTruckController component3 = gameObject4.GetComponent<PushbackTruckController>();
+                component3.Initialize();
+                component3.ServiceVehicleModel.isOwnedByAirport = true;
+                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
+                gameObject4.DumpFields();
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.U))
+            {
+                ProcurmentControllerSpawnProcureablePatcher.Prefix(EntryPoint.ProductTypeEnum);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.I))
+            {
+                ACMH.Utilities.Logger.ShowDialog($"TestCar: {TEST?.name ?? "Null"}");
+                if (TEST != null)
+                {
+                    TEST.transform.position = new Vector2(200f, 200f);
+                }
+            }
         }
     }
 }

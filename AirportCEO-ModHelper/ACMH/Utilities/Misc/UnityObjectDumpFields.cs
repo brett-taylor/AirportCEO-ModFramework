@@ -1,4 +1,5 @@
 ﻿using Harmony;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,22 +7,6 @@ using UnityEngine;
 
 namespace ACMH.Utilities.Misc
 {
-    [HarmonyPatch(typeof(PlayerInputController))]
-    [HarmonyPatch("Update")]
-    public static class UnityObjectDumpFieldsHotKey
-    {
-        public static void Postfix()
-        {
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
-            {
-                GameObject gameObject8 = Singleton<TrafficController>.Instance.SpawnVehicleGameObject(Enums.VehicleType.ServiceCar, Enums.VehicleSubType.Unspecified);
-                gameObject8.GetComponent<ServiceCarController>().Initialize();
-                gameObject8.DumpFields();
-                Logger.ShowDialog("Worked.");
-            }
-        }
-    }
-
     public static class UnityObjectDumpFields
     {
         private static readonly string DUMPS_FOLDER_NAME = "Dumps";
@@ -33,6 +18,7 @@ namespace ACMH.Utilities.Misc
             string fileLocation = Path.Combine(path, $"{mb.name}.txt");
             TextWriter stream = new StreamWriter(fileLocation, false);
 
+            stream.WriteLine($"Generated From Gameobject {mb.name} at {System.DateTime.Now.ToString()}");
             foreach (Component c in mb.GetComponentsInChildren<Component>())
             {
                 stream.WriteLine($"Component {c.name} || Type {c.GetType()} || Parent {c.transform.parent?.name}");
@@ -62,7 +48,21 @@ namespace ACMH.Utilities.Misc
             List<string> fieldNames = c.GetType().GetFields().Select(field => field.Name).ToList();
             List<object> fieldValues = c.GetType().GetFields().Select(field => field.GetValue(c)).ToList();
             for (int i = 0; i < fieldNames.Count; i++)
+            {
                 stream.WriteLine($"{fieldNames[i]} : {fieldValues[i]}");
+            }
+        }
+
+        private static void DumpList(IList list, TextWriter stream)
+        {
+            foreach (object o in list)
+                stream.WriteLine($"List contains: {o}");
+        }
+
+        private static void DumpArray(object[] array, TextWriter stream)
+        {
+            foreach (object o in array)
+                stream.WriteLine($"List contains: {o}");
         }
 
         private static void DumpComponentToStream(Transform t, TextWriter stream)
@@ -100,10 +100,19 @@ namespace ACMH.Utilities.Misc
             stream.WriteLine($"sortingLayerName: {t.sortingLayerName}");
             stream.WriteLine($"sortingOrder: {t.sortingOrder}");
             stream.WriteLine($"maskInteraction: {t.maskInteraction}");
-            stream.WriteLine(" ");
             stream.WriteLine($"Sprite: {t.sprite?.name}"); 
             stream.WriteLine($"Texture: {t.sprite?.texture?.name}");
-            stream.WriteLine($"Texture: {t.sprite?.texture?.name}");
+            stream.WriteLine($"associatedAlphaSplitTexture: {t.sprite?.associatedAlphaSplitTexture}");
+            stream.WriteLine($"border: {t.sprite?.border}");
+            stream.WriteLine($"bounds: {t.sprite?.bounds}");
+            stream.WriteLine($"packed: {t.sprite?.packed}");
+            stream.WriteLine($"packingMode: {t.sprite?.packingMode}");
+            stream.WriteLine($"packingRotation: {t.sprite?.packingRotation}");
+            stream.WriteLine($"pivot: {t.sprite?.pivot}");
+            stream.WriteLine($"pixelsPerUnit: {t.sprite?.pixelsPerUnit}");
+            stream.WriteLine($"rect: {t.sprite?.rect}");
+            stream.WriteLine($"textureRect: {t.sprite?.textureRect}");
+            stream.WriteLine($"textureRectOffset: {t.sprite?.textureRectOffset}");
         }
     }
 }
