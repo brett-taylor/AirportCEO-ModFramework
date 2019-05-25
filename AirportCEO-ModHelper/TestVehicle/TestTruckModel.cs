@@ -11,7 +11,7 @@ namespace TestVehicle
             vehicleHitboxes = new Vector2[] { new Vector2(4f, 2f) };
             vehicleType = Enums.VehicleType.ServiceCar;
             fuelType = Enums.FuelType.Gasoline;
-            topSpeed = 50f;
+            topSpeed = 20f;
             operatingCost = 100f;
             randomizeColor = false;
             maxDeliveryQuantityCapacity = 0f;

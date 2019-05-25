@@ -5,11 +5,21 @@ namespace TestVehicle
 {
     public class TestTruckController : ServiceVehicleController
     {
+        public TestTruckModel TestTruckModel {
+            get {
+                return (TestTruckModel) model;
+            }
+        }
+
         public override void Initialize()
         {
-            model = new TestTruckModel();
+            if (model == null)
+            {
+                model = new TestTruckModel();
+            }
+
             resetAction = new Action<Enums.ServiceVehicleActivity, bool, string>(ResetCarModel);
-            model.Initialize();
+            TestTruckModel.Initialize();
             base.Initialize();
         }
 
@@ -26,7 +36,7 @@ namespace TestVehicle
 
         public override void Reset()
         {
-            model.Reset();
+            TestTruckModel.Reset();
             base.Reset();
         }
 

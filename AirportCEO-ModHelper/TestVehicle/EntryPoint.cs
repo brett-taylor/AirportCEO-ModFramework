@@ -2,6 +2,7 @@
 using ACML.ModLoader;
 using Harmony;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -151,7 +152,7 @@ namespace TestVehicle
                 //////////////////////////////////////////
 
                 //////////////////////////////////////////
-                ServiceVehicleController scc = testCar.AddComponent<TestTruckController>();
+                TestTruckController scc = testCar.AddComponent<TestTruckController>();
                 scc.colorableParts = new SpriteRenderer[0];
                 scc.cargoDoors = new Transform[0];
                 scc.doorManager = vdm;
@@ -160,10 +161,9 @@ namespace TestVehicle
                 scc.exhaust = testCar.GetComponentInChildren<ParticleSystem>();
                 scc.shadows = new ShadowHandler[] { shadowHandler };
                 scc.boundary = bh;
+                scc.thoughtsReferenceList = new List<Thought>(); 
+                scc.currentShipment = new Shipment(Vector3.zero, Enums.DeliveryContainerType.Unspecified, Enums.DeliveryContentType.Unspecified, 0, "");
                 scc.currentActionDescriptionListReference = new List<Enums.ServiceVehicleAction>();
-                scc.allSprites = new SpriteRenderer[0];
-                scc.currentShipment = new Shipment(Vector3.zero, Enums.DeliveryContainerType.Unspecified, Enums.DeliveryContentType.Unspecified, 0);
-                scc.thoughtsReferenceList = new List<Thought>();
                 //////////////////////////////////////////
 
                 //////////////////////////////////////////
@@ -252,12 +252,13 @@ namespace TestVehicle
                 component3.Initialize();
                 component3.ServiceVehicleModel.isOwnedByAirport = true;
                 Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
-                gameObject4.DumpFields();
+                TrafficController.Instance.StartCoroutine(TestTest(component3));
             }
 
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.U))
             {
                 ProcurmentControllerSpawnProcureablePatcher.Prefix(EntryPoint.ProductTypeEnum);
+                TrafficController.Instance.StartCoroutine(TestTest(TEST.GetComponent<TestTruckController>()));
             }
 
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.I))
@@ -268,6 +269,21 @@ namespace TestVehicle
                     TEST.transform.position = new Vector2(200f, 200f);
                 }
             }
+        }
+
+        public static IEnumerator TestTest(ServiceVehicleController controller)
+        {
+            ACMH.Utilities.Logger.ShowNotification("CALLED");
+            yield return new WaitForSecondsRealtime(10f);
+            controller.gameObject.DumpFields();
+            Console.WriteLine($"[TESTTEST] Object Name: {controller.gameObject.name} Component name {controller.GetType()}");
+            Console.WriteLine($"[TESTTEST] currentActionDescriptionListReference.Count: {controller.currentActionDescriptionListReference.Count}");
+            foreach(Enums.ServiceVehicleAction action in controller.currentActionDescriptionListReference)
+            {
+                Console.WriteLine($"[TESTTEST] element: {action}");
+            }
+            ACMH.Utilities.Logger.ShowNotification("DONE DONE DONE");
+            ACMH.Utilities.Logger.ShowDialog("done");
         }
     }
 }
