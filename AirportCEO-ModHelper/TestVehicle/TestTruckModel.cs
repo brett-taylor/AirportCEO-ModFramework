@@ -7,9 +7,9 @@ namespace TestVehicle
         public new void Initialize()
         {
             base.Initialize();
-            vehicleName = "Sausy Test Car " + Utils.RandomRangeI(0f, 999f);
-            vehicleHitboxes = new Vector2[] { new Vector2(4f, 2f) };
-            vehicleType = Enums.VehicleType.ServiceCar;
+            vehicleName = "Test Car " + Utils.RandomRangeI(0f, 999f);
+            vehicleHitboxes = new Vector2[] { new Vector2(6f, 2f) };
+            vehicleType = EntryPoint.VehicleType;
             fuelType = Enums.FuelType.Gasoline;
             topSpeed = 20f;
             operatingCost = 100f;

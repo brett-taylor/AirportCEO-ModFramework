@@ -5,9 +5,11 @@ namespace TestVehicle
 {
     public class TestTruckController : ServiceVehicleController
     {
-        public TestTruckModel TestTruckModel {
-            get {
-                return (TestTruckModel) model;
+        public TestTruckModel TestTruckModel
+        {
+            get
+            {
+                return GetModel<TestTruckModel>();
             }
         }
 

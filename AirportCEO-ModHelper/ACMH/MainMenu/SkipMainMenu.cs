@@ -1,4 +1,5 @@
 ﻿using Harmony;
+using UnityEngine;
 
 namespace ACMH.MainMenu
 {
@@ -14,7 +15,9 @@ namespace ACMH.MainMenu
         {
             if (SKIP_MAIN_MENU)
             {
-                __instance.StartCoroutine(__instance.LaunchAirportCoroutine(Enums.GameLoadSetting.ContinueGame, SAVE));
+                GameObject go = GameObject.Find("LoadedFromGameWorld");
+                if (go == null)
+                    __instance.StartCoroutine(__instance.LaunchAirportCoroutine(Enums.GameLoadSetting.ContinueGame, SAVE));
             }
         }
     }
