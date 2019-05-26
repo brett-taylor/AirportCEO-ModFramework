@@ -40,8 +40,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\ACML.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp_publicized">
-      <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\Assembly-CSharp_publicized.dll</HintPath>
+    <Reference Include="Assembly-CSharp_publicized, Version=11.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,7 +57,7 @@
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>..\Dependencies\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -64,7 +65,7 @@
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\Steam Library\steamapps\common\Airport CEO\Airport CEO_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>..\Dependencies\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
