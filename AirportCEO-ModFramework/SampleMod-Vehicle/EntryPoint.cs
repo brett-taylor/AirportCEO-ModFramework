@@ -293,6 +293,36 @@ namespace SampleModVehicle
                     ACMF.ModHelper.Utilities.Logger.ShowNotification($"Job Agent: {gameObject.name} || Job: {gameObject.GetComponent<ServiceVehicleController>().CurrentJobTaskReferenceID ?? "Empty"}");
             }
 
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.T))
+            {
+                List<TestTruckModel> models = new List<TestTruckModel>();
+
+                VehicleController[] vehicleArray = Singleton<TrafficController>.Instance.GetVehicleArray();
+                foreach(VehicleController vc in vehicleArray)
+                    if (vc is TestTruckController)
+                        models.Add(vc.GetComponent<TestTruckController>().TestTruckModel);
+
+                Serialization.ACMHVehicleWrapper aCMHVehicleWrapper = new Serialization.ACMHVehicleWrapper();
+                aCMHVehicleWrapper.VehicleModels.AddRange(models);
+
+                string json = JsonHelper.ToJson(aCMHVehicleWrapper.VehicleModels.ToArray(), true);
+                ACMF.ModHelper.Utilities.Logger.ShowDialog($"Count: {aCMHVehicleWrapper.VehicleModels.Count} || JSON: {json}");
+                System.Console.WriteLine($" ");
+                System.Console.WriteLine($" ");
+                System.Console.WriteLine($"JSON: {json}");
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
+            {
+                TestTruckModel model = TEST.First().GetComponent<TestTruckController>().TestTruckModel;
+                string json = JsonUtility.ToJson(model);
+
+                ACMF.ModHelper.Utilities.Logger.ShowDialog($"JSON: {json}");
+                System.Console.WriteLine($" ");
+                System.Console.WriteLine($" ");
+                System.Console.WriteLine($"JSON: {json}");
+            }
+
             /*foreach (GameObject gameObject in TEST)
             {
                 string referenceJob = gameObject.GetComponent<ServiceVehicleController>().CurrentJobTaskReferenceID;
@@ -359,6 +389,35 @@ namespace SampleModVehicle
             }
 
             return true;
+        }
+    }
+
+    public static class JsonHelper
+    {
+        public static T[] FromJson<T>(string json)
+        {
+            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
+            return wrapper.Items;
+        }
+
+        public static string ToJson<T>(T[] array)
+        {
+            Wrapper<T> wrapper = new Wrapper<T>();
+            wrapper.Items = array;
+            return JsonUtility.ToJson(wrapper);
+        }
+
+        public static string ToJson<T>(T[] array, bool prettyPrint)
+        {
+            Wrapper<T> wrapper = new Wrapper<T>();
+            wrapper.Items = array;
+            return JsonUtility.ToJson(wrapper, prettyPrint);
+        }
+
+        [Serializable]
+        private class Wrapper<T>
+        {
+            public T[] Items;
         }
     }
 }

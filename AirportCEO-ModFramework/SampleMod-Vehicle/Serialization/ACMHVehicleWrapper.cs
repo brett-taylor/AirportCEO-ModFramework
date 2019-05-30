@@ -7,27 +7,10 @@ namespace SampleModVehicle.Serialization
     [Serializable]
     public class ACMHVehicleWrapper
     {
-        [SerializeField]
-        public List<string> VehicleTypes;
+        public List<TestTruckModel> VehicleModels = new List<TestTruckModel>();
 
-        [SerializeField]
-        public List<VehicleModel> VehicleModels;
-
-        public ACMHVehicleWrapper()
-        {
-            VehicleTypes = new List<string>();
-            VehicleModels = new List<VehicleModel>();
-        }
-
-        public void AddNewObject(Type typeInstance, object instance)
-        {
-            VehicleTypes.Add(instance.GetType().FullName);
-            VehicleModels.Add((VehicleModel)instance);
-        }
-
-        public static ACMHVehicleWrapper CreateFromJSON(string jsonString)
-        {
-            return JsonUtility.FromJson<ACMHVehicleWrapper>(jsonString);
-        }
+        public void AddNewObject(TestTruckModel testTruckModel) => VehicleModels.Add(testTruckModel);
+        public string SaveToJSON() => JsonUtility.ToJson(this);
+        public static ACMHVehicleWrapper CreateFromJSON(string jsonString) => JsonUtility.FromJson<ACMHVehicleWrapper>(jsonString);
     }
 }

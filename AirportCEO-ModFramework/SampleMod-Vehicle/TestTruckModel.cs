@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SampleModVehicle
 {
+    [Serializable]
     public class TestTruckModel : ServiceVehicleModel
     {
+        public int randomNumberOne;
+
         public new void Initialize()
         {
             base.Initialize();
@@ -22,6 +26,8 @@ namespace SampleModVehicle
             nodesToOccupy = 2;
             occupyBackwards = false;
             canBeAssignedToStaticJobTaskObject = true;
+
+            randomNumberOne = 5;
         }
 
         public override void Reset()
