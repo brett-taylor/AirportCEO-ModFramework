@@ -331,5 +331,5 @@ ASALocalRun/
 
 Unity Projects/*/Library/*
 Unity Projects/*/Temp/*
-AirportCEO-ModHelper/Dependencies/*.dll
-AirportCEO-ModLoader/Dependencies/*.dll
+AirportCEO-ModFramework/Dependencies/*.dll
+AirportCEO-ModFramework/Dependencies/*.xml
