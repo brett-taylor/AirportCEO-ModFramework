@@ -329,7 +329,5 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
-Unity Projects/*/Library/*
-Unity Projects/*/Temp/*
 AirportCEO-ModFramework/Dependencies/*.dll
 AirportCEO-ModFramework/Dependencies/*.xml

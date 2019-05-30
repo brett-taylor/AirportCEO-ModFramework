@@ -12,7 +12,7 @@ namespace ACMF.ModHelper.MainMenu
         public static void Postfix(MainMenuWorldController __instance)
         {
             GameObject versionText = Object.Instantiate(Utilities.Assets.MAIN_MENU_VERSION_TEXT);
-            versionText.transform.Find("Container/ACML").GetComponent<TextMeshProUGUI>().text = $"Airport CEO Mod Loader: v{ACMF.Version}";
+            versionText.transform.Find("Container/ACMF").GetComponent<TextMeshProUGUI>().text = $"Airport CEO Mod Framework: v{ACMF.Version}";
         }
     }
 }

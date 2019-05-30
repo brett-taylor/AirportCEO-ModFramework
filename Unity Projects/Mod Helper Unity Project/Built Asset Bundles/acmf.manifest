@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2393515423
+CRC: 2865807816
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e66ff9bedab5b1698b301d0722da4cec
+    Hash: f581a24e9926ebabb357022c0308d531
   TypeTreeHash:
     serializedVersion: 2
     Hash: fde7c4083c840314d867f45882835f72
@@ -34,5 +34,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/MainMenu/ACML_H-Info.prefab
+- Assets/MainMenu/ACMF-Info.prefab
 Dependencies: []

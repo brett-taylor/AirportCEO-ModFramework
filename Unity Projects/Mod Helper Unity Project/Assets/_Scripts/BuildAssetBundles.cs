@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class BuildAssetBundles
 {
-    [MenuItem("ACMH/Build Asset Bundles")]
+    [MenuItem("ACMF/Build Asset Bundles")]
     static void BuildAllAssetBundles()
     {
         BuildPipeline.BuildAssetBundles("Built Asset Bundles/", BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
