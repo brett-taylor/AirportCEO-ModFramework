@@ -215,69 +215,14 @@ namespace TestVehicle
                 string text = "";
                 Console.WriteLine($"!!!!!!!IMPORTANT! TestCar Spawned");
 
-                GameObject testCar = UnityEngine.Object.Instantiate(Assets.TEST_VEHICLE);
-                testCar.transform.SetParent(FolderController.Instance.GetSceneRootTransform(), false);
+                GameObject testCar = Assets.GetGameObjectForTestTruck();
 
-                //////////////////////////////////////////
-                VehicleDoorManager vdm = testCar.transform.Find("Doors").gameObject.AddComponent<VehicleDoorManager>();
-                vdm.frontDoorPoints = new List<Transform>();
-                vdm.rearDoorPoints = new List<Transform>();
-                vdm.cargoDoorPoints = new List<Transform>();
-                vdm.transformsToHide = new List<Transform>();
-                vdm.frontDoorPoints.Add(testCar.transform.Find("Doors/FrontDoor1"));
-                vdm.frontDoorPoints.Add(testCar.transform.Find("Doors/FrontDoor2"));
-                vdm.rearDoorPoints.Add(testCar.transform.Find("Doors/RearDoor1"));
-                vdm.cargoDoorPoints.Add(testCar.transform.Find("Doors/CargoPoint"));
-                vdm.allAccessPoints = new List<Transform>();
-                vdm.allAccessPoints.AddRange(vdm.frontDoorPoints);
-                vdm.allAccessPoints.AddRange(vdm.rearDoorPoints);
-                //////////////////////////////////////////
-
-                //////////////////////////////////////////
-                VehicleLightManager vlm = testCar.transform.Find("Lights").gameObject.AddComponent<VehicleLightManager>();
-                //////////////////////////////////////////
-
-                //////////////////////////////////////////
-                BoundaryHandler bh = testCar.transform.Find("Boundary").gameObject.AddComponent<BoundaryHandler>();
-                bh.zoneType = (Enums.ZoneType) 4;
-                bh.boundaryType = BoundaryHandler.BoundaryType.PersonGrid;
-                //////////////////////////////////////////
-
-                //////////////////////////////////////////
-                ShadowHandler shadowHandler = testCar.transform.Find("Sprite/Shadow").gameObject.AddComponent<ShadowHandler>();
-                shadowHandler.shadowDistance = 0.175f;
-                //////////////////////////////////////////
-
-                //////////////////////////////////////////
-                VehicleAudioManager vehicleAudio = testCar.transform.Find("Audio").gameObject.AddComponent<VehicleAudioManager>();
-                //////////////////////////////////////////
-
-                //////////////////////////////////////////
-                TestTruckController scc = testCar.AddComponent<TestTruckController>();
-                scc.colorableParts = new SpriteRenderer[] { testCar.transform.Find("Sprite/Chassie").gameObject.GetComponent<SpriteRenderer>() };
-                scc.cargoDoors = new Transform[0];
-                scc.doorManager = vdm;
-                scc.lightManager = vlm;
-                scc.audioManager = vehicleAudio;
-                scc.exhaust = testCar.GetComponentInChildren<ParticleSystem>();
-                scc.shadows = new ShadowHandler[] { shadowHandler };
-                scc.boundary = bh;
-                scc.thoughtsReferenceList = new List<Thought>(); 
-                scc.currentShipment = new Shipment(Vector3.zero, Enums.DeliveryContainerType.Unspecified, Enums.DeliveryContentType.Unspecified, 0, "");
-                scc.currentActionDescriptionListReference = new List<Enums.ServiceVehicleAction>();
-                //////////////////////////////////////////
-
-                //////////////////////////////////////////
-                scc.gameObject.SetActive(false);
-                scc.transform.position = Vector3.zero;
+                TestTruckController scc = testCar.GetComponent<TestTruckController>();
                 scc.Initialize();
                 scc.ServiceVehicleModel.isOwnedByAirport = true;
                 TrafficController.Instance.AddVehicleToSpawnQueue(scc, false);
-                vlm.ActivateLights();
-                vlm.ToggleWarningLights(true);
                 testCar.DumpFields();
                 SpawnTestCar.TEST.Add(testCar);
-                //////////////////////////////////////////
 
                 NotificationController.Instance.AttemptSendNotification("A new product has arrived!", CameraController.Instance.GetWorldCenter(), 
                     Enums.NotificationType.Other, Enums.MessageSeverity.Unspecified, text + "NewProduct", text, Enums.InteractableObjectType.Vehicle, true);
@@ -347,14 +292,14 @@ namespace TestVehicle
                     ACMH.Utilities.Logger.ShowNotification($"Job Agent: {gameObject.name} || Job: {gameObject.GetComponent<ServiceVehicleController>().CurrentJobTaskReferenceID ?? "Empty"}");
             }
 
-            foreach (GameObject gameObject in TEST)
+            /*foreach (GameObject gameObject in TEST)
             {
                 string referenceJob = gameObject.GetComponent<ServiceVehicleController>().CurrentJobTaskReferenceID;
                 if (string.IsNullOrEmpty(referenceJob) == false)
                 {
                     ACMH.Utilities.Logger.ShowNotification($"JOB SET: {gameObject.name} has job {referenceJob}");
                 }
-            }
+            }*/
         }
     }
 
