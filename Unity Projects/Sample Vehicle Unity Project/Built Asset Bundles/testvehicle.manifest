@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 941376997
+CRC: 3349804277
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 473f2536f51779a51ca209503b9f47d6
+    Hash: af70a3647a0f0baf76621d989aa6c481
   TypeTreeHash:
     serializedVersion: 2
     Hash: 07de8bf4249144b20ca0cf7f9bdd9a6c
@@ -30,6 +30,5 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Sprites/Service Vehicle Master Sprite Sheet.png
 - Assets/Prefabs/TestCar.prefab
 Dependencies: []
