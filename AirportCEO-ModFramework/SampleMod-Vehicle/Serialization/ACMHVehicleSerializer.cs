@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SampleModVehicle.Serialization
 {
@@ -40,47 +39,36 @@ namespace SampleModVehicle.Serialization
                     if (vehicleController is TestTruckController)
                     {
                         vehicleController.SetVehicleForSerialization();
-                        vehicleWrapper.AddNewObject(vehicleController.GetComponent<TestTruckController>().TestTruckModel);
+                        vehicleWrapper.VehicleModels.Add(vehicleController.GetComponent<TestTruckController>().TestTruckModel);
                     }
                 }
             }
 
-            
-            if (!Utils.WriteFileAsJson(JsonUtility.ToJson(vehicleWrapper, true), savePath + "/ModdedVehicleData.json"))
+            byte[] bytes = OdinSerializer.SerializationUtility.SerializeValue(vehicleWrapper, OdinSerializer.DataFormat.JSON);
+            string json = System.Text.Encoding.UTF8.GetString(bytes);
+            if (!Utils.WriteFileAsJson(json, savePath + "/ModdedVehicleData.json"))
             {
-                DialogPanel.Instance.ShowMessagePanel("Error when writing save file to: " + savePath + "/ModdedVehicleData.json", false);
+                ACMF.ModHelper.Utilities.Logger.ShowDialog("ERROR! when writing save file to: " + savePath + "/ModdedVehicleData.json");
             }
         }
 
         public static void DeserializeVehicles(string savePath)
         {
-            /*ACMHVehicleWrapper vehicleWrapper = JsonUtility.FromJson<ACMHVehicleWrapper>(Utils.ReadFileToJson(savePath + "/ModdedVehicleData.json"));
-            for (int i = 0; i < vehicleWrapper.VehicleTypes.Count; i++)
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(Utils.ReadFileToJson(savePath + "/ModdedVehicleData.json"));
+            ACMHVehicleWrapper vehicleWrapper = OdinSerializer.SerializationUtility.DeserializeValue<ACMHVehicleWrapper>(bytes, OdinSerializer.DataFormat.JSON);
+            for (int i = 0; i < vehicleWrapper.VehicleModels.Count; i++)
             {
-                if (vehicleWrapper.VehicleTypes[i].Equals(typeof(TestTruckModel).FullName) == true)
+                if (vehicleWrapper.VehicleModels[i] is TestTruckModel)
                 {
                     GameObject gameObject = Assets.GetGameObjectForTestTruck();
                     TestTruckController component = gameObject.GetComponent<TestTruckController>();
                     component.Initialize();
                     TestTruckModel vm = vehicleWrapper.VehicleModels[i] as TestTruckModel;
-                    System.Console.WriteLine($"222 vehicleModel {vm?.vehicleName ?? "null"}");
                     component.RestoreVehicleFromSerialization(vm);
                     TrafficController.Instance.AddVehicleToList(component);
                     component.Launch();
                 }
-            }*/
-        }
-    }
-
-    [Harmony.HarmonyPatch(typeof(VehicleController))]
-    [Harmony.HarmonyPatch("RestoreVehicleFromSerialization")]
-    public class RestoreVehicleFromSerializationPatcher
-    {
-        [Harmony.HarmonyPrefix]
-        public static void Prefix(VehicleController __instance, VehicleModel vehicleModel)
-        {
-            if (__instance is TestTruckController)
-                System.Console.WriteLine($"111 vehicleModel {vehicleModel?.vehicleName ?? "null"}");
+            }
         }
     }
 }

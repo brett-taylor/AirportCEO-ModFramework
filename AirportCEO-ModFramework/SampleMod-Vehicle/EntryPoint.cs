@@ -295,32 +295,30 @@ namespace SampleModVehicle
 
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.T))
             {
-                List<TestTruckModel> models = new List<TestTruckModel>();
-
-                VehicleController[] vehicleArray = Singleton<TrafficController>.Instance.GetVehicleArray();
-                foreach(VehicleController vc in vehicleArray)
+                Serialization.ACMHVehicleWrapper acmhVehicleWrapper = new Serialization.ACMHVehicleWrapper();
+                VehicleController[] vehicleArray = TrafficController.Instance.GetVehicleArray();
+                foreach (VehicleController vc in vehicleArray)
+                {
                     if (vc is TestTruckController)
-                        models.Add(vc.GetComponent<TestTruckController>().TestTruckModel);
+                    {
+                        vc.SetVehicleForSerialization();
+                        acmhVehicleWrapper.VehicleModels.Add(vc.GetComponent<TestTruckController>().TestTruckModel);
+                    }
+                }
 
-                Serialization.ACMHVehicleWrapper aCMHVehicleWrapper = new Serialization.ACMHVehicleWrapper();
-                aCMHVehicleWrapper.VehicleModels.AddRange(models);
-
-                string json = JsonHelper.ToJson(aCMHVehicleWrapper.VehicleModels.ToArray(), true);
-                ACMF.ModHelper.Utilities.Logger.ShowDialog($"Count: {aCMHVehicleWrapper.VehicleModels.Count} || JSON: {json}");
-                System.Console.WriteLine($" ");
-                System.Console.WriteLine($" ");
-                System.Console.WriteLine($"JSON: {json}");
+                byte[] bytes = OdinSerializer.SerializationUtility.SerializeValue(acmhVehicleWrapper, OdinSerializer.DataFormat.JSON);
+                string json = System.Text.Encoding.UTF8.GetString(bytes);
+                Serialization.ACMHVehicleWrapper deserializedTest = OdinSerializer.SerializationUtility.DeserializeValue<Serialization.ACMHVehicleWrapper>(bytes, OdinSerializer.DataFormat.JSON);
+                ACMF.ModHelper.Utilities.Logger.ShowDialog($"Json: {json}");
             }
 
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
             {
-                TestTruckModel model = TEST.First().GetComponent<TestTruckController>().TestTruckModel;
+                VehicleModel model = (VehicleModel) TEST.First().GetComponent<VehicleController>().VehicleModel;
                 string json = JsonUtility.ToJson(model);
 
                 ACMF.ModHelper.Utilities.Logger.ShowDialog($"JSON: {json}");
-                System.Console.WriteLine($" ");
-                System.Console.WriteLine($" ");
-                System.Console.WriteLine($"JSON: {json}");
+                Console.WriteLine($"JSON: {json}");
             }
 
             /*foreach (GameObject gameObject in TEST)
@@ -364,13 +362,13 @@ namespace SampleModVehicle
         [HarmonyPostfix]
         public static void Postfix(ServiceVehicleController __instance)
         {
-            ACMF.ModHelper.Utilities.Logger.ShowDialog($"GenerateSpecificServiceVehicleJobTaskActionChain patched {__instance.VehicleType}");
+            /*ACMF.ModHelper.Utilities.Logger.ShowDialog($"GenerateSpecificServiceVehicleJobTaskActionChain patched {__instance.VehicleType}");
             if (__instance.ServiceVehicleModel.vehicleType == EntryPoint.VehicleType)
             {
                 __instance.ServiceVehicleModel.AddToActionList(Enums.ServiceVehicleAction.MoveToTransitStructure);
                 __instance.ServiceVehicleModel.AddToActionList(Enums.ServiceVehicleAction.WaitForTransitStructureOccupation);
                 __instance.ServiceVehicleModel.AddToActionList(Enums.ServiceVehicleAction.ParkAtTransitStructure);
-            }
+            }*/
         }
     }
 
@@ -389,35 +387,6 @@ namespace SampleModVehicle
             }
 
             return true;
-        }
-    }
-
-    public static class JsonHelper
-    {
-        public static T[] FromJson<T>(string json)
-        {
-            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
-            return wrapper.Items;
-        }
-
-        public static string ToJson<T>(T[] array)
-        {
-            Wrapper<T> wrapper = new Wrapper<T>();
-            wrapper.Items = array;
-            return JsonUtility.ToJson(wrapper);
-        }
-
-        public static string ToJson<T>(T[] array, bool prettyPrint)
-        {
-            Wrapper<T> wrapper = new Wrapper<T>();
-            wrapper.Items = array;
-            return JsonUtility.ToJson(wrapper, prettyPrint);
-        }
-
-        [Serializable]
-        private class Wrapper<T>
-        {
-            public T[] Items;
         }
     }
 }

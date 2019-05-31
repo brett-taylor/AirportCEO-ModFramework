@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SampleModVehicle
 {
-    [Serializable]
+    [System.Serializable]
     public class TestTruckModel : ServiceVehicleModel
     {
         public int randomNumberOne;
@@ -17,7 +16,7 @@ namespace SampleModVehicle
             fuelType = Enums.FuelType.Gasoline;
             topSpeed = 20f;
             operatingCost = 100f;
-            randomizeColor = false;
+            randomizeColor = true;
             maxDeliveryQuantityCapacity = 0f;
             CurrentQuantityDelivered = 0f;
             allowedDeliveryContainer = Enums.DeliveryContainerType.Seat;

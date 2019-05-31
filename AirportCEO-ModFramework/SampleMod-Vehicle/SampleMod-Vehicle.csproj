@@ -38,6 +38,9 @@
     <Reference Include="Assembly-CSharp_publicized">
       <HintPath>..\Dependencies\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
+    <Reference Include="OdinSerializer">
+      <HintPath>..\Dependencies\OdinSerializer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +48,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="UnityEngine.AssetBundleModule">
       <HintPath>..\Dependencies\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>

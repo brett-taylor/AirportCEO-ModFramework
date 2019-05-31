@@ -51,19 +51,26 @@ namespace ACMF.ModLoader
         private static void AddToFoundModsIfACMLMod(string dllLocation)
         {
             Utilities.Logger.Print($"Attempting to load dll: {dllLocation}");
-            Assembly assembly = Assembly.LoadFrom(dllLocation);
 
-            Type entryPointClass = assembly.ManifestModule.GetTypes().First((x) => x.GetCustomAttributes(typeof(ACMFMod), true).Length > 0);
-            if (entryPointClass == null)
-                return;
+            try
+            {
+                Assembly assembly = Assembly.LoadFrom(dllLocation);
+                Type entryPointClass = assembly.ManifestModule.GetTypes().First((x) => x.GetCustomAttributes(typeof(ACMFMod), true).Length > 0);
+                if (entryPointClass == null)
+                    return;
 
-            MethodInfo entryPointMethod = entryPointClass.GetMethods().First((x) => x.GetCustomAttributes(typeof(ACMFModEntryPoint), true).Length > 0);
-            if (entryPointMethod == null)
-                return;
+                MethodInfo entryPointMethod = entryPointClass.GetMethods().First((x) => x.GetCustomAttributes(typeof(ACMFModEntryPoint), true).Length > 0);
+                if (entryPointMethod == null)
+                    return;
 
-            ACMFMod acmlMod = (ACMFMod) entryPointClass.GetCustomAttributes(typeof(ACMFMod), true).FirstOrDefault();
-            ModsFound.Add(acmlMod.ID, new Mod(acmlMod, assembly, entryPointMethod));
-            Utilities.Logger.Print($"Found Mod: {acmlMod.Name}");
+                ACMFMod acmlMod = (ACMFMod)entryPointClass.GetCustomAttributes(typeof(ACMFMod), true).FirstOrDefault();
+                ModsFound.Add(acmlMod.ID, new Mod(acmlMod, assembly, entryPointMethod));
+                Utilities.Logger.Print($"Found Mod: {acmlMod.Name}");
+            }
+            catch
+            {
+
+            }
         }
 
         private static void LoadMod(Mod mod)

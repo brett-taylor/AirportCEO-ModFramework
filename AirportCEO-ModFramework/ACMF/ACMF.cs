@@ -9,7 +9,6 @@ namespace ACMF
     public class ACMF
     {
         public static readonly ModVersion Version = new ModVersion(0, 1, 0);
-        public static readonly string HarmonyDLLFileName = "0Harmony.dll";
         public static readonly string ACMFFolderLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private static bool Initialised = false;
 
@@ -20,9 +19,17 @@ namespace ACMF
 
             Initialised = true;
             Logger.Print($"ACMF Directory: {ACMFFolderLocation}");
-            string harmonyDirectory = Path.Combine(ACMFFolderLocation, HarmonyDLLFileName);
-            Logger.Print($"Loading Harmony from {harmonyDirectory}");
-            Assembly assembly = Assembly.LoadFrom(harmonyDirectory);
+            Logger.Print($"Loading all DLLS in {ACMFFolderLocation}");
+
+            string[] dllsToLoad = Directory.GetFiles(ACMFFolderLocation, "*.dll", SearchOption.TopDirectoryOnly);
+            foreach (string dll in dllsToLoad)
+            {
+                if (Path.GetFileName(dll).Equals("ACMF.dll"))
+                    continue;
+
+                Logger.Print($"Loading DLL: {Path.GetFileName(dll)}");
+                Assembly.LoadFrom(dll);
+            }
 
             Logger.Print($"Loading ModHelper...");
             ModHelper.Utilities.Assets.Initialise();
