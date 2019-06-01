@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="GameControllerPatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
