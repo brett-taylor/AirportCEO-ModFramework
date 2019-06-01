@@ -10,6 +10,9 @@ namespace ACMF
     {
         public static readonly ModVersion Version = new ModVersion(0, 1, 0);
         public static readonly string ACMFFolderLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public static readonly string UNIQUE_ID = "AirportCEO.ModFramework";
+
+        internal static ModHelper.Config.ModHelperConfig Config { get; private set; } = null;
         private static bool Initialised = false;
 
         public static void Entry()
@@ -32,8 +35,10 @@ namespace ACMF
             }
 
             Logger.Print($"Loading ModHelper...");
+            Config = ModHelper.Config.ACMFConfigManager.LoadConfig<ModHelper.Config.ModHelperConfig>(UNIQUE_ID);
+            ModHelper.Utilities.Logger.Print($"TEST TEST: {Config.ENABLE_INSTANT_LOAD_INTO_SAVE_GAME}");
             ModHelper.Utilities.Assets.Initialise();
-            HarmonyInstance harmonyInstance = HarmonyInstance.Create("AirportCEOModFramework");
+            HarmonyInstance harmonyInstance = HarmonyInstance.Create(UNIQUE_ID);
             harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
 
             Logger.Print($"Initialising ModLoader");

@@ -38,6 +38,9 @@
     <Reference Include="Assembly-CSharp_publicized">
       <HintPath>..\Dependencies\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
+    <Reference Include="OdinSerializer">
+      <HintPath>..\Dependencies\OdinSerializer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACMF.cs" />
+    <Compile Include="ModHelper\Config\ACMFConfig.cs" />
+    <Compile Include="ModHelper\Config\ConfigManager.cs" />
+    <Compile Include="ModHelper\Config\Impl\ModHelperConfig.cs" />
     <Compile Include="ModHelper\MainMenu\ModMenuCustomMod.cs" />
     <Compile Include="ModHelper\MainMenu\ModMenuPatcher.cs" />
     <Compile Include="ModHelper\MainMenu\ShowVersionOnMenuPatcher.cs" />
