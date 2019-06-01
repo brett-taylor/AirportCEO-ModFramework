@@ -40,6 +40,32 @@ namespace ACMF.ModLoader
                 else
                     Utilities.Logger.Print($"{mod.ModInfo.Name} did not load because {mod.ModLoadFailure}");
             }
+            
+        }
+
+        public static Queue<string> GenerateModLoadOrder(List<Tuple<string, List<string>>> modsToLoad)
+        {
+            Queue<string> loadOrder = new Queue<string>();
+
+            Boolean changed;
+            do
+            {
+                changed = false;
+                foreach (Tuple<string, List<string>> mod in modsToLoad)
+                {
+                    if (!loadOrder.Contains(mod.Item1))
+                    {
+                        mod.Item2.RemoveAll(x => loadOrder.Contains(x));
+                        if (mod.Item2.Count == 0)
+                        {
+                            loadOrder.Enqueue(mod.Item1);
+                            changed = true;
+                        }
+                    }
+                }
+            } while (changed);
+
+            return loadOrder;
         }
 
         public static string GetModPath()
