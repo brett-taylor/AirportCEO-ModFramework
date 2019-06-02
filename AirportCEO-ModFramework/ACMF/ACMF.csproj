@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACMF.cs" />
+    <Compile Include="ModHelper\Camera\UnboundedCamera.cs" />
     <Compile Include="ModHelper\Config\ACMFConfig.cs" />
     <Compile Include="ModHelper\Config\ConfigManager.cs" />
     <Compile Include="ModHelper\Config\Impl\ModHelperConfig.cs" />
@@ -88,6 +89,8 @@
     <Compile Include="ModLoader\Utilities\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ModHelper\Vehicles\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
