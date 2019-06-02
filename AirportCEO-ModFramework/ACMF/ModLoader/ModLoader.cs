@@ -47,7 +47,7 @@ namespace ACMF.ModLoader
         {
             Queue<string> loadOrder = new Queue<string>();
 
-            Boolean changed;
+            bool changed = false;
             do
             {
                 changed = false;
