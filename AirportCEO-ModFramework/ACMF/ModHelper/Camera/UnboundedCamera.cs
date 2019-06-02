@@ -19,9 +19,6 @@ namespace ACMF.ModHelper.Camera
             __instance.genericMoveCamera.YRangeMax = int.MaxValue;
             __instance.genericMoveCamera.ZRangeMin = -2000f;
             __instance.genericMoveCamera.ZRangeMax = -2f;
-
-            //typeof(CameraController).GetField("minHeight").SetValue(__instance, 2f);
-            //typeof(CameraController).GetField("maxHeight").SetValue(__instance, 2000f);
             __instance.mainCamera.nearClipPlane = 2f;
             __instance.mainCamera.farClipPlane = 2100f;
         }
