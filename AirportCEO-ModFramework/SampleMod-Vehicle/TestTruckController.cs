@@ -44,7 +44,7 @@ namespace SampleModVehicle
 
         public override IEnumerator PerformWork()
         {
-            ACMF.ModHelper.Utilities.Logger.ShowDialog("test test");
+            ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel("test test");
             yield break;
         }
     }

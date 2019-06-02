@@ -278,7 +278,7 @@ namespace SampleModVehicle
 
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.E))
             {
-                ACMF.ModHelper.Utilities.Logger.ShowDialog($"TestCar: {TEST.Last()?.name ?? "Null"}");
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"TestCar: {TEST.Last()?.name ?? "Null"}");
                 if (TEST != null && TEST.Last() != null)
                     TEST.Last().transform.position = new Vector2(20f, 20f);
             }
@@ -309,7 +309,7 @@ namespace SampleModVehicle
                 byte[] bytes = OdinSerializer.SerializationUtility.SerializeValue(acmhVehicleWrapper, OdinSerializer.DataFormat.JSON);
                 string json = System.Text.Encoding.UTF8.GetString(bytes);
                 Serialization.ACMHVehicleWrapper deserializedTest = OdinSerializer.SerializationUtility.DeserializeValue<Serialization.ACMHVehicleWrapper>(bytes, OdinSerializer.DataFormat.JSON);
-                ACMF.ModHelper.Utilities.Logger.ShowDialog($"Json: {json}");
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"JSON: {json}");
             }
 
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
@@ -317,7 +317,7 @@ namespace SampleModVehicle
                 VehicleModel model = (VehicleModel) TEST.First().GetComponent<VehicleController>().VehicleModel;
                 string json = JsonUtility.ToJson(model);
 
-                ACMF.ModHelper.Utilities.Logger.ShowDialog($"JSON: {json}");
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"JSON: {json}");
                 Console.WriteLine($"JSON: {json}");
             }
 
@@ -381,7 +381,7 @@ namespace SampleModVehicle
         {
             if (__instance.VehicleType == EntryPoint.VehicleType)
             {
-                ACMF.ModHelper.Utilities.Logger.ShowDialog($"AttemptGenerateSpecificVehicleJobTaskActionChain patched {__instance.VehicleType}");
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"AttemptGenerateSpecificVehicleJobTaskActionChain patched {__instance.VehicleType}");
                 __result = true;
                 return false;
             }

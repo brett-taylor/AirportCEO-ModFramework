@@ -14,14 +14,6 @@ namespace ACMF.ModHelper.Utilities
 
         internal static void Error(string message, bool alertInGame = false) => Print($"[ERROR] {message}", alertInGame);
 
-        public static void ShowDialog(string message)
-        {
-            if (DialogPanel.Instance != null)
-                DialogPanel.Instance.ShowMessagePanel(message);
-
-            Console.WriteLine($"[Logger::ShowDialog] {message}");
-        }
-
         public static void ShowNotification(string message)
         {
             if (NotificationController.Instance != null)

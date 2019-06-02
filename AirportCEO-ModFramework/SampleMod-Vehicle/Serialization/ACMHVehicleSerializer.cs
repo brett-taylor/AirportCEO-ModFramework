@@ -48,7 +48,7 @@ namespace SampleModVehicle.Serialization
             string json = System.Text.Encoding.UTF8.GetString(bytes);
             if (!Utils.WriteFileAsJson(json, savePath + "/ModdedVehicleData.json"))
             {
-                ACMF.ModHelper.Utilities.Logger.ShowDialog("ERROR! when writing save file to: " + savePath + "/ModdedVehicleData.json");
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel("ERROR! when writing save file to: " + savePath + "/ModdedVehicleData.json");
             }
         }
 
