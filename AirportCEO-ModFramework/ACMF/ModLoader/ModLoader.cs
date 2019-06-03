@@ -28,19 +28,46 @@ namespace ACMF.ModLoader
             Utilities.Logger.Print($"Located ModPath: {GetModPath()}");
             FileInfo[] allDlls = new DirectoryInfo(modPath).GetFiles("*.dll", SearchOption.AllDirectories);
             foreach (FileInfo dll in allDlls)
-            {
                 AddToFoundModsIfACMLMod(dll.ToString());
-            }
+
+            List<Tuple<string, List<string>>> attemptToLoadMods = new List<Tuple<string, List<string>>>();
 
             foreach (Mod mod in ModsFound.Values)
             {
-                mod.CalculateIfShouldLoad();
-                if (mod.ShouldLoad())
-                    LoadMod(mod);
+                if (mod.IsOnCorrectVersionOFACMF() == false)
+                {
+                    mod.ModLoadFailure = ModLoadFailure.REQUIRES_NEWER_VERSION_OF_ACMF;
+                    string message = $"{mod.ModInfo.Name} requires a newer version of ACMF (requires {mod.ModInfo.RequiredACMFVersion}";
+                    Utilities.Logger.Error(message);
+                    ModHelper.DialogPopup.DialogManager.QueueMessagePanel(message);
+                }
                 else
-                    Utilities.Logger.Print($"{mod.ModInfo.Name} did not load because {mod.ModLoadFailure}");
+                    attemptToLoadMods.Add(new Tuple<string, List<string>>(mod.ModInfo.ID, mod.ModInfo.RequiredMods));
             }
-            
+
+            GenerateModLoadOrder(attemptToLoadMods, out Queue<string> loadOrder, out List<string> failedMods);
+            if (failedMods.Count != 0)
+            {
+                Utilities.Logger.Error("Some mods failed to load:");
+                foreach(string failedMod in failedMods)
+                {
+                    Utilities.Logger.Error($"   {failedMod} failed to load as the following mods were missing: {ModsFound[failedMod].MissingDependencies()}.");
+                    foreach(string requiredMod in ModsFound[failedMod].GetMissingDependencies())
+                        ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"{failedMod} requires the mod {requiredMod}");
+                }
+            }
+
+            Utilities.Logger.Print("Mod load order decided:");
+            foreach (string loadMod in loadOrder)
+                Utilities.Logger.Print($"   {loadMod}");
+
+            while (loadOrder.Count != 0)
+            {
+                string modToLoad = loadOrder.Dequeue();
+                ModsFound.TryGetValue(modToLoad, out Mod mod);
+                if (mod != null)
+                    LoadMod(mod);
+            }
         }
 
         public static Queue<string> GenerateModLoadOrder(List<Tuple<string, List<string>>> modsToLoad)
@@ -66,6 +93,15 @@ namespace ACMF.ModLoader
             } while (changed);
 
             return loadOrder;
+        }
+
+        public static void GenerateModLoadOrder(List<Tuple<string, List<string>>> modsToLoad, out Queue<string> modLoadOrder, out List<string> modsFailedToLoad)
+        {
+            modLoadOrder = GenerateModLoadOrder(modsToLoad);
+            modsFailedToLoad = new List<string>();
+            foreach (string mod in ModsFound.Keys)
+                if (modLoadOrder.Contains(mod) == false)
+                    modsFailedToLoad.Add(mod);
         }
 
         public static string GetModPath()
@@ -95,7 +131,6 @@ namespace ACMF.ModLoader
             }
             catch
             {
-
             }
         }
 
@@ -113,8 +148,8 @@ namespace ACMF.ModLoader
                 if (ModsLoaded.ContainsKey(mod.ModInfo.ID))
                     ModsLoaded.Remove(mod.ModInfo.ID);
 
-                Utilities.Logger.Print($"Failed to execute entry point of mod: {mod.ModInfo.Name}");
-                Utilities.Logger.Print(e.ToString());
+                Utilities.Logger.Error($"Failed to execute entry point of mod: {mod.ModInfo.Name}");
+                Utilities.Logger.Error(e.ToString());
             }
         }
     }

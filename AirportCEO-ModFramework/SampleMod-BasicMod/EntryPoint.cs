@@ -6,7 +6,13 @@ using UnityEngine;
 
 namespace SampleModBasicMod
 {
-    [ACMFMod(id: "Hanks.Tom.SampleMod", name: "Sample Mod", modVersion: "12.3.5", requiredACMLVersion: "0.1.0")]
+    [ACMFMod(
+        id: "Hanks.Tom.SampleMod", 
+        name: "Sample Mod", 
+        modVersion: "12.3.5", 
+        requiredACMLVersion: "0.1.0", 
+        requiredMods: new string[] { "SomeRequiredModThatDoesntExist" }
+    )]
     public class EntryPoint
     {
         public static Config Config { get; private set; } = null;
@@ -28,7 +34,7 @@ namespace SampleModBasicMod
         [HarmonyPostfix]
         public static void Postfix()
         {
-            if (EntryPoint.Config.ALLOW_GAME_CONTROLLER_PATCH && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.T))
+            if (EntryPoint.Config.ALLOW_GAME_CONTROLLER_PATCH && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.B))
             {
                 ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel("Working Postfix Onto GameController::Update");
                 ACMF.ModHelper.Utilities.Logger.ShowNotification("Working Postfix Onto GameController::Update");

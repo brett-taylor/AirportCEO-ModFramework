@@ -36,7 +36,6 @@ namespace ACMF
 
             Logger.Print($"Loading ModHelper...");
             Config = ModHelper.Config.ACMFConfigManager.LoadConfig<ModHelper.Config.ModHelperConfig>(UNIQUE_ID);
-            ModHelper.Utilities.Logger.Print($"TEST TEST: {Config.ENABLE_INSTANT_LOAD_INTO_SAVE_GAME}");
             ModHelper.Utilities.Assets.Initialise();
             HarmonyInstance harmonyInstance = HarmonyInstance.Create(UNIQUE_ID);
             harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());

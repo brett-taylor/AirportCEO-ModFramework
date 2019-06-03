@@ -1,4 +1,5 @@
-﻿using ACMF.ModLoader.Attributes;
+﻿using System.Collections.Generic;
+using ACMF.ModLoader.Attributes;
 using System.Reflection;
 
 namespace ACMF.ModLoader
@@ -9,8 +10,8 @@ namespace ACMF.ModLoader
         public Assembly Assembly { get; private set; }
         public MethodInfo EntryPoint { get; private set; }
         public ModVersion ModVersion { get; private set; }
-        public ModVersion RequiredACMLVersion { get; private set; }
-        public ModLoadFailure ModLoadFailure { get; private set; }
+        public ModVersion RequiredACMFVersion { get; private set; }
+        public ModLoadFailure ModLoadFailure { get; set; }
 
         public Mod(ACMFMod modInfo, Assembly assembly, MethodInfo entryPoint)
         {
@@ -18,24 +19,28 @@ namespace ACMF.ModLoader
             Assembly = assembly;
             EntryPoint = entryPoint;
             ModVersion = ModVersion.Parse(modInfo.ModVersion);
-            RequiredACMLVersion = ModVersion.Parse(modInfo.RequiredACMLVersion);
+            RequiredACMFVersion = ModVersion.Parse(modInfo.RequiredACMFVersion);
             ModLoadFailure = ModLoadFailure.UNKNOWN;
         }
 
-        public void CalculateIfShouldLoad()
+        public bool IsOnCorrectVersionOFACMF()
         {
-            if (RequiredACMLVersion > ACMF.Version)
-            {
-                ModLoadFailure = ModLoadFailure.REQUIRES_NEWER_VERSION_OF_ACML;
-                return;
-            }
-
-            ModLoadFailure = ModLoadFailure.SUCCESS;
+            return ACMF.Version >= RequiredACMFVersion;
         }
 
-        public bool ShouldLoad()
+        public List<string> GetMissingDependencies()
         {
-            return ModLoadFailure == ModLoadFailure.SUCCESS;
+            List<string> missingDependencies = new List<string>();
+            foreach (string requiredMod in ModInfo.RequiredMods)
+                if (ModLoader.ModsLoaded.ContainsKey(requiredMod) == false)
+                    missingDependencies.Add(requiredMod);
+
+            return missingDependencies;
+        }
+
+        public string MissingDependencies()
+        {
+            return string.Join(", ", GetMissingDependencies());
         }
     }
 }

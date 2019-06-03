@@ -77,7 +77,7 @@
     <Compile Include="ModHelper\DialogPopup\DialogPopupInfo.cs" />
     <Compile Include="ModHelper\MainMenu\ModMenuCustomMod.cs" />
     <Compile Include="ModHelper\MainMenu\ModMenuPatcher.cs" />
-    <Compile Include="ModHelper\MainMenu\ShowVersionOnMenuPatcher.cs" />
+    <Compile Include="ModHelper\MainMenu\MainMenuShowHideGameMenuPanelsPatcher.cs" />
     <Compile Include="ModHelper\MainMenu\SkipMainMenu.cs" />
     <Compile Include="ModHelper\Utilities\Assets.cs" />
     <Compile Include="ModHelper\Utilities\Extensions\GameObjectExtensions.cs" />

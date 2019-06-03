@@ -19,8 +19,7 @@ namespace ACMF.ModHelper.DialogPopup
                 ShowCloseButton = false
             });
 
-            if (DialogPanel.Instance.gameObject.activeSelf == false)
-                ShowNext();
+            ShowNextIfNoPopupCurrently();
         }
 
         public static void QueueQuestionPanel(string message, Action<bool> action, bool showCloseButton = false)
@@ -34,16 +33,21 @@ namespace ACMF.ModHelper.DialogPopup
                 ShowCloseButton = showCloseButton
             });
 
-            if (DialogPanel.Instance.gameObject.activeSelf == false)
-                ShowNext();
+            ShowNextIfNoPopupCurrently();
         }
 
-        public static void ShowNext()
+        internal static void ShowNext()
         {
             if (ToShow.Count == 0 || DialogPanel.Instance == null)
                 return;
 
             PlayerInputController.Instance.StartCoroutine(DelayShow(ToShow.Dequeue()));
+        }
+
+        public static void ShowNextIfNoPopupCurrently()
+        {
+            if (DialogPanel.Instance != null && DialogPanel.Instance.gameObject.activeSelf == false)
+                ShowNext();
         }
 
         private static IEnumerator DelayShow(DialogPopupInfo info)
