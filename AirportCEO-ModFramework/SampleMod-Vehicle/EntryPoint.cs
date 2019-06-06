@@ -16,9 +16,9 @@ namespace SampleModVehicle
     {
         public static HarmonyInstance HarmonyInstance { get; set; }
         public static Mod Mod { get; set; }
-        public static Enums.ProcureableProductType ProductTypeEnum { get; set; } = (Enums.ProcureableProductType) 21470001;
+        public static Enums.ProcureableProductType ProductTypeEnum { get; set; }
         public static Enums.VehicleType VehicleType { get; set; }
-        public static Enums.VehicleJobTaskType VehicleJobTask = (Enums.VehicleJobTaskType) 21470002;
+        public static Enums.VehicleJobTaskType VehicleJobTask { get; set; }
 
         [ACMFModEntryPoint]
         public static void Entry(Mod mod)
@@ -27,8 +27,10 @@ namespace SampleModVehicle
             HarmonyInstance = HarmonyInstance.Create(Mod.ModInfo.ID);
             HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
             Assets.Initialise();
+
             VehicleType = EnumCache<Enums.VehicleType>.Instance.Patch("TestTruck");
-            Enums.VehicleType VehicleType2 = EnumCache<Enums.VehicleType>.Instance.Patch("TestTruck2");
+            ProductTypeEnum = EnumCache<Enums.ProcureableProductType>.Instance.Patch("TestTruckProcureable");
+            VehicleJobTask = EnumCache<Enums.VehicleJobTaskType>.Instance.Patch("TestTruckVehicleJobType");
         }
     }
 

@@ -79,6 +79,8 @@
     <Compile Include="ModHelper\DialogPopup\DialogPopupInfo.cs" />
     <Compile Include="ModHelper\EnumPatcher\EnumCache.cs" />
     <Compile Include="ModHelper\EnumPatcher\EnumBackingStore.cs" />
+    <Compile Include="ModHelper\EnumPatcher\EnumCacheSerialization.cs" />
+    <Compile Include="ModHelper\EnumPatcher\EnumCacheSingleton.cs" />
     <Compile Include="ModHelper\EnumPatcher\EnumPatcher.cs" />
     <Compile Include="ModHelper\EnumPatcher\IEnumCache.cs" />
     <Compile Include="ModHelper\MainMenu\ModMenuCustomMod.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="ModHelper\MainMenu\SkipMainMenu.cs" />
     <Compile Include="ModHelper\Utilities\Assets.cs" />
     <Compile Include="ModHelper\Utilities\Extensions\GameObjectExtensions.cs" />
+    <Compile Include="ModHelper\Utilities\JsonSerialization.cs" />
     <Compile Include="ModHelper\Utilities\Logger.cs" />
     <Compile Include="ModHelper\Utilities\Misc\UnityObjectDumpFields.cs" />
     <Compile Include="ModLoader\Attributes\ACMFMod.cs" />

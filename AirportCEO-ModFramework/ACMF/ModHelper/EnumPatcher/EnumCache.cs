@@ -3,21 +3,9 @@ using System.Collections.Generic;
 
 namespace ACMF.ModHelper.EnumPatcher
 {
-    public class EnumCache<T> : IEnumCache where T : Enum
+    public partial class EnumCache<T> : IEnumCache where T : Enum
     {
-        private static EnumCache<T> InternalInstance = null;
-        public static EnumCache<T> Instance
-        {
-            get
-            {
-                if (InternalInstance == null)
-                    InternalInstance = new EnumCache<T>();
-
-                return InternalInstance;
-            }
-        }
-
-        private EnumBackingStore<T> BackingStore = new EnumBackingStore<T>();
+        private EnumBackingStore<T> BackingStore;
         public Type TypeActedUpon { get => typeof(T); }
 
         private EnumCache()
@@ -27,7 +15,9 @@ namespace ACMF.ModHelper.EnumPatcher
 
         public T Patch(string name)
         {
-            return BackingStore.Patch(name);
+            T t = BackingStore.Patch(name);
+            Serialize();
+            return t;
         }
 
         public void EnumPostfix_GetValues(ref Array __result)
