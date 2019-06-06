@@ -20,10 +20,7 @@ namespace ACMF.ModHelper.Config
             if (DoesConfigFileExist(mod) == false)
                 return CreateNewConfig<T>(mod);
 
-            using (FileStream stream = File.Open(GetConfigPath(mod), FileMode.Open))
-            {
-                return (T) SerializationUtility.DeserializeValue<ACMFConfig>(stream, DataFormat.JSON);
-            }
+            return Utilities.JsonSerialization.Deserialize(out T config, GetConfigPath(mod)) ? config : CreateNewConfig<T>(mod);
         }
 
         private static string GetConfigPath(string mod)
@@ -49,11 +46,7 @@ namespace ACMF.ModHelper.Config
             if (string.IsNullOrEmpty(config.ModID))
                 return false;
 
-            string filePath = GetConfigPath(config.ModID);
-            TextWriter stream = new StreamWriter(filePath, false);
-            stream.WriteLine(Encoding.UTF8.GetString(SerializationUtility.SerializeValue(config, DataFormat.JSON)));
-            stream.Close();
-            return true;
+            return Utilities.JsonSerialization.Serialize(config, GetConfigPath(config.ModID));
         }
     }
 }
