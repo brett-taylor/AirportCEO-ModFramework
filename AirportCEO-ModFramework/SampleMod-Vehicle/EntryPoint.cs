@@ -1,4 +1,5 @@
-﻿using ACMF.ModHelper.Utilities.Misc;
+﻿using ACMF.ModHelper.EnumPatcher;
+using ACMF.ModHelper.Utilities.Misc;
 using ACMF.ModLoader;
 using ACMF.ModLoader.Attributes;
 using Harmony;
@@ -15,9 +16,9 @@ namespace SampleModVehicle
     {
         public static HarmonyInstance HarmonyInstance { get; set; }
         public static Mod Mod { get; set; }
-        public static Enums.ProcureableProductType ProductTypeEnum { get; set; } = (Enums.ProcureableProductType)21470001;
-        public static Enums.VehicleType VehicleType { get; set; } = (Enums.VehicleType)25;
-        public static Enums.VehicleJobTaskType VehicleJobTask = (Enums.VehicleJobTaskType)21470002;
+        public static Enums.ProcureableProductType ProductTypeEnum { get; set; } = (Enums.ProcureableProductType) 21470001;
+        public static Enums.VehicleType VehicleType { get; set; }
+        public static Enums.VehicleJobTaskType VehicleJobTask = (Enums.VehicleJobTaskType) 21470002;
 
         [ACMFModEntryPoint]
         public static void Entry(Mod mod)
@@ -26,130 +27,8 @@ namespace SampleModVehicle
             HarmonyInstance = HarmonyInstance.Create(Mod.ModInfo.ID);
             HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
             Assets.Initialise();
-        }
-    }
-
-    [HarmonyPatch(typeof(Enum))]
-    [HarmonyPatch("GetValues")]
-    public class EnumGetValuesPatcher
-    {
-        [HarmonyPostfix]
-        private static void Postfix_GetValues(Type enumType, ref Array __result)
-        {
-            if (enumType.Equals(typeof(Enums.ProcureableProductType)))
-            {
-                Console.WriteLine($"Enum::GetValues Patch for Enums.ProcureableProductType");
-                var listArray = new List<Enums.ProcureableProductType>();
-                foreach (Enums.ProcureableProductType productType in __result)
-                {
-                    listArray.Add(productType);
-                }
-
-                listArray.Add(EntryPoint.ProductTypeEnum);
-
-                __result = listArray.ToArray();
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(Enum))]
-    [HarmonyPatch("ToString")]
-    [HarmonyPatch(new Type[0])]
-    public class EnumToStringPatcher
-    {
-        [HarmonyPrefix]
-        private static bool Prefix(Enum __instance, ref string __result)
-        {
-            if ((__instance is Enums.VehicleType vehicleType && vehicleType == EntryPoint.VehicleType)
-                || (__instance is Enums.ProcureableProductType productType && productType == EntryPoint.ProductTypeEnum))
-            {
-                __result = "Test Truck";
-                return false;
-            }
-
-            return true;
-        }
-    }
-
-    [HarmonyPatch(typeof(Enum))]
-    [HarmonyPatch("IsDefined")]
-    [HarmonyPatch(new Type[] { typeof(Type), typeof(object) })]
-    public class EnumIsDefinedPatcher
-    {
-        [HarmonyPrefix]
-        private static bool Prefix_IsDefined(Type enumType, object value, ref bool __result)
-        {
-            if (enumType.Equals(typeof(Enums.VehicleType)) && (Enums.VehicleType)value == EntryPoint.VehicleType)
-            {
-                __result = true;
-                return false;
-            }
-
-            return true;
-        }
-    }
-
-    [HarmonyPatch(typeof(Enum))]
-    [HarmonyPatch("Parse")]
-    [HarmonyPatch(new Type[] { typeof(Type), typeof(string), typeof(bool) })]
-    public class EnumParsePatcher
-    {
-        private static bool Prefix_Parse(Type enumType, string value, bool ignoreCase, ref object __result)
-        {
-            if (enumType.Equals(typeof(Enums.VehicleType)))
-            {
-                if (ignoreCase && value.Equals("test truck"))
-                {
-                    __result = EntryPoint.VehicleType;
-                    return false;
-                }
-
-                if (ignoreCase == false && value.Equals("Test Truck"))
-                {
-                    __result = EntryPoint.VehicleType;
-                    return false;
-                }
-            }
-
-            if (enumType.Equals(typeof(Enums.ProcureableProductType)))
-            {
-                if (ignoreCase && value.Equals("test truck"))
-                {
-                    __result = EntryPoint.ProductTypeEnum;
-                    return false;
-                }
-
-                if (ignoreCase == false && value.Equals("Test Truck"))
-                {
-                    __result = EntryPoint.ProductTypeEnum;
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
-
-    [HarmonyPatch(typeof(Enum))]
-    [HarmonyPatch("GetNames")]
-    [HarmonyPatch(new Type[] { typeof(Type) })]
-    public class EnumGetNamesPatcher
-    {
-        [HarmonyPostfix]
-        public static void Postfix(Type enumType, ref Array __result)
-        {
-            if (enumType.Equals(typeof(Enums.VehicleType)))
-            {
-                var listArray = new List<string>();
-                foreach (string vehicleType in __result)
-                {
-                    listArray.Add(vehicleType);
-                }
-
-                listArray.Add(EntryPoint.VehicleType.ToString());
-
-                __result = listArray.ToArray();
-            }
+            VehicleType = EnumCache<Enums.VehicleType>.Instance.Patch("TestTruck");
+            Enums.VehicleType VehicleType2 = EnumCache<Enums.VehicleType>.Instance.Patch("TestTruck2");
         }
     }
 
@@ -295,40 +174,15 @@ namespace SampleModVehicle
 
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.T))
             {
-                Serialization.ACMHVehicleWrapper acmhVehicleWrapper = new Serialization.ACMHVehicleWrapper();
-                VehicleController[] vehicleArray = TrafficController.Instance.GetVehicleArray();
-                foreach (VehicleController vc in vehicleArray)
-                {
-                    if (vc is TestTruckController)
-                    {
-                        vc.SetVehicleForSerialization();
-                        acmhVehicleWrapper.VehicleModels.Add(vc.GetComponent<TestTruckController>().TestTruckModel);
-                    }
-                }
+                /*Enums.VehicleType vt = EnumCache<Enums.VehicleType>.Instance.BackingStore.IntToEnum(24);
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"Test 1: {vt} || {vt.ToString()}");
 
-                byte[] bytes = OdinSerializer.SerializationUtility.SerializeValue(acmhVehicleWrapper, OdinSerializer.DataFormat.JSON);
-                string json = System.Text.Encoding.UTF8.GetString(bytes);
-                Serialization.ACMHVehicleWrapper deserializedTest = OdinSerializer.SerializationUtility.DeserializeValue<Serialization.ACMHVehicleWrapper>(bytes, OdinSerializer.DataFormat.JSON);
-                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"JSON: {json}");
+                Enums.VehicleType vt2 = EnumCache<Enums.VehicleType>.Instance.BackingStore.IntToEnum(25);
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"Test 2: {vt2} || {vt2.ToString()}");*/
+                
+                Enums.VehicleType vt = EnumCache<Enums.VehicleType>.Instance.Patch("TestThisEnum" + UnityEngine.Random.Range(50, 200));
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"Test 1: {vt} || {vt.ToString()}");
             }
-
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
-            {
-                VehicleModel model = (VehicleModel) TEST.First().GetComponent<VehicleController>().VehicleModel;
-                string json = JsonUtility.ToJson(model);
-
-                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"JSON: {json}");
-                Console.WriteLine($"JSON: {json}");
-            }
-
-            /*foreach (GameObject gameObject in TEST)
-            {
-                string referenceJob = gameObject.GetComponent<ServiceVehicleController>().CurrentJobTaskReferenceID;
-                if (string.IsNullOrEmpty(referenceJob) == false)
-                {
-                    ACMH.Utilities.Logger.ShowNotification($"JOB SET: {gameObject.name} has job {referenceJob}");
-                }
-            }*/
         }
     }
 

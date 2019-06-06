@@ -7,11 +7,13 @@ namespace ACMF.ModHelper.DialogPopup
     public static class DialogManager
     {
         private static Queue<DialogPopupInfo> ToShow = new Queue<DialogPopupInfo>();
+        private static bool IsCoroutineRunning = false;
 
-        public static void QueueMessagePanel(string message, Action action = null)
+        public static void QueueMessagePanel(string message, bool printToLog = true, Action action = null)
         {
             ToShow.Enqueue(new DialogPopupInfo()
             {
+                PrintToLog = printToLog,
                 IsQuestion = false,
                 Message = message,
                 QuestionAction = null,
@@ -22,10 +24,11 @@ namespace ACMF.ModHelper.DialogPopup
             ShowNextIfNoPopupCurrently();
         }
 
-        public static void QueueQuestionPanel(string message, Action<bool> action, bool showCloseButton = false)
+        public static void QueueQuestionPanel(string message, Action<bool> action, bool printToLog = true, bool showCloseButton = false)
         {
             ToShow.Enqueue(new DialogPopupInfo()
             {
+                PrintToLog = printToLog,
                 IsQuestion = true,
                 Message = message,
                 QuestionAction = action,
@@ -41,12 +44,13 @@ namespace ACMF.ModHelper.DialogPopup
             if (ToShow.Count == 0 || DialogPanel.Instance == null)
                 return;
 
+            IsCoroutineRunning = true;
             PlayerInputController.Instance.StartCoroutine(DelayShow(ToShow.Dequeue()));
         }
 
         public static void ShowNextIfNoPopupCurrently()
         {
-            if (DialogPanel.Instance != null && DialogPanel.Instance.gameObject.activeSelf == false)
+            if (DialogPanel.Instance != null && DialogPanel.Instance.gameObject.activeSelf == false && IsCoroutineRunning == false)
                 ShowNext();
         }
 
@@ -63,6 +67,11 @@ namespace ACMF.ModHelper.DialogPopup
                 else
                     DialogPanel.Instance.ShowMessagePanel(info.Message);
             }
+
+            if (info.PrintToLog)
+                Utilities.Logger.Print($"[DialogPopup] {info.Message}");
+
+            IsCoroutineRunning = false;
         }
     }
 }

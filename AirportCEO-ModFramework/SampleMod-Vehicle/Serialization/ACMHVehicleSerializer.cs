@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 
 namespace SampleModVehicle.Serialization
 {
@@ -54,6 +55,9 @@ namespace SampleModVehicle.Serialization
 
         public static void DeserializeVehicles(string savePath)
         {
+            if (File.Exists(savePath + "/ModdedVehicleData.json") == false)
+                return;
+
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(Utils.ReadFileToJson(savePath + "/ModdedVehicleData.json"));
             ACMHVehicleWrapper vehicleWrapper = OdinSerializer.SerializationUtility.DeserializeValue<ACMHVehicleWrapper>(bytes, OdinSerializer.DataFormat.JSON);
             for (int i = 0; i < vehicleWrapper.VehicleModels.Count; i++)

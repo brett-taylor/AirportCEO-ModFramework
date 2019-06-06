@@ -4,6 +4,7 @@ namespace ACMF.ModHelper.DialogPopup
 {
     public struct DialogPopupInfo
     {
+        public bool PrintToLog;
         public bool IsQuestion;
         public string Message;
         public Action<bool> QuestionAction;

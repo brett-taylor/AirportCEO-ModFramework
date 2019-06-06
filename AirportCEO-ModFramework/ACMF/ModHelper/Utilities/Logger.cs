@@ -6,7 +6,7 @@ namespace ACMF.ModHelper.Utilities
     {
         internal static void Print(string message, bool alertInGame = false)
         {
-            Console.WriteLine($"[AirportCEOModHelper] {message}");
+            Console.WriteLine($"[AirportCEOModFramework] {message}");
 
             if (alertInGame)
                 ShowNotification(message);

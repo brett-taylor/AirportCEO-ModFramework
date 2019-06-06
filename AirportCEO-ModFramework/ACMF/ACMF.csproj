@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -75,6 +77,10 @@
     <Compile Include="ModHelper\DialogPopup\DialogManager.cs" />
     <Compile Include="ModHelper\DialogPopup\DialogPanelHidePanelPatcher.cs" />
     <Compile Include="ModHelper\DialogPopup\DialogPopupInfo.cs" />
+    <Compile Include="ModHelper\EnumPatcher\EnumCache.cs" />
+    <Compile Include="ModHelper\EnumPatcher\EnumBackingStore.cs" />
+    <Compile Include="ModHelper\EnumPatcher\EnumPatcher.cs" />
+    <Compile Include="ModHelper\EnumPatcher\IEnumCache.cs" />
     <Compile Include="ModHelper\MainMenu\ModMenuCustomMod.cs" />
     <Compile Include="ModHelper\MainMenu\ModMenuPatcher.cs" />
     <Compile Include="ModHelper\MainMenu\MainMenuShowHideGameMenuPanelsPatcher.cs" />
@@ -93,7 +99,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ModHelper\Vehicles\" />
+    <Folder Include="ModHelper\ModPrefabs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
