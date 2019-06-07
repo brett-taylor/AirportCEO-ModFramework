@@ -1,4 +1,5 @@
-﻿using ACMF.ModLoader;
+﻿using ACMF.ModHelper.PatchTime;
+using ACMF.ModLoader;
 using ACMF.ModLoader.Utilities;
 using Harmony;
 using System.IO;
@@ -42,6 +43,9 @@ namespace ACMF
 
             Logger.Print($"Initialising ModLoader");
             ModLoader.ModLoader.Initialise();
+
+            Logger.Print($"Executing PatchTime");
+            PatchTimeManager.Initialise();
         }
     }
 }

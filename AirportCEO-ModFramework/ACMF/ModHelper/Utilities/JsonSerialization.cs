@@ -47,7 +47,6 @@ namespace ACMF.ModHelper.Utilities
             catch (Exception e)
             {
                 Logger.Error($"JsonDeserialization Failed: {e.ToString()}");
-                Logger.Error(e.StackTrace);
                 deserializedObject = default;
                 return false;
             }

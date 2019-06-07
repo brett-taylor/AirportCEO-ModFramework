@@ -125,7 +125,7 @@ namespace ACMF.ModLoader
                 if (entryPointMethod == null)
                     return;
 
-                ACMFMod acmlMod = (ACMFMod)entryPointClass.GetCustomAttributes(typeof(ACMFMod), true).FirstOrDefault();
+                ACMFMod acmlMod = (ACMFMod) entryPointClass.GetCustomAttributes(typeof(ACMFMod), true).FirstOrDefault();
                 ModsFound.Add(acmlMod.ID, new Mod(acmlMod, assembly, entryPointMethod));
                 Utilities.Logger.Print($"Found Mod: {acmlMod.Name}");
             }

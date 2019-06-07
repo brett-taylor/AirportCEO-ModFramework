@@ -87,6 +87,11 @@
     <Compile Include="ModHelper\MainMenu\ModMenuPatcher.cs" />
     <Compile Include="ModHelper\MainMenu\MainMenuShowHideGameMenuPanelsPatcher.cs" />
     <Compile Include="ModHelper\MainMenu\SkipMainMenu.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Procurments\ProcurmentManager.cs" />
+    <Compile Include="ModHelper\PatchTime\PatchableClass.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Procurments\ProcurmentTemplate.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Vehicles\Vehicle.cs" />
+    <Compile Include="ModHelper\PatchTime\PatchTimeManager.cs" />
     <Compile Include="ModHelper\Utilities\Assets.cs" />
     <Compile Include="ModHelper\Utilities\Extensions\GameObjectExtensions.cs" />
     <Compile Include="ModHelper\Utilities\JsonSerialization.cs" />
@@ -101,8 +106,6 @@
     <Compile Include="ModLoader\Utilities\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ModHelper\ModPrefabs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

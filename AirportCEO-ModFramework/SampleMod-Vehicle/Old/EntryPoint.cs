@@ -1,4 +1,5 @@
 ﻿using ACMF.ModHelper.EnumPatcher;
+using ACMF.ModHelper.ModPrefabs;
 using ACMF.ModHelper.Utilities.Misc;
 using ACMF.ModLoader;
 using ACMF.ModLoader.Attributes;
@@ -51,8 +52,6 @@ namespace SampleModVehicle
         }
     }
 
-    [HarmonyPatch(typeof(ProcurementController))]
-    [HarmonyPatch("GenerateProcureable")]
     public class ProcurmentControllerGenerateProcureablePatcher
     {
         [HarmonyPrefix]
