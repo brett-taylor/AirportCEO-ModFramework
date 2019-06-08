@@ -1,5 +1,6 @@
 ﻿using System;
 using ACMF.ModHelper.ModPrefabs.Procurments;
+using UnityEngine;
 
 namespace SampleModVehicle
 {
@@ -28,5 +29,17 @@ namespace SampleModVehicle
         public override bool IsQuantifiable => true;
 
         public override bool IsPhysicalProduct => true;
+
+        public override Sprite Sprite => DataPlaceholder.Instance.procureableProductSprites[1];
+
+        public override void SpawnProcureable()
+        {
+            GameObject testCar = Assets.GetGameObjectForTestTruck();
+            TestTruckController scc = testCar.GetComponent<TestTruckController>();
+            scc.Initialize();
+            scc.ServiceVehicleModel.isOwnedByAirport = true;
+            TrafficController.Instance.AddVehicleToSpawnQueue(scc, false);
+            SpawnTestCar.TEST.Add(testCar);
+        }
     }
 }

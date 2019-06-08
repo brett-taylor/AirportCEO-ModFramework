@@ -16,42 +16,63 @@ namespace ACMF.ModHelper.Utilities
         }
     }
 
-    [HarmonyPatch(typeof(BuildingController))]
-    [HarmonyPatch("Awake")]
+    [HarmonyPatch(typeof(PlayerInputController))]
+    [HarmonyPatch("Update")]
     public class ActivateCurrentlyDisabledTurnAroundServicesBuildingControllerPatcher
     {
         [HarmonyPostfix]
         public static void Postfix(BuildingController __instance)
         {
-            Utilities.Logger.Print($"TESTTESTEST: {__instance.mediumDeicingPad.activeSelf}");
-            Utilities.Logger.Print($"TESTTESTEST 2: {__instance.mediumDeicingPad.transform.parent?.name ?? "null"}");
-            Utilities.Logger.Print($"TESTTESTEST 3: {__instance.largeATCTower.transform.parent?.name ?? "null"}");
-            __instance.cateringDepot.SetActive(true);
-            __instance.wasteDepot.SetActive(true);
-            __instance.deicingFluidDepot.SetActive(true);
-            __instance.smallDeicingPad.SetActive(true);
-            __instance.mediumDeicingPad.SetActive(true);
-            __instance.largeStand.SetActive(true);
-        }
-    }
-}
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.CapsLock) && Input.GetKeyDown(KeyCode.Z))
+            {
+                BuildingController.Instance.SpawnStructure(Enums.StructureType.CateringDepot);
+            }
 
-/*
- * BuildingController.Instance.SpawnStructure(Enums.StructureType.CateringDepot);
- * 
- * BuildingController.Instance.SpawnStructure(Enums.StructureType.AircraftDeicingStand);
- * 
- * BuildingController.Instance.SpawnStructure(Enums.StructureType.DeicingFluidDepot);
- * 
- * BuildingController.Instance.SpawnStructure(Enums.StructureType.WasteDepot);
- * 
- * GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.CateringTruck, Enums.VehicleSubType.Unspecified);
- * GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.AircraftCabinCleaningTruck, Enums.VehicleSubType.Unspecified);
- * GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.DeicingTruck, Enums.VehicleSubType.Unspecified);
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.CapsLock) && Input.GetKeyDown(KeyCode.X))
+            {
+                BuildingController.Instance.SpawnStructure(Enums.StructureType.AircraftDeicingStand);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.CapsLock) && Input.GetKeyDown(KeyCode.C))
+            {
+                BuildingController.Instance.SpawnStructure(Enums.StructureType.DeicingFluidDepot);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.CapsLock) && Input.GetKeyDown(KeyCode.V))
+            {
+                BuildingController.Instance.SpawnStructure(Enums.StructureType.AircraftDeicingStand);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.CapsLock) && Input.GetKeyDown(KeyCode.B))
+            {
+                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.CateringTruck, Enums.VehicleSubType.Unspecified);
                 ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
                 component3.Initialize();
                 component3.ServiceVehicleModel.isOwnedByAirport = true;
                 Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
                 gameObject4.DumpFields();
-*/
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.CapsLock) && Input.GetKeyDown(KeyCode.N))
+            {
+                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.AircraftCabinCleaningTruck, Enums.VehicleSubType.Unspecified);
+                ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
+                component3.Initialize();
+                component3.ServiceVehicleModel.isOwnedByAirport = true;
+                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
+                gameObject4.DumpFields();
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.CapsLock) && Input.GetKeyDown(KeyCode.M))
+            {
+                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.DeicingTruck, Enums.VehicleSubType.Unspecified);
+                ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
+                component3.Initialize();
+                component3.ServiceVehicleModel.isOwnedByAirport = true;
+                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
+                gameObject4.DumpFields();
+            }
+        }
+    }
+}
 

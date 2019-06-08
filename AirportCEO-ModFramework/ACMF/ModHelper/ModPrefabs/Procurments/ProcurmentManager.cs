@@ -16,9 +16,9 @@ namespace ACMF.ModHelper.ModPrefabs.Procurments
             [HarmonyPrefix]
             public static bool Prefix(ProcurementController __instance, Enums.ProcureableProductType productType)
             {
-                System.Console.WriteLine($"ProcurementController::GenerateProcureable {productType}");
                 if (ProcureableProducts.ContainsKey(productType))
                 {
+                    System.Console.WriteLine($"ProcurementController::GenerateProcureable {productType}");
                     ProcureableProduct pp = ProcureableProducts[productType].CreateProcureableProduct();
                     __instance.allAvailableProcureableProducts.Add(pp);
                     return false;
@@ -35,8 +35,33 @@ namespace ACMF.ModHelper.ModPrefabs.Procurments
             [HarmonyPrefix]
             public static bool Prefix(Sprite __result, Enums.ProcureableProductType procureableProductType)
             {
-                __result = DataPlaceholder.Instance.procureableProductSprites[1];
-                return false;
+                if (ProcureableProducts.ContainsKey(procureableProductType))
+                {
+                    __result = ProcureableProducts[procureableProductType].Sprite;
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(ProcurementController))]
+        [HarmonyPatch("SpawnProcureable")]
+        public class ProcurmentControllerSpawnProcureablePatcher
+        {
+            [HarmonyPrefix]
+            public static bool Prefix(Enums.ProcureableProductType productType)
+            {
+                if (ProcureableProducts.ContainsKey(productType))
+                {
+                    ProcurmentTemplate pt = ProcureableProducts[productType];
+                    pt.SpawnProcureable();
+                    NotificationController.Instance.AttemptSendNotification("A new product has arrived!", CameraController.Instance.GetWorldCenter(),
+                        Enums.NotificationType.Other, Enums.MessageSeverity.Unspecified, pt.Title + "NewProduct", pt.Title, Enums.InteractableObjectType.Vehicle, true);
+                    return false;
+                }
+                
+                return true;
             }
         }
     }

@@ -34,35 +34,6 @@ namespace SampleModVehicle
         }
     }
 
-    public class ProcurmentControllerSpawnProcureablePatcher
-    {
-        [HarmonyPrefix]
-        public static bool Prefix(Enums.ProcureableProductType productType)
-        {
-            Console.WriteLine($"ProcurementController::SpawnProcureable Patched for {productType}");
-            if (productType == EntryPoint.ProductTypeEnum)
-            {
-                string text = "";
-                Console.WriteLine($"!!!!!!!IMPORTANT! TestCar Spawned");
-
-                GameObject testCar = Assets.GetGameObjectForTestTruck();
-
-                TestTruckController scc = testCar.GetComponent<TestTruckController>();
-                scc.Initialize();
-                scc.ServiceVehicleModel.isOwnedByAirport = true;
-                TrafficController.Instance.AddVehicleToSpawnQueue(scc, false);
-                testCar.DumpFields();
-                SpawnTestCar.TEST.Add(testCar);
-
-                NotificationController.Instance.AttemptSendNotification("A new product has arrived!", CameraController.Instance.GetWorldCenter(),
-                    Enums.NotificationType.Other, Enums.MessageSeverity.Unspecified, text + "NewProduct", text, Enums.InteractableObjectType.Vehicle, true);
-                return false;
-            }
-
-            return true;
-        }
-    }
-
     [HarmonyPatch(typeof(VehicleDoorManager))]
     [HarmonyPatch("Awake")]
     public class VehicleDoorManagerAwakePatcher
@@ -88,80 +59,8 @@ namespace SampleModVehicle
         [HarmonyPostfix]
         public static void Postfix()
         {
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q))
-            {
-                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.DeicingTruck, Enums.VehicleSubType.Unspecified);
-                ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
-                component3.Initialize();
-                component3.ServiceVehicleModel.isOwnedByAirport = true;
-                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
-                gameObject4.DumpFields();
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q))
-            {
-                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.AircraftCabinCleaningTruck, Enums.VehicleSubType.Unspecified);
-                ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
-                component3.Initialize();
-                component3.ServiceVehicleModel.isOwnedByAirport = true;
-                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
-                gameObject4.DumpFields();
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q))
-            {
-                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.CateringTruck, Enums.VehicleSubType.Unspecified);
-                ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
-                component3.Initialize();
-                component3.ServiceVehicleModel.isOwnedByAirport = true;
-                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
-                gameObject4.DumpFields();
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
-            {
-                BuildingController.Instance.SpawnStructure(Enums.StructureType.CateringDepot);
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.X))
-            {
-                BuildingController.Instance.SpawnStructure(Enums.StructureType.AircraftDeicingStand);
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
-            {
-                BuildingController.Instance.SpawnStructure(Enums.StructureType.DeicingFluidDepot);
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.V))
-            {
-                BuildingController.Instance.SpawnStructure(Enums.StructureType.WasteDepot);
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.B))
-            {
-                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel(OperationsPanelUI.Instance.overviewPanel.cateringServiceStatusText.text);
-                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel(OperationsPanelUI.Instance.overviewPanel.cateringServiceStatusText.isActiveAndEnabled.ToString());
-
-                foreach(Transform t in OperationsPanelUI.Instance.overviewPanel.cateringServiceStatusText.transform.parent.parent)
-                {
-                    t.gameObject.SetActive(true);
-                }
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q))
-            {
-                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.HoneyTruck, Enums.VehicleSubType.Unspecified);
-                ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
-                component3.Initialize();
-                component3.ServiceVehicleModel.isOwnedByAirport = true;
-                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
-                gameObject4.DumpFields();
-            }
-
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.W))
             {
-                ProcurmentControllerSpawnProcureablePatcher.Prefix(EntryPoint.ProductTypeEnum);
                 if (TEST != null && TEST.Last() != null)
                     TEST.Last()?.DumpFields();
             }

@@ -15,9 +15,16 @@ namespace ACMF.ModHelper.EnumPatcher
 
         public T Patch(string name)
         {
-            T t = BackingStore.Patch(name);
-            Serialize();
+            bool isNewlyPatchedEnum = BackingStore.Patch(name, out T t);
+            if (isNewlyPatchedEnum)
+                Serialize();
+
             return t;
+        }
+
+        public T[] GetEnums()
+        {
+            return BackingStore.GetCachedEnumArray();
         }
 
         public void EnumPostfix_GetValues(ref Array __result)
@@ -26,7 +33,7 @@ namespace ACMF.ModHelper.EnumPatcher
             foreach (T productType in __result)
                 listArray.Add(productType);
 
-            listArray.AddRange(BackingStore.GetCachedEnumArray());
+            listArray.AddRange(GetEnums());
             __result = listArray.ToArray();
         }
 

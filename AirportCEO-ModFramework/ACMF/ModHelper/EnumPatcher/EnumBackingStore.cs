@@ -43,21 +43,26 @@ namespace ACMF.ModHelper.EnumPatcher
             return EnumToInt(Enums.Last().Key) + 1;
         }
 
-        internal T Patch(string name)
+        internal bool Patch(string name, out T t)
         {
-            if (GetEnumViaName(name, out T t) == true)
-                return t;
+            if (GetEnumViaName(name, out t) == true)
+                return false;
 
-            EnumsArrayCached = null;
-            T newEnum = IntToEnum(GetNextFreeID());
-            Enums.Add(newEnum, name);
-            return newEnum;
+            t = IntToEnum(GetNextFreeID());
+            Enums.Add(t, name);
+            RegenerateEnumCachedArray();
+            return true;
+        }
+
+        private void RegenerateEnumCachedArray()
+        {
+            EnumsArrayCached = Enums.Keys.Cast<T>().ToArray();
         }
 
         internal T[] GetCachedEnumArray()
         {
             if (EnumsArrayCached == null)
-                EnumsArrayCached = Enums.Keys.Cast<T>().ToArray();
+                RegenerateEnumCachedArray();
 
             return EnumsArrayCached;
         }

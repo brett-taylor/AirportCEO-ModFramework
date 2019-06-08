@@ -1,5 +1,6 @@
 ﻿using ACMF.ModHelper.EnumPatcher;
 using System;
+using UnityEngine;
 
 namespace ACMF.ModHelper.ModPrefabs.Procurments
 {
@@ -17,6 +18,7 @@ namespace ACMF.ModHelper.ModPrefabs.Procurments
         public abstract TimeSpan DeliveryTime { get; }
         public abstract bool IsQuantifiable { get; }
         public abstract bool IsPhysicalProduct { get; }
+        public abstract Sprite Sprite { get; }
 
         public Enums.ProcureableProductType Type { get; private set; }
 
@@ -26,6 +28,8 @@ namespace ACMF.ModHelper.ModPrefabs.Procurments
             Type = EnumCache<Enums.ProcureableProductType>.Instance.Patch(Title);
             ProcurmentManager.ProcureableProducts.Add(Type, this);
         }
+
+        public abstract void SpawnProcureable();
 
         internal ProcureableProduct CreateProcureableProduct()
         {

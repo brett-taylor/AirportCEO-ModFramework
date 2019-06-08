@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ACMF.ModHelper.Utilities
 {
     public class Logger
     {
+        internal static void Error(string message, bool alertInGame = false) => Print($"[ERROR] {message}", alertInGame);
         internal static void Print(string message, bool alertInGame = false)
         {
             Console.WriteLine($"[AirportCEOModFramework] {message}");
@@ -12,7 +14,38 @@ namespace ACMF.ModHelper.Utilities
                 ShowNotification(message);
         }
 
-        internal static void Error(string message, bool alertInGame = false) => Print($"[ERROR] {message}", alertInGame);
+        internal static void Print<T>(IEnumerable<T> enumerable)
+        {
+            Print($"Printing {enumerable}");
+            int no = 1;
+            foreach(T t in enumerable)
+            {
+                Print($"    {no}: {t}");
+                no++;
+            }
+        }
+
+        internal static void Print<T>(T[] array)
+        {
+            Print($"Printing {array}");
+            int no = 1;
+            foreach (T t in array)
+            {
+                Print($"    {no}: {t}");
+                no++;
+            }
+        }
+
+        internal static void Print(Array array)
+        {
+            Print($"Printing {array}");
+            int no = 1;
+            foreach (object t in array)
+            {
+                Print($"    {no}: {t}");
+                no++;
+            }
+        }
 
         public static void ShowNotification(string message)
         {
