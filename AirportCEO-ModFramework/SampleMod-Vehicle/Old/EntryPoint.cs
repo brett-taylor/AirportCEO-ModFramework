@@ -30,61 +30,10 @@ namespace SampleModVehicle
             Assets.Initialise();
 
             VehicleType = EnumCache<Enums.VehicleType>.Instance.Patch("TestTruck");
-            ProductTypeEnum = EnumCache<Enums.ProcureableProductType>.Instance.Patch("TestTruckProcureable");
             VehicleJobTask = EnumCache<Enums.VehicleJobTaskType>.Instance.Patch("TestTruckVehicleJobType");
         }
     }
 
-    [HarmonyPatch(typeof(ProcurementController))]
-    [HarmonyPatch("GetProcureableProductSprite")]
-    public class ProcurmentControllerGetProcureableProductSpritePatcher
-    {
-        [HarmonyPrefix]
-        public static bool Prefix(Sprite __result, Enums.ProcureableProductType procureableProductType)
-        {
-            if (procureableProductType == EntryPoint.ProductTypeEnum)
-            {
-                __result = DataPlaceholder.Instance.procureableProductSprites[13];
-                return false;
-            }
-
-            return true;
-        }
-    }
-
-    public class ProcurmentControllerGenerateProcureablePatcher
-    {
-        [HarmonyPrefix]
-        public static bool Prefix(ProcurementController __instance, Enums.ProcureableProductType productType)
-        {
-            if (productType == EntryPoint.ProductTypeEnum)
-            {
-                ProcureableProduct procureableProduct = new ProcureableProduct
-                {
-                    type = EntryPoint.ProductTypeEnum,
-                    title = "Test Truck",
-                    category = Enums.ProcureableProductCategory.Vehicles,
-                    subCategory = Enums.ProcureableProductSubCategory.ServiceVehicles,
-                    description = "Cool Test Truck that does nothing because the job system is hard to understand",
-                    fixedCost = 100f,
-                    operatingCost = 5f,
-                    deliveryTime = new TimeSpan(0, 10, 0),
-                    isQuantifiable = true,
-                    isPhysicalProduct = true,
-                    prerequisiteForDisplay = new ProcurementController.Prerequisite[0],
-                    prerequisite = new PrerequisiteContainer[0]
-                };
-
-                __instance.allAvailableProcureableProducts.Add(procureableProduct);
-                return false;
-            }
-
-            return true;
-        }
-    }
-
-    [HarmonyPatch(typeof(ProcurementController))]
-    [HarmonyPatch("SpawnProcureable")]
     public class ProcurmentControllerSpawnProcureablePatcher
     {
         [HarmonyPrefix]
@@ -141,7 +90,68 @@ namespace SampleModVehicle
         {
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q))
             {
-                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.ServiceCar, Enums.VehicleSubType.Unspecified);
+                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.DeicingTruck, Enums.VehicleSubType.Unspecified);
+                ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
+                component3.Initialize();
+                component3.ServiceVehicleModel.isOwnedByAirport = true;
+                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
+                gameObject4.DumpFields();
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q))
+            {
+                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.AircraftCabinCleaningTruck, Enums.VehicleSubType.Unspecified);
+                ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
+                component3.Initialize();
+                component3.ServiceVehicleModel.isOwnedByAirport = true;
+                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
+                gameObject4.DumpFields();
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q))
+            {
+                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.CateringTruck, Enums.VehicleSubType.Unspecified);
+                ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
+                component3.Initialize();
+                component3.ServiceVehicleModel.isOwnedByAirport = true;
+                Singleton<TrafficController>.Instance.AddVehicleToSpawnQueue(component3, false);
+                gameObject4.DumpFields();
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
+            {
+                BuildingController.Instance.SpawnStructure(Enums.StructureType.CateringDepot);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.X))
+            {
+                BuildingController.Instance.SpawnStructure(Enums.StructureType.AircraftDeicingStand);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
+            {
+                BuildingController.Instance.SpawnStructure(Enums.StructureType.DeicingFluidDepot);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.V))
+            {
+                BuildingController.Instance.SpawnStructure(Enums.StructureType.WasteDepot);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.B))
+            {
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel(OperationsPanelUI.Instance.overviewPanel.cateringServiceStatusText.text);
+                ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel(OperationsPanelUI.Instance.overviewPanel.cateringServiceStatusText.isActiveAndEnabled.ToString());
+
+                foreach(Transform t in OperationsPanelUI.Instance.overviewPanel.cateringServiceStatusText.transform.parent.parent)
+                {
+                    t.gameObject.SetActive(true);
+                }
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Q))
+            {
+                GameObject gameObject4 = TrafficController.Instance.SpawnVehicleGameObject(Enums.VehicleType.HoneyTruck, Enums.VehicleSubType.Unspecified);
                 ServiceVehicleController component3 = gameObject4.GetComponent<ServiceVehicleController>();
                 component3.Initialize();
                 component3.ServiceVehicleModel.isOwnedByAirport = true;
@@ -166,7 +176,6 @@ namespace SampleModVehicle
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
             {
                 StandModel standModel = BuildingController.Instance.GetArrayOfSpecificStructureType(Enums.StructureType.AircraftStand)[0] as StandModel;
-                JobTaskRequestManager.RequestTestJob(standModel);
 
                 ACMF.ModHelper.Utilities.Logger.ShowNotification($"Vehicle Count: {TEST.Count}");
                 foreach (GameObject gameObject in TEST)
@@ -184,29 +193,6 @@ namespace SampleModVehicle
                 Enums.VehicleType vt = EnumCache<Enums.VehicleType>.Instance.Patch("TestThisEnum" + UnityEngine.Random.Range(50, 200));
                 ACMF.ModHelper.DialogPopup.DialogManager.QueueMessagePanel($"Test 1: {vt} || {vt.ToString()}");
             }
-        }
-    }
-
-    public class JobTaskRequestManager
-    {
-        public static void RequestTestJob(StandModel cfm)
-        {
-            JobTaskController.Instance.CreateGenericFlightJobTask(
-                TimeController.Instance.GetCurrentContinuousTimeAsTimeSpan(),
-                new TimeSpan(1, 0, 0),
-                "",
-                Enums.TravelDirection.Unspecified,
-                EntryPoint.VehicleType,
-                EntryPoint.VehicleJobTask,
-                new string[] { cfm.referenceID },
-                true,
-                cfm.serviceVehicleEntryPosition.position,
-                cfm.serviceVehicleEntryPosition.eulerAngles,
-                true,
-                false,
-                Enums.TrailerType.Unspecified,
-                0
-            );
         }
     }
 

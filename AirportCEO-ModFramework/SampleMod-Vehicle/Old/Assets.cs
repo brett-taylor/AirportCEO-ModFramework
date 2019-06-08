@@ -43,8 +43,8 @@ namespace SampleModVehicle
 
             //////////////////////////////////////////
             BoundaryHandler bh = testCar.transform.Find("Boundary").gameObject.AddComponent<BoundaryHandler>();
-            bh.zoneType = (Enums.ZoneType)4;
-            bh.boundaryType = BoundaryHandler.BoundaryType.PersonGrid;
+            //bh.zoneType = Enums.ZoneType.GenericZoneType;
+            //bh.boundaryType = BoundaryHandler.BoundaryType.PersonGrid;
             //////////////////////////////////////////
 
             //////////////////////////////////////////
@@ -67,7 +67,7 @@ namespace SampleModVehicle
             scc.shadows = new ShadowHandler[] { shadowHandler };
             scc.boundary = bh;
             scc.thoughtsReferenceList = new List<Thought>();
-            scc.currentShipment = new Shipment(Vector3.zero, Enums.DeliveryContainerType.Unspecified, Enums.DeliveryContentType.Unspecified, 0, "");
+            //scc.currentShipment = new Shipment(Vector3.zero, Enums.DeliveryContainerType.Unspecified, Enums.DeliveryContentType.Unspecified, 0, "");
             scc.currentActionDescriptionListReference = new List<Enums.ServiceVehicleAction>();
             scc.gameObject.SetActive(false);
             scc.transform.position = Vector3.zero;

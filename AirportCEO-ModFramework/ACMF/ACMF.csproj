@@ -37,7 +37,8 @@
     <Reference Include="0Harmony">
       <HintPath>..\Dependencies\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp_publicized">
+    <Reference Include="Assembly-CSharp_publicized, Version=11.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
     <Reference Include="OdinSerializer">
@@ -63,6 +64,7 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Dependencies\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\UnityEngine.UI.dll</HintPath>
@@ -92,6 +94,7 @@
     <Compile Include="ModHelper\ModPrefabs\Procurments\ProcurmentTemplate.cs" />
     <Compile Include="ModHelper\ModPrefabs\Vehicles\Vehicle.cs" />
     <Compile Include="ModHelper\PatchTime\PatchTimeManager.cs" />
+    <Compile Include="ModHelper\Utilities\ActivateCurrentlyDisabledTurnAroundServices.cs" />
     <Compile Include="ModHelper\Utilities\Assets.cs" />
     <Compile Include="ModHelper\Utilities\Extensions\GameObjectExtensions.cs" />
     <Compile Include="ModHelper\Utilities\JsonSerialization.cs" />

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace SampleModVehicle
 {
@@ -17,13 +18,14 @@ namespace SampleModVehicle
             topSpeed = 20f;
             operatingCost = 100f;
             randomizeColor = true;
-            maxDeliveryQuantityCapacity = 0f;
-            CurrentQuantityDelivered = 0f;
-            allowedDeliveryContainer = Enums.DeliveryContainerType.Seat;
+            maxQuantityLoadedGoods = 4f;
+            allowedDeliveryContainers = new List<Enums.DeliveryContainerType>
+            {
+                Enums.DeliveryContainerType.Seat
+            };
             acceptedTargetDistance = GridController.nodeDiameter;
             acceptedTargetDistanceTurn = 0.5f;
             nodesToOccupy = 2;
-            occupyBackwards = false;
             canBeAssignedToStaticJobTaskObject = true;
 
             randomNumberOne = 5;

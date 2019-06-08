@@ -20,7 +20,6 @@ namespace SampleModVehicle
                 model = new TestTruckModel();
             }
 
-            resetAction = new Action<Enums.ServiceVehicleActivity, bool, string>(ResetCarModel);
             TestTruckModel.Initialize();
             base.Initialize();
         }

@@ -30,6 +30,16 @@ namespace ACMF.ModHelper.Utilities
 
         public static bool Deserialize<T>(out T deserializedObject, string filePath)
         {
+            if (File.Exists(filePath) == true)
+                return DeserializeInternal(out deserializedObject, filePath);
+
+            Logger.Error($"File to deserialize does not exist: {filePath}");
+            deserializedObject = default;
+            return false;
+        }
+
+        private static bool DeserializeInternal<T>(out T deserializedObject, string filePath)
+        {
             try
             {
                 if (File.Exists(filePath) == false)
