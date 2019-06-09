@@ -1,4 +1,5 @@
-﻿using ACMF.ModHelper.PatchTime;
+﻿using ACMF.ModHelper.EnumPatcher;
+using ACMF.ModHelper.PatchTime;
 using ACMF.ModLoader;
 using ACMF.ModLoader.Utilities;
 using Harmony;
@@ -37,7 +38,6 @@ namespace ACMF
 
             Logger.Print($"Loading ModHelper...");
             Config = ModHelper.Config.ACMFConfigManager.LoadConfig<ModHelper.Config.ModHelperConfig>(UNIQUE_ID);
-            ModHelper.Utilities.Assets.Initialise();
             HarmonyInstance harmonyInstance = HarmonyInstance.Create(UNIQUE_ID);
             harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
 

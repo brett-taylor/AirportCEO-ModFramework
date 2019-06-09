@@ -65,14 +65,12 @@
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Old\Assets.cs" />
-    <Compile Include="Old\EntryPoint.cs" />
+    <Compile Include="Assets.cs" />
+    <Compile Include="EntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Old\Serialization\ACMHVehicleSerializer.cs" />
-    <Compile Include="Old\Serialization\ACMHVehicleWrapper.cs" />
-    <Compile Include="Old\TestTruckController.cs" />
-    <Compile Include="Old\TestTruckModel.cs" />
-    <Compile Include="TestTruck.cs" />
+    <Compile Include="TestTruckController.cs" />
+    <Compile Include="TestTruckCreator.cs" />
+    <Compile Include="TestTruckModel.cs" />
     <Compile Include="TestTruckProcurment.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace ACMF.ModHelper.ModPrefabs.Procurments
 {
-    public static class ProcurmentManager
+    internal static class ProcurmentManager
     {
-        public static Dictionary<Enums.ProcureableProductType, ProcurmentTemplate> ProcureableProducts { get; private set; } 
-            = new Dictionary<Enums.ProcureableProductType, ProcurmentTemplate>();
+        public static Dictionary<Enums.ProcureableProductType, ACMFProcurmentTemplate> ProcureableProducts { get; private set; } 
+            = new Dictionary<Enums.ProcureableProductType, ACMFProcurmentTemplate>();
 
         [HarmonyPatch(typeof(ProcurementController))]
         [HarmonyPatch("GenerateProcureable")]
@@ -18,7 +18,6 @@ namespace ACMF.ModHelper.ModPrefabs.Procurments
             {
                 if (ProcureableProducts.ContainsKey(productType))
                 {
-                    System.Console.WriteLine($"ProcurementController::GenerateProcureable {productType}");
                     ProcureableProduct pp = ProcureableProducts[productType].CreateProcureableProduct();
                     __instance.allAvailableProcureableProducts.Add(pp);
                     return false;
@@ -54,7 +53,7 @@ namespace ACMF.ModHelper.ModPrefabs.Procurments
             {
                 if (ProcureableProducts.ContainsKey(productType))
                 {
-                    ProcurmentTemplate pt = ProcureableProducts[productType];
+                    ACMFProcurmentTemplate pt = ProcureableProducts[productType];
                     pt.SpawnProcureable();
                     NotificationController.Instance.AttemptSendNotification("A new product has arrived!", CameraController.Instance.GetWorldCenter(),
                         Enums.NotificationType.Other, Enums.MessageSeverity.Unspecified, pt.Title + "NewProduct", pt.Title, Enums.InteractableObjectType.Vehicle, true);

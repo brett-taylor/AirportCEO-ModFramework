@@ -14,6 +14,17 @@ namespace ACMF.ModHelper.Utilities
                 ShowNotification(message);
         }
 
+        internal static void Print<T>(ICollection<T> collection)
+        {
+            Print($"Printing {collection} || Size {collection.Count}");
+            int no = 1;
+            foreach (T t in collection)
+            {
+                Print($"    {no}: {t}");
+                no++;
+            }
+        }
+
         internal static void Print<T>(IEnumerable<T> enumerable)
         {
             Print($"Printing {enumerable}");

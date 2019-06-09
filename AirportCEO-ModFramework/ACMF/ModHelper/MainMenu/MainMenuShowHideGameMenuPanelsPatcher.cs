@@ -1,4 +1,5 @@
-﻿using Harmony;
+﻿using ACMF.ModHelper.AssetBundles.Impl;
+using Harmony;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace ACMF.ModHelper.MainMenu
         [HarmonyPostfix]
         public static void Postfix(MainMenuWorldController __instance)
         {
-            GameObject versionText = Object.Instantiate(Utilities.Assets.MAIN_MENU_VERSION_TEXT);
+            GameObject versionText = Object.Instantiate(ACMFAssets.Instance.AttemptLoadGameObject("ACMF-Info"));
             versionText.transform.Find("Container/ACMF").GetComponent<TextMeshProUGUI>().text = $"Airport CEO Mod Framework: v{ACMF.Version}";
 
             DialogPopup.DialogManager.ShowNextIfNoPopupCurrently();

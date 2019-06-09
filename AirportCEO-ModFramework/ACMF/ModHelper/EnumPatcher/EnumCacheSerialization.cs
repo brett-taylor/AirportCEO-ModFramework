@@ -5,9 +5,9 @@ namespace ACMF.ModHelper.EnumPatcher
 {
     public partial class EnumCache<T> : IEnumCache where T : Enum
     {
-        private static readonly string ENUM_CACHE_FILE_ENDING = ".acmfCache.json";
-        private static readonly string ENUM_CACHE_FOLDER_NAME = "GlobalEnumCache";
-        private static string SERIALIZED_ENUM_CACHE_FOLDER { get => Path.Combine(ACMF.ACMFFolderLocation, ENUM_CACHE_FOLDER_NAME); }
+        internal static readonly string ENUM_CACHE_FILE_ENDING = ".acmfCache.json";
+        internal static readonly string ENUM_CACHE_FOLDER_NAME = "GlobalEnumCache";
+        internal static string SERIALIZED_ENUM_CACHE_FOLDER { get => Path.Combine(ACMF.ACMFFolderLocation, ENUM_CACHE_FOLDER_NAME); }
 
         private void Serialize()
         {
