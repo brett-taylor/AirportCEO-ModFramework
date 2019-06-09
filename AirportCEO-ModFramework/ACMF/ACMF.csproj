@@ -95,9 +95,13 @@
     <Compile Include="ModHelper\ModPrefabs\Procurments\ProcurmentManager.cs" />
     <Compile Include="ModHelper\ModPrefabs\Procurments\ACMFProcurmentTemplate .cs" />
     <Compile Include="ModHelper\ModPrefabs\Vehicles\ACMFServiceVehicleModel.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Vehicles\IServiceVehicleCreator.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Vehicles\VehicleSerialization\VehicleSerializationPatcher.cs" />
     <Compile Include="ModHelper\ModPrefabs\Vehicles\ServiceVehicleCreator.cs" />
     <Compile Include="ModHelper\ModPrefabs\Vehicles\VehicleLightManagerPatcher.cs" />
     <Compile Include="ModHelper\ModPrefabs\Vehicles\VehicleDoorManagerPatcher.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Vehicles\VehicleSerialization\VehicleSerializationWrapper.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Vehicles\VehicleSerialization\VehicleSerializer.cs" />
     <Compile Include="ModHelper\PatchTime\PatchTimeMethod.cs" />
     <Compile Include="ModHelper\PatchTime\PatchTimeManager.cs" />
     <Compile Include="ModHelper\Utilities\ActivateCurrentlyDisabledTurnAroundServices.cs" />

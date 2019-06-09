@@ -152,39 +152,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 33856358208751570, guid: 2315cf65e252fcd41908cf704cef358e,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 33637825107786664, guid: 2315cf65e252fcd41908cf704cef358e,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114191123713918512, guid: 2315cf65e252fcd41908cf704cef358e,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
+    - target: {fileID: 1195013873400902, guid: 2315cf65e252fcd41908cf704cef358e, type: 2}
+      propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114191123713918512, guid: 2315cf65e252fcd41908cf704cef358e,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114320421336306550, guid: 2315cf65e252fcd41908cf704cef358e,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114320421336306550, guid: 2315cf65e252fcd41908cf704cef358e,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1317396088734404, guid: 2315cf65e252fcd41908cf704cef358e, type: 2}
-      propertyPath: m_Name
-      value: __WarningLights
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2315cf65e252fcd41908cf704cef358e, type: 2}

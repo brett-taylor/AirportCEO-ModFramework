@@ -25,11 +25,7 @@ namespace SampleModVehicle
 
         public override void SpawnProcureable()
         {
-            GameObject testCar = TestTruckCreator.Instance.CreateInstance();
-            TestTruckController scc = testCar.GetComponent<TestTruckController>();
-            scc.Initialize();
-            scc.ServiceVehicleModel.isOwnedByAirport = true;
-            TrafficController.Instance.AddVehicleToSpawnQueue(scc, false);
+            GameObject testTruck = TestTruckCreator.SpawnRegular();
         }
     }
 }

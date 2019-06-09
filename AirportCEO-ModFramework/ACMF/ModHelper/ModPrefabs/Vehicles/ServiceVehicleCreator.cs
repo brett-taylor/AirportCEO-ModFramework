@@ -1,10 +1,40 @@
-﻿using System;
+﻿using ACMF.ModHelper.PatchTime;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ACMF.ModHelper.ModPrefabs.Vehicles
 {
-    public abstract class ServiceVehicleCreator<T> where T : ServiceVehicleController
+    public static class ServiceVehicleCreator
+    {
+        private static readonly Dictionary<Type, IServiceVehicleCreator> VehicleCreatorsFromController = new Dictionary<Type, IServiceVehicleCreator>();
+
+        public static ServiceVehicleCreator<T> GetCreator<T>() where T : ServiceVehicleController
+        {
+            if (HasCreatorFromType(typeof(T)) && VehicleCreatorsFromController[typeof(T)] is ServiceVehicleCreator<T> result)
+                return result;
+
+            Utilities.Logger.Error($"ServiceVehicleCreator attempted to get creator from controller for {typeof(T)} which does not exist.");
+            return null;
+        }
+
+        internal static void Add<T>(IServiceVehicleCreator o) where T : ServiceVehicleController
+        {
+            VehicleCreatorsFromController.Add(typeof(T), o);
+        }
+
+        internal static IServiceVehicleCreator GetCreatorFromType(Type type)
+        {
+            return HasCreatorFromType(type) ? VehicleCreatorsFromController[type] : null;
+        }
+
+        internal static bool HasCreatorFromType(Type type)
+        {
+            return VehicleCreatorsFromController.ContainsKey(type);
+        }
+    }
+
+    public abstract class ServiceVehicleCreator<T> : IServiceVehicleCreator where T : ServiceVehicleController
     {
         protected abstract GameObject VehicleGameObject { get; }
         protected abstract string[] FrontDoorTransforms { get; }
@@ -13,7 +43,14 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles
         protected float ShadowDistance { get; } = 0.175f;
         protected abstract string[] ColorableSpriteRenderers { get; }
 
-        public virtual GameObject CreateInstance()
+        [PatchTimeMethod]
+        public void Patch()
+        {
+            Utilities.Logger.Print($"Registered ServiceVehicleCreator of Controller {typeof(T).Name}");
+            ServiceVehicleCreator.Add<T>(this);
+        }
+
+        public virtual GameObject CreateNewInstance()
         {
             if (VehicleGameObject == null)
             {
@@ -23,25 +60,16 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles
 
             GameObject vehicle = UnityEngine.Object.Instantiate(VehicleGameObject);
             vehicle.transform.SetParent(FolderController.Instance.GetSceneRootTransform(), false);
-            Utilities.Logger.Print("Reached step 1");
             AddVehicleDoorManager(vehicle);
-            Utilities.Logger.Print("Reached step 2");
             AddVehicleLightManager(vehicle);
-            Utilities.Logger.Print("Reached step 3");
             AddBoundaryHandler(vehicle);
-            Utilities.Logger.Print("Reached step 4");
             AddShadowHandler(vehicle);
-            Utilities.Logger.Print("Reached step 5");
             AddVehicleAudio(vehicle);
-            Utilities.Logger.Print("Reached step 6");
             AddServiceVehicleController(vehicle);
-            Utilities.Logger.Print("Reached step 7");
 
             PostCreateInstance(vehicle);
             return vehicle;
         }
-
-        protected abstract void PostCreateInstance(GameObject vehicle);
 
         protected virtual void AddVehicleDoorManager(GameObject vehicle)
         {
@@ -116,5 +144,22 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles
             serviceVehicleController.gameObject.SetActive(false);
             serviceVehicleController.transform.position = Vector3.zero;
         }
+
+        protected abstract void PostCreateInstance(GameObject vehicle);
+
+        public virtual GameObject CreateForDeserialization(VehicleModel vehicleModel)
+        {
+            GameObject vehicle = CreateNewInstance();
+            T controller = vehicle.GetComponent<T>();
+            controller.Initialize();
+            controller.RestoreVehicleFromSerialization(vehicleModel);
+            TrafficController.Instance.AddVehicleToList(controller);
+            controller.Launch();
+
+            PostCreateForDeserialization(vehicle);
+            return vehicle;
+        }
+
+        protected abstract void PostCreateForDeserialization(GameObject vehicle);
     }
 }
