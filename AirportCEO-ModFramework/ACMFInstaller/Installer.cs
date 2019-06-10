@@ -10,6 +10,8 @@ namespace ACMFInstaller
     public static class Installer
     {
         private static readonly string EXAMPLE_DIRECTORY = "C:\\Steam Library\\steamapps\\common\\Airport CEO";
+        private static readonly string STEAM_SUBFOLDER = "\\steamapps\\common\\Airport CEO";
+        private static readonly string DEFAULT_STEAM_LOCATION = "Program Files (x86)\\Steam" + STEAM_SUBFOLDER;
         private static readonly string AIRPORT_CEO_EXECUTABLE_FILE_NAME = "Airport CEO.exe";
         private static readonly string MANAGED_DIRECTORY = Path.Combine("Airport CEO_Data", "Managed");
         private static readonly string DLL_DIRECTORY = Path.Combine(MANAGED_DIRECTORY, "Assembly-CSharp.dll");
@@ -28,7 +30,17 @@ namespace ACMFInstaller
 
         public static void Main()
         {
-            string airportCEODirectory = GetInputDirectory();
+            //If the game is installed in a default directory this will make it so the user doesn't have to input the location.
+            string airportCEODirectory = TryDefaultSteamDirectories();
+            if (airportCEODirectory == "") {
+                airportCEODirectory = GetInputDirectory();
+                //This is to allow the user to write D:\SteamLibrary, instead of the whole path.
+                if (VerifyExecutableDirectory(airportCEODirectory) == false)
+                {
+                    airportCEODirectory += STEAM_SUBFOLDER;
+                }
+            }
+            
             if (VerifyExecutableDirectory(airportCEODirectory) == true)
             {
                 Console.WriteLine("Found executable. Attempting to now find Assembly Assembly-CSharp");
@@ -42,8 +54,10 @@ namespace ACMFInstaller
                         CopyRequirments(REQUIRMENTS_LOCATION, Path.Combine(managed, REQUIRMENTS_COPY_TO_LOCATION));
                         Console.WriteLine("Patch Starting.");
                         string backupDLL = Path.Combine(Path.GetDirectoryName(dll), Path.GetFileNameWithoutExtension(dll)) + BACKUP_DLL_EXTESION;
-                        ReplaceOriginalWithBackupIfItExists(dll, backupDLL);
-                        CreateBackup(dll, backupDLL);
+                        if (!ReplaceOriginalWithBackupIfItExists(dll, backupDLL))
+                        {
+                            CreateBackup(dll, backupDLL);
+                        }
                         Patch(dll, backupDLL, Path.Combine(airportCEODirectory, ACMF_DLL_NEW_LOCATION));
                         Console.WriteLine("");
                         Console.WriteLine("Patch successful.");
@@ -84,6 +98,22 @@ namespace ACMFInstaller
             return result;
         }
 
+        private static string TryDefaultSteamDirectories()
+        {
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo drive in allDrives)
+            {
+                string gameLocation = drive.Name + DEFAULT_STEAM_LOCATION;
+                //May want to combine this writeline with the VerifyExecutableDirectory one.
+                Console.WriteLine("Checking " + gameLocation + " for Airport CEO.");
+                if (VerifyExecutableDirectory(gameLocation))
+                    return gameLocation;
+            }
+
+            return "";
+        }
+
         private static void CopyRequirments(string from, string to)
         {
             Console.WriteLine("");
@@ -104,16 +134,24 @@ namespace ACMFInstaller
             Console.WriteLine("Done copying files.");
         }
 
-        private static void ReplaceOriginalWithBackupIfItExists(string dll, string backupDLL)
+        private static bool ReplaceOriginalWithBackupIfItExists(string dll, string backupDLL)
         {
             if (File.Exists(backupDLL) == false)
-                return;
+                return false;
 
+            //Added a guard to stop dlls from older versions displacing the current version.
             if (File.Exists(dll) == true)
-                File.Delete(dll);
+                if (File.GetCreationTime(dll).Minute > File.GetCreationTime(backupDLL).AddMinutes(5).Minute)
+                {
+                    Console.WriteLine("Current Dll newer than backup, if you've run this patcher multiple times," +
+                                      " verify the integrity of your game's files and try again.");
+                    return true;
+                } else
+                    File.Delete(dll);
 
             Console.WriteLine($"Replaced original dll with backed up dll.");
             File.Copy(backupDLL, dll);
+            return true;
         }
 
         private static void CreateBackup(string dll, string backupDLL)
