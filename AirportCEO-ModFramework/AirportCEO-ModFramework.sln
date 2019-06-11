@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod-Vehicle", "Sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMF.UnitTests", "ACMF.UnitTests\ACMF.UnitTests.csproj", "{42A98F4C-145B-47C7-97BD-866A9EC9203C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod-JobsMod", "SampleMod-JobsMod\SampleMod-JobsMod.csproj", "{808B1E39-EB79-4A33-B78A-075120B25F21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{42A98F4C-145B-47C7-97BD-866A9EC9203C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42A98F4C-145B-47C7-97BD-866A9EC9203C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42A98F4C-145B-47C7-97BD-866A9EC9203C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{808B1E39-EB79-4A33-B78A-075120B25F21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{808B1E39-EB79-4A33-B78A-075120B25F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{808B1E39-EB79-4A33-B78A-075120B25F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{808B1E39-EB79-4A33-B78A-075120B25F21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
