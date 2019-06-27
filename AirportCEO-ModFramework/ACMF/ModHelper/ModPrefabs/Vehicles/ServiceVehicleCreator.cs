@@ -1,39 +1,10 @@
-﻿using ACMF.ModHelper.PatchTime;
-using System;
+﻿using ACMF.ModHelper.ModPrefabs.Vehicles.Interfaces;
+using ACMF.ModHelper.PatchTime;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ACMF.ModHelper.ModPrefabs.Vehicles
 {
-    public static class ServiceVehicleCreator
-    {
-        private static readonly Dictionary<Type, IServiceVehicleCreator> VehicleCreatorsFromController = new Dictionary<Type, IServiceVehicleCreator>();
-
-        public static ServiceVehicleCreator<T> GetCreator<T>() where T : ServiceVehicleController
-        {
-            if (HasCreatorFromType(typeof(T)) && VehicleCreatorsFromController[typeof(T)] is ServiceVehicleCreator<T> result)
-                return result;
-
-            Utilities.Logger.Error($"ServiceVehicleCreator attempted to get creator from controller for {typeof(T)} which does not exist.");
-            return null;
-        }
-
-        internal static void Add<T>(IServiceVehicleCreator o) where T : ServiceVehicleController
-        {
-            VehicleCreatorsFromController.Add(typeof(T), o);
-        }
-
-        internal static IServiceVehicleCreator GetCreatorFromType(Type type)
-        {
-            return HasCreatorFromType(type) ? VehicleCreatorsFromController[type] : null;
-        }
-
-        internal static bool HasCreatorFromType(Type type)
-        {
-            return VehicleCreatorsFromController.ContainsKey(type);
-        }
-    }
-
     public abstract class ServiceVehicleCreator<T> : IServiceVehicleCreator where T : ServiceVehicleController
     {
         protected abstract GameObject VehicleGameObject { get; }
@@ -47,7 +18,7 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles
         public void Patch()
         {
             Utilities.Logger.Print($"Registered ServiceVehicleCreator of Controller {typeof(T).Name}");
-            ServiceVehicleCreator.Add<T>(this);
+            ActiveServiceVehicleCreators.Add<T>(this);
         }
 
         public virtual GameObject CreateNewInstance()
@@ -79,7 +50,7 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles
             vdm.cargoDoorPoints = new List<Transform>();
             vdm.transformsToHide = new List<Transform>();
 
-            foreach(string s in FrontDoorTransforms)
+            foreach (string s in FrontDoorTransforms)
                 vdm.frontDoorPoints.Add(vehicle.transform.Find(s));
 
             foreach (string s in RearDoorTransforms)

@@ -15,7 +15,7 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles.VehicleSerialization
 
             foreach (VehicleController vehicleController in vehicleArray)
             {
-                if (ServiceVehicleCreator.HasCreatorFromType(vehicleController.GetType()) == false)
+                if (ActiveServiceVehicleCreators.HasCreatorFromType(vehicleController.GetType()) == false)
                     continue;
 
                 Utilities.Logger.Print($"Modded Vehicles Serializing {vehicleController}...");
@@ -41,11 +41,11 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles.VehicleSerialization
 
             foreach (Tuple<VehicleModel, Type> tuple in vehicleSerializationWrapper.GetVehicles())
             {
-                if (ServiceVehicleCreator.HasCreatorFromType(tuple.Item2) == false)
+                if (ActiveServiceVehicleCreators.HasCreatorFromType(tuple.Item2) == false)
                     continue;
 
                 Utilities.Logger.Print($"Modded Vehicles Deserializing {tuple}...");
-                ServiceVehicleCreator.GetCreatorFromType(tuple.Item2).CreateForDeserialization(tuple.Item1);
+                ActiveServiceVehicleCreators.GetCreatorFromType(tuple.Item2).CreateForDeserialization(tuple.Item1);
             }
 
             Utilities.Logger.Print($"Modded Vehicles Deserialization successful.");

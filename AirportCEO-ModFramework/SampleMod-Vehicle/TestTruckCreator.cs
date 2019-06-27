@@ -17,7 +17,7 @@ namespace SampleModVehicle
 
         public static GameObject SpawnRegular()
         {
-            GameObject vehicle = ServiceVehicleCreator.GetCreator<TestTruckController>().CreateNewInstance();
+            GameObject vehicle = ActiveServiceVehicleCreators.GetCreator<TestTruckController>().CreateNewInstance();
             TestTruckController controller = vehicle.GetComponent<TestTruckController>();
             controller.Initialize();
             controller.ServiceVehicleModel.isOwnedByAirport = true;
