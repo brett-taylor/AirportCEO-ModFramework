@@ -51,8 +51,7 @@ namespace ACMF
             PatchTimeManager.Initialise();
 
             stopwatch.Stop();
-            Logger.Print($"ACMF took {stopwatch.ElapsedMilliseconds}ms to load.");
-
+            Logger.Print($"ACMF took {stopwatch.ElapsedMilliseconds} ms to load.");
         }
     }
 }

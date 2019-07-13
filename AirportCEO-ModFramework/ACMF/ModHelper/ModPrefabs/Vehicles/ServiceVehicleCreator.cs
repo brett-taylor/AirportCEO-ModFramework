@@ -29,7 +29,7 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles
                 return null;
             }
 
-            GameObject vehicle = UnityEngine.Object.Instantiate(VehicleGameObject);
+            GameObject vehicle = Object.Instantiate(VehicleGameObject);
             vehicle.transform.SetParent(FolderController.Instance.GetSceneRootTransform(), false);
             AddVehicleDoorManager(vehicle);
             AddVehicleLightManager(vehicle);
@@ -108,10 +108,8 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles
             serviceVehicleController.exhaust = vehicle.GetComponentInChildren<ParticleSystem>();
             serviceVehicleController.shadows = vehicle.GetComponentsInChildren<ShadowHandler>();
             serviceVehicleController.boundary = vehicle.GetComponentInChildren<BoundaryHandler>();
-
             serviceVehicleController.thoughtsReferenceList = new List<Thought>();
             serviceVehicleController.currentShipment = new Shipment("", Vector3.zero, Enums.DeliveryContainerType.Unspecified, Enums.DeliveryContentType.Unspecified, 0, "");
-            serviceVehicleController.currentActionDescriptionListReference = new List<Enums.ServiceVehicleAction>();
             serviceVehicleController.gameObject.SetActive(false);
             serviceVehicleController.transform.position = Vector3.zero;
         }

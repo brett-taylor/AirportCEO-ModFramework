@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ACMF</RootNamespace>
     <AssemblyName>ACMF</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -118,7 +118,6 @@
     <Compile Include="ModHelper\ModPrefabs\Vehicles\VehicleSerialization\VehicleSerializer.cs" />
     <Compile Include="ModHelper\PatchTime\PatchTimeMethod.cs" />
     <Compile Include="ModHelper\PatchTime\PatchTimeManager.cs" />
-    <Compile Include="ModHelper\Utilities\ActivateCurrentlyDisabledTurnAroundServices.cs" />
     <Compile Include="ModHelper\AssetBundles\Impl\ACMFAssets.cs" />
     <Compile Include="ModHelper\Utilities\Extensions\GameObjectExtensions.cs" />
     <Compile Include="ModHelper\Utilities\JsonSerialization.cs" />
