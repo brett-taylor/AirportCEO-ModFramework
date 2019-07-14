@@ -1,4 +1,5 @@
-﻿using ACMF.ModHelper.EnumPatcher;
+﻿using ACMF.ModHelper.BuildMenu;
+using ACMF.ModHelper.EnumPatcher;
 using ACMF.ModHelper.ModPrefabs.Buildings.Interfaces;
 using ACMF.ModHelper.PatchTime;
 using ACMF.ModHelper.Utilities.Extensions;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace ACMF.ModHelper.ModPrefabs.Buildings
 {
-    public abstract class PlaceableItemCreator<T> : IACMFPlaceableItem, IBuildingCreator where T : PlaceableItemCreator<T>
+    public abstract class PlaceableItemCreator<T> : IACMFPlaceableItem, IBuildingCreator, IAppearInBuildMenu where T : PlaceableItemCreator<T>
     {
         public Enums.ItemType ItemTypeEnum { get; private set; }
         public abstract string ItemTypeEnumName { get; }
@@ -46,6 +47,9 @@ namespace ACMF.ModHelper.ModPrefabs.Buildings
         public abstract bool IMustBeWithinSpecificZone { get; }
         public abstract bool IMustBeWithinRoom { get; }
 
+        public abstract Sprite ItemBuildSprite { get; }
+        public abstract bool ShouldAppearInBuildMenu { get; }
+
         protected abstract void PatchedItemTypeEnum(Enums.ItemType itemType);
         protected abstract void PostSetupPrefabDuringPatchtime(GameObject prefab);
         protected abstract void PostCreateNewInstance(GameObject gameObject);
@@ -58,6 +62,15 @@ namespace ACMF.ModHelper.ModPrefabs.Buildings
             PatchedItemTypeEnum(ItemTypeEnum);
             SetupPrefabDuringPatchtime(Prefab);
             ActiveBuildingCreators.Add<T>(this, ItemTypeEnum);
+
+            if (ShouldAppearInBuildMenu)
+            {
+                BuildMenuData.AddBuildItem(new BuildMenuItem(
+                    sprite: ItemBuildSprite,
+                    itemName: $"{IObjectName} (${IObjectCost})",
+                    onClick: () => BuildingController.Instance.SpawnItem(ItemTypeEnum)
+                ));
+            }
         }
 
         protected virtual void SetupPrefabDuringPatchtime(GameObject prefab)

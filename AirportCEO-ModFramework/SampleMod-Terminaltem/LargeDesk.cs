@@ -43,6 +43,9 @@ namespace SampleModTerminaltem
         public override bool IMustBeWithinSpecificZone => true;
         public override bool IMustBeWithinRoom => true;
 
+        public override bool ShouldAppearInBuildMenu => true;
+        public override Sprite ItemBuildSprite => Prefab.transform.Find("Sprite/Desk").GetComponent<SpriteRenderer>().sprite;
+
         /**
          * If you are just doing boring serialization/deserialization like the following
          * remove the interface IACMFPlaceableItemCustomSerializationSystem and these following methods

@@ -78,10 +78,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UIElementsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACMF.cs" />
     <Compile Include="ModHelper\AssetBundles\ACMFAssetBundle.cs" />
+    <Compile Include="ModHelper\BuildMenu\BuildMenuData.cs" />
+    <Compile Include="ModHelper\BuildMenu\BuildMenuItem.cs" />
+    <Compile Include="ModHelper\BuildMenu\BuildMenuView.cs" />
+    <Compile Include="ModHelper\BuildMenu\GameControllerStartPatcher.cs" />
+    <Compile Include="ModHelper\BuildMenu\IAppearInBuildMenu.cs" />
+    <Compile Include="ModHelper\BuildMenu\MoveableWindow.cs" />
+    <Compile Include="ModHelper\BuildMenu\ToggleBuildMenuButton.cs" />
     <Compile Include="ModHelper\Camera\UnboundedCamera.cs" />
     <Compile Include="ModHelper\Config\ACMFConfig.cs" />
     <Compile Include="ModHelper\Config\ConfigManager.cs" />
