@@ -1,18 +1,19 @@
 ﻿using ACMF.ModHelper.ModPrefabs.Buildings;
+using ACMF.ModHelper.ModPrefabs.Buildings.Interfaces;
 using UnityEngine;
 
 namespace SampleModTerminaltem
 {
-    public class LargeDesk : PlaceableItemCreator<LargeDesk>
+    public class LargeDesk : PlaceableItemCreator<LargeDesk>, IACMFPlaceableItemCustomSerializationSystem
     {
         public static Enums.ItemType LargeDeskItemTypeEnum => ActiveBuildingCreators.GetCreator<LargeDesk>().ItemTypeEnum;
 
         public override string ItemTypeEnumName => "LargeOfficeDesk";
         public override GameObject Prefab => Assets.Instance.AttemptLoadGameObject("LargeOfficeDesk");
         public override string IObjectNameKey => "Large Deluxe Desk";
-        public override string IObjectName => "Lrage Deluxe Desk";
+        public override string IObjectName => "Large Deluxe Desk";
         public override string IObjectDescription => "A desk fit for a CEO.";
-        public override Enums.ThreeStepScale IObjectSize => Enums.ThreeStepScale.Small;
+        public override Enums.ThreeStepScale IObjectSize => Enums.ThreeStepScale.Medium;
         public override Enums.ObjectType IObjectType => Enums.ObjectType.Item;
         public override float IObjectCost => 100f;
         public override float IOperationsCost => 1f;
@@ -41,6 +42,32 @@ namespace SampleModTerminaltem
         public override bool IMustBeWithinGenericZone => false;
         public override bool IMustBeWithinSpecificZone => true;
         public override bool IMustBeWithinRoom => true;
+
+        /**
+         * If you are just doing boring serialization/deserialization like the following
+         * remove the interface IACMFPlaceableItemCustomSerializationSystem and these following methods
+         * and allow the system serialize/deserialize for you.
+         * This is the default serialization/deseralization behaviour.
+         */
+        public PlaceableItemSerializable SerializeItem(PlaceableItem placeableItem)
+        {
+            PlaceableItemSerializable placeableItemSerializable = new PlaceableItemSerializable();
+            placeableItemSerializable.SetObjectForSerializer(placeableItem);
+            return placeableItemSerializable;
+        }
+
+        /**
+         * Read the above comment for SerializeItem()
+         */
+        public bool DeserializeItem(PlaceableItemSerializable placeableItemSerializable)
+        {
+            PlaceableItem component = 
+                Object.Instantiate(Prefab, placeableItemSerializable.position, placeableItemSerializable.rotation, FolderController.Instance.itemsFolder).GetComponent<PlaceableItem>();
+            component.SetObjectFromSerializer(placeableItemSerializable);
+            component.ChangeToPlaced(false);
+
+            return true;
+        }
 
         protected override void PatchedItemTypeEnum(Enums.ItemType itemType) { }
         protected override void PostCreateNewInstance(GameObject gameObject) { }

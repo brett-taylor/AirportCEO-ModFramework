@@ -3,11 +3,11 @@ using System.IO;
 
 namespace ACMF.ModHelper.ModPrefabs.Vehicles.VehicleSerialization
 {
-    public static class VehicleSerializer
+    internal static class VehicleSerializer
     {
         private static readonly string MODDED_VEHICLES_SAVE_FILE_NAME = "/ModdedVehicleData.json";
 
-        public static void SerializeVehicles(string savePath)
+        internal static void SerializeVehicles(string savePath)
         {
             VehicleController[] vehicleArray = Singleton<TrafficController>.Instance.GetVehicleArray();
             TrailerController[] trailersArray = Singleton<TrafficController>.Instance.GetTrailersArray();
@@ -30,7 +30,7 @@ namespace ACMF.ModHelper.ModPrefabs.Vehicles.VehicleSerialization
             Utilities.Logger.Print($"Modded Vehicles Serialization successful.");
         }
 
-        public static void DeserializeVehicles(string savePath)
+        internal static void DeserializeVehicles(string savePath)
         {
             if (File.Exists(savePath + MODDED_VEHICLES_SAVE_FILE_NAME) == false)
                 return;
