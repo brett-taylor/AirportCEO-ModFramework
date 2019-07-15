@@ -3,11 +3,10 @@ using ACMF.ModLoader.Attributes;
 using Harmony;
 using System.Reflection;
 using UnityEngine;
-using ACMF.ModHelper.ModPrefabs.Buildings;
 
-namespace SampleModTerminaltem
+namespace SampleModNewFloors
 {
-    [ACMFMod(id: "ACMF.SampleMod.TerminalItem", name: "Sample-Mod-Terminal-Item", modVersion: "1.0.0", requiredACMLVersion: "0.0.0")]
+    [ACMFMod(id: "ACMF.SampleMod.NewFloors", name: "Sample-Mod-New-Floors", modVersion: "1.0.0", requiredACMLVersion: "0.0.0")]
     public class EntryPoint
     {
         public static HarmonyInstance HarmonyInstance { get; private set; }
