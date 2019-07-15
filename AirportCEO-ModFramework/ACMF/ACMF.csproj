@@ -124,6 +124,7 @@
     <Compile Include="ModHelper\ModPrefabs\Buildings\Interfaces\IBuildingCreator.cs" />
     <Compile Include="ModHelper\ModPrefabs\Buildings\PlaceableItemSerialization\PlaceableItemSerializationWrapper.cs" />
     <Compile Include="ModHelper\ModPrefabs\Buildings\PlaceableItemSerialization\PlaceableItemSerializer.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Floors\Patches\PlaceableFloorGetVariationsPatcher.cs" />
     <Compile Include="ModHelper\ModPrefabs\Procurments\ProcurmentManager.cs" />
     <Compile Include="ModHelper\ModPrefabs\Procurments\ACMFProcurmentTemplate .cs" />
     <Compile Include="ModHelper\ModPrefabs\Vehicles\ACMFServiceVehicleModel.cs" />
@@ -135,7 +136,10 @@
     <Compile Include="ModHelper\ModPrefabs\Vehicles\Patches\VehicleDoorManagerPatcher.cs" />
     <Compile Include="ModHelper\ModPrefabs\Vehicles\VehicleSerialization\VehicleSerializationWrapper.cs" />
     <Compile Include="ModHelper\ModPrefabs\Vehicles\VehicleSerialization\VehicleSerializer.cs" />
-    <Compile Include="ModHelper\PatchTime\PatchTimeMethod.cs" />
+    <Compile Include="ModHelper\PatchTime\MethodAttributes\IPatchTime.cs" />
+    <Compile Include="ModHelper\PatchTime\MethodAttributes\PatchTimeLateMethod.cs" />
+    <Compile Include="ModHelper\PatchTime\MethodAttributes\PatchTimeEarlyMethod.cs" />
+    <Compile Include="ModHelper\PatchTime\MethodAttributes\PatchTimeMethod.cs" />
     <Compile Include="ModHelper\PatchTime\PatchTimeManager.cs" />
     <Compile Include="ModHelper\AssetBundles\Impl\ACMFAssets.cs" />
     <Compile Include="ModHelper\Utilities\Extensions\GameObjectExtensions.cs" />

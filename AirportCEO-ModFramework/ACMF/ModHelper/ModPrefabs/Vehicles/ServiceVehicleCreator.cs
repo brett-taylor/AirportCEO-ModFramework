@@ -1,5 +1,6 @@
 ﻿using ACMF.ModHelper.ModPrefabs.Vehicles.Interfaces;
 using ACMF.ModHelper.PatchTime;
+using ACMF.ModHelper.PatchTime.MethodAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 

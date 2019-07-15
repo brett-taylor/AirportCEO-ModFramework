@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace ACMF.ModHelper.PatchTime
+namespace ACMF.ModHelper.PatchTime.MethodAttributes
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-    public class PatchTimeMethod : Attribute
+    public class PatchTimeEarlyMethod : Attribute, IPatchTime
     {
     }
 }

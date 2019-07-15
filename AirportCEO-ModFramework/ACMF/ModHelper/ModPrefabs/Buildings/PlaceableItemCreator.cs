@@ -2,6 +2,7 @@
 using ACMF.ModHelper.EnumPatcher;
 using ACMF.ModHelper.ModPrefabs.Buildings.Interfaces;
 using ACMF.ModHelper.PatchTime;
+using ACMF.ModHelper.PatchTime.MethodAttributes;
 using ACMF.ModHelper.Utilities.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
