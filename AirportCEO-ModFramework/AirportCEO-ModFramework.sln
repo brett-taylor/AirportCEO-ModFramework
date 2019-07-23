@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMF.UnitTests", "ACMF.Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod-Terminaltem", "SampleMod-Terminaltem\SampleMod-Terminaltem.csproj", "{E3FC1A23-2C8F-4409-AADC-250139340254}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod-NewFloors", "SampleMod-NewFloors\SampleMod-NewFloors.csproj", "{631EB3BB-5383-4081-B359-FE72E20FC760}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod-NewStructure", "SampleMod-NewStructure\SampleMod-NewStructure.csproj", "{631EB3BB-5383-4081-B359-FE72E20FC760}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

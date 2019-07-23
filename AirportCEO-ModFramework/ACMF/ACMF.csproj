@@ -114,17 +114,23 @@
     <Compile Include="ModHelper\MainMenu\ModMenuPatcher.cs" />
     <Compile Include="ModHelper\MainMenu\MainMenuShowHideGameMenuPanelsPatcher.cs" />
     <Compile Include="ModHelper\MainMenu\SkipMainMenu.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\ActiveBuildingCreators.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\Interfaces\IACMFPlaceableItemCustomSerializationSystem.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\PlaceableItemSerialization\PlaceableItemSerializationPatcher.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\Patches\BuildingControllerGetItemGameObjectPatcher.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\Interfaces\IACMFInteractionItemModel.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\PlaceableItemCreator.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\Interfaces\IACMFPlaceableItem.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\Interfaces\IBuildingCreator.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\PlaceableItemSerialization\PlaceableItemSerializationWrapper.cs" />
-    <Compile Include="ModHelper\ModPrefabs\Buildings\PlaceableItemSerialization\PlaceableItemSerializer.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\ActivePlaceableItemCreators.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\Interfaces\IACMFPlaceableItemCustomSerializationSystem.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\Serialization\PlaceableItemSerializationPatcher.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\Patches\BuildingControllerGetItemGameObjectPatcher.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\Interfaces\IACMFInteractionItemModel.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\PlaceableItemCreator.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\Interfaces\IACMFPlaceableItem.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\Interfaces\IPlaceableItemCreator.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\Serialization\PlaceableItemSerializationWrapper.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableItems\Serialization\PlaceableItemSerializer.cs" />
     <Compile Include="ModHelper\ModPrefabs\Floors\Patches\PlaceableFloorGetVariationsPatcher.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableObjects\Interfaces\IACMFPlaceableObject.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableStructures\ActivePlaceableStructureCreators.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableStructures\Interfaces\IACMFPlaceableStructure.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableStructures\Interfaces\IPlaceableStructureCreator.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableStructures\Patches\BuildingControllerGetStructureGameObjectPatcher.cs" />
+    <Compile Include="ModHelper\ModPrefabs\Placeables\PlaceableStructures\PlaceableStructureCreator.cs" />
     <Compile Include="ModHelper\ModPrefabs\Procurments\ProcurmentManager.cs" />
     <Compile Include="ModHelper\ModPrefabs\Procurments\ACMFProcurmentTemplate .cs" />
     <Compile Include="ModHelper\ModPrefabs\Vehicles\ACMFServiceVehicleModel.cs" />
@@ -155,6 +161,8 @@
     <Compile Include="ModLoader\Utilities\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ModHelper\ModPrefabs\Placeables\PlaceableStructures\Serialization\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

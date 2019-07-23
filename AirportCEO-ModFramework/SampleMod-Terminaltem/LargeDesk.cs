@@ -1,15 +1,15 @@
-﻿using ACMF.ModHelper.ModPrefabs.Buildings;
-using ACMF.ModHelper.ModPrefabs.Buildings.Interfaces;
+﻿using ACMF.ModHelper.ModPrefabs.Placeables.PlaceableItems;
+using ACMF.ModHelper.ModPrefabs.Placeables.PlaceableItems.Interfaces;
 using UnityEngine;
 
 namespace SampleModTerminaltem
 {
     public class LargeDesk : PlaceableItemCreator<LargeDesk>, IACMFPlaceableItemCustomSerializationSystem
     {
-        public static Enums.ItemType LargeDeskItemTypeEnum => ActiveBuildingCreators.GetCreator<LargeDesk>().ItemTypeEnum;
+        public static Enums.ItemType LargeDeskItemTypeEnum => ActivePlaceableItemCreators.GetCreator<LargeDesk>().ItemTypeEnum;
 
         public override string ItemTypeEnumName => "LargeOfficeDesk";
-        public override GameObject Prefab => Assets.Instance.AttemptLoadGameObject("LargeOfficeDesk");
+        public override GameObject Prefab { get; } = Assets.Instance.AttemptLoadGameObject("LargeOfficeDesk");
         public override string IObjectNameKey => "Large Deluxe Desk";
         public override string IObjectName => "Large Deluxe Desk";
         public override string IObjectDescription => "A desk fit for a CEO.";
