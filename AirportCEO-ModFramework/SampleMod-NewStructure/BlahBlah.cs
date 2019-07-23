@@ -46,10 +46,6 @@ namespace SampleModNewStructure
 
         protected override void PostSetupPrefabDuringPatchtime(GameObject prefab)
         {
-            ShadowHandler shadowHandler = prefab.transform.Find("Sprite/Shadow").gameObject.AddComponent<ShadowHandler>();
-            shadowHandler.shadowDistance = 0.3f;
-            shadowHandler.referenceTransform = prefab.transform;
-
             prefab.transform.Find("Sprite/Base").GetComponent<SpriteRenderer>().sortingLayerName = "AboveObjects";
             prefab.transform.Find("Sprite/Animators/WindDirection").GetComponent<SpriteRenderer>().sortingLayerName = "AboveObjects";
             prefab.transform.Find("Sprite/Animators/Aneometer").GetComponent<SpriteRenderer>().sortingLayerName = "AboveObjects";
